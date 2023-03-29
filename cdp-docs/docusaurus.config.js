@@ -77,7 +77,6 @@ const config = {
             position: 'left',
             label: 'Documentation',
           },
- 
           {to: '/blog', label: 'Status Reports', position: 'left'},
           {
             href: 'https://github.com/cdp-ucsc/',
@@ -94,7 +93,7 @@ const config = {
             items: [
               {
                 label: 'Tutorial',
-                to: '/docs/intro',
+                to: '/docs/tutorial/intro',
               },
             ],
           },
