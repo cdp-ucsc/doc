@@ -112,10 +112,6 @@ const config = {
             title: 'More',
             items: [
               {
-                label: 'Status Reports',
-                to: '/blog',
-              },
-              {
                 label: 'GitHub',
                 href: 'https://github.com/cdp-ucsc',
               },
