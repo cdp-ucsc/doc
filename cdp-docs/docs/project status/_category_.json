@@ -1,0 +1,8 @@
+{
+  "label": "Project Status",
+  "position": 1,
+  "link": {
+    "type": "generated-index",
+    "description": "Project Status, Scope, Decisions, etc"
+  }
+}
