@@ -45,13 +45,7 @@ const config = {
           editUrl:
             'https://github.com/tree/main/cdp-docs/docs/',
         },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/cdp-ucsc/doc/tree/main/cdp-docs/docs/',
-        },
+        blog: false,
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
@@ -77,7 +71,7 @@ const config = {
             position: 'left',
             label: 'Documentation',
           },
-          {to: '/blog', label: 'Status Reports', position: 'left'},
+     //     {to: '/blog', label: 'Status Reports', position: 'left'},
           {
             href: 'https://github.com/cdp-ucsc/',
             label: 'GitHub',

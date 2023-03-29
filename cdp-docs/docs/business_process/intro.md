@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Business Process
+# Business Process Inventory
 
 ###  Documentation Inventory
 
