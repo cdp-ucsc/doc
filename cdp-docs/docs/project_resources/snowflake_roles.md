@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 5
 ---
 
 # Snowflake Roles
@@ -136,3 +136,7 @@ Development roles provide broad access and are used to build models that blend i
 
 - These roles are typically reserved for members of the data team and are primarily used in developing enterprise data models. 
 - These roles have the ability to create models and data sets in the development databases.
+
+| Role Name | Role Purpose |
+| --- | --- |
+| DEVELOPER_ROLE | Broad access across domains, requires AVC approval|
