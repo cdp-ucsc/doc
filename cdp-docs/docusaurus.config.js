@@ -43,7 +43,7 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/tree/main/cdp-docs/docs/',
+            'https://github.com/cdp-ucsc/doc/blob/main/cdp-docs/',
         },
         blog: false,
         theme: {
