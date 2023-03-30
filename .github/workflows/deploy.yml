@@ -3,7 +3,7 @@ name: Deploy cdp-ucsc GitHub Pages
 defaults:
   run:
     shell: bash
-    working-directory: /cdp-ucsc
+    working-directory: cdp-ucsc/
 
 on:
   push:
