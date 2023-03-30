@@ -73,7 +73,7 @@ const config = {
           },
      //     {to: '/blog', label: 'Status Reports', position: 'left'},
           {
-            href: 'https://github.com/cdp-ucsc/',
+            href: 'https://github.com/cdp-ucsc/doc/',
             label: 'GitHub',
             position: 'right',
           },
