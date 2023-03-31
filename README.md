@@ -1,9 +1,41 @@
-### CDP Project Documentation 
+# Website
 
-This repo hosts the code for the [CDP Documentation Center](https://cdp-ucsc.github.io/doc) site, and is intended to be 
-the documentation center for the CDP Project. The site is based on the [Docusaurus](https://docusaurus.io/), framework which is an open source project developed in house at Facebook. The CDP Documentation Center website, is deployed to [Github Pages](https://pages.github.com/) and is publically accessible. 
+This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
 
-The team is currently evaluating the viablitly of the product, in the hopes of landing on a solution that will allow building a robust workflow around documentation and communication, while leveraging git as a source of truth.
+### Installation
 
-This site is deployed to GitHub through the use of GitHub actions, when a Pull Request (PR) is merged to main, The site will be re-deployed to include the changes from the PR.
+```
+$ yarn
+```
 
+### Local Development
+
+```
+$ yarn start
+```
+
+This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+
+### Build
+
+```
+$ yarn build
+```
+
+This command generates static content into the `build` directory and can be served using any static contents hosting service.
+
+### Deployment
+
+Using SSH:
+
+```
+$ USE_SSH=true yarn deploy
+```
+
+Not using SSH:
+
+```
+$ GIT_USER=<Your GitHub username> yarn deploy
+```
+
+If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
