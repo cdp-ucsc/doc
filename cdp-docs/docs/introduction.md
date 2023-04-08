@@ -1,7 +1,16 @@
-#Introduction
-This page documents the approach and high-level architectural considerations that will be followed in the design, development, and operation of the Enterprise Data Warehouse (EDW).
+### Introduction
+This page documents the approach and high-level architectural considerations that will be followed in the design, development, and operation of the Common Data Platform (CDP).
 
-We will be following the Kimball approach to data warehousing. Information about the approach can be found here: Kimball Techniques. The team will be using The Data Warehouse Toolkit as a reference. The text can be purchased from Amazon here: The Data Warehouse Toolkit.
+The Common Data Platform is an umbrella term that encompasses many aspects of the management of data on the campus and serves as the Campus Data Strategy to meet the current business needs as well as positioning ourselves to meet future demands.
+
+### Centralize and Secure Enterprise Data
+- Implement secure automated data pipelines from source to target in near real time
+- Identify, classify and manage access to sensitive data
+
+
+### Develop an Enterprise Data Model, a single source of facts
+
+We will be following the Kimball approach to data warehousing in support of developing the Enterprise Data Warehouse.  Ral Information about the approach can be found here: Kimball Techniques. The team will be using The Data Warehouse Toolkit as a reference. The text can be purchased from Amazon here: The Data Warehouse Toolkit.
 
 In a nutshell, the Kimball approach uses dimensional modeling techniques to design a star schema. A star schema consists of fact tables to record the events of the business surrounded by dimension tables which hold the descriptive data related to those events. Important dimensions, like Customer, Facility, and Vehicle, can be built once and used in many different fact tables. This reuse of dimension tables allows for consistent data for these important concepts and is called "conformed dimensions" in the Kimball approach.
 
