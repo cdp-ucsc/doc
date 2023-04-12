@@ -4,7 +4,9 @@ sidebar_position: 2
 
 # SQL Style Guide
 
----
+##### This guide establishes our standards for SQL and are enforced by code review. Some standards are also enforced by SQLFLuff. The purpose of the guide is to help developers write clear and concise SQL that can be worked on and understood by others.
+
+<br>
 
 ## General guidelines
 
@@ -36,10 +38,10 @@ Otherwise the identifier will have to be quoted everywhere it's used.
 #### Never use tab characters.
 It's easier to keep things consistent in version control when only space characters are used. By default, VS Code inserts spaces and uses 4 space per `Tab` key. [(source)](https://code.visualstudio.com/docs/editor/codebasics#_indentation)
 
-
 --- 
+<br>
+
 ## Syntax
----
 
 #### Keywords and function names should all be lowercase.
 Lowercase is more readable than uppercase, and you won't have to constantly be holding down a shift key.
@@ -322,10 +324,10 @@ from (
 ```
 
 ---
+<br>
 
 ## Naming
 The general guide for naming is to be descriptive over minimal.
-
 ---
 
 #### Boolean column names:
@@ -360,6 +362,8 @@ inner join orders as o on c.id = o.customer_id
 ```
 
 ---
+<br>
+
 ## Formatting
 The general guide for formatting is:
   - If there's only one thing, put it on the same line as the opening keyword.
@@ -796,6 +800,7 @@ where plan_name in ('monthly', 'yearly')
 ```
 
 ---
+<br>
 
 ## Credits
 
