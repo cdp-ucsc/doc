@@ -31,7 +31,7 @@ It's more readable, easier to keep consistent, and avoids having to quote identi
 <br>
 
 #### Never use reserved words as identifiers.
-Otherwise the identifier will have to be quoted everywhere it's used.
+Otherwise the identifier will have to be quoted everywhere it's used. [(Snowflake's reserved words)](https://docs.snowflake.com/en/sql-reference/reserved-keywords)
 
 <br>
 
