@@ -66,10 +66,10 @@ const config = {
         },
         items: [
           {
-            type: 'docSidebar',
-            sidebarId: 'documentationSidebar',
-            position: 'left',
-            label: 'Documentation',
+            to: "/docs/introduction",
+            label: "Docs",
+            position: "left",
+            activeBaseRegex: "docs/(?!(dbt-cloud))",
           },
      //     {to: '/blog', label: 'Status Reports', position: 'left'},
           {

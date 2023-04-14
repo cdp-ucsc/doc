@@ -1,4 +1,4 @@
-### Introduction
+
 This page documents the approach and high-level architectural considerations that will be followed in the design, development, and operation of the Common Data Platform (CDP). The Common Data Platform is an umbrella term that encompasses many aspects of the management of data on the campus and serves as the Campus Data Strategy to meet the current business needs as well as positioning ourselves to meet future demands.
 
 
@@ -8,4 +8,5 @@ The design and development of the Enterprise Data Model (EDW) will primarily fol
 
 In a nutshell, the Kimball approach uses dimensional modeling techniques to design a [star schema](https://en.wikipedia.org/wiki/Star_schema). A star schema consists of fact tables to record the events of the business surrounded by dimension tables which hold the descriptive data related to those events. Important dimensions, like Student, Employees, Facility, and Finance, can be built once and used in many different fact tables. This reuse of dimension tables allows for consistent data for these important concepts and is called **"conformed dimensions"** in the Kimball approach.
 
-Another feature of the Kimball approach is that it is iterative. This works well within Scrum since the building of individual fact and dimension tables can be done in sprints. 
+Another feature of the Kimball approach is that it is iterative. This works well within Scrum since the building of individual fact and dimension tables can be done in sprints.
+
