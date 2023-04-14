@@ -71,6 +71,28 @@ const config = {
             position: "left",
             activeBaseRegex: "docs/(?!(dbt-cloud))",
           },
+          {
+            label: "Tech Platform",
+            position: "left",
+            items: [
+              {
+                label: 'Snowflake',
+                href: 'https://snowflake.com',
+              },
+              {
+                label: 'Fivetran',
+                href: 'https://fivetran.com',
+              },
+              {
+                label: 'dbt labs',
+                href: 'https://getdbt.com',
+              },
+              {
+                label: "Glossary",
+                to: "/glossary",
+              }
+            ],
+          },
      //     {to: '/blog', label: 'Status Reports', position: 'left'},
           {
             href: 'https://github.com/cdp-ucsc/doc/',
