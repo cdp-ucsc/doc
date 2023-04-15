@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# CDP Style Guide - Draft
+# SQL Style Guide - Draft
 
 
 > copied from [dbt Style guide](https://github.com/dbt-labs/corp/blob/main/dbt_style_guide.md)
