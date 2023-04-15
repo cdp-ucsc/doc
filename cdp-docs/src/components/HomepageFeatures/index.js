@@ -22,11 +22,11 @@ const FeatureList = [
     ),
   },
   {
-    title: 'Project Status',
+    title: 'Program Updates',
     Svg: require('@site/static/img/project_status.svg').default,
     description: (
       <>
-        Running list of project status intended for broad consumption.
+        Official communication channels for program updates and status.
       </>
     ),
   },
