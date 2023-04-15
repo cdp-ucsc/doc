@@ -82,6 +82,10 @@ const config = {
             position: "right",
             items: [
               {
+                label: 'Modern Data Stack',
+                to: '/docs/architecture/mds.md',
+              },              
+              {
                 label: 'Snowflake',
                 href: 'https://snowflake.com',
               },
