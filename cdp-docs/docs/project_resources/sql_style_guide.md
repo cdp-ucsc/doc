@@ -6,40 +6,40 @@ sidebar_position: 2
 
 ##### This guide establishes our standards for SQL and are enforced by code review. Some standards are also enforced by SQLFLuff. The purpose of the guide is to help developers write clear and concise SQL that can be worked on and understood by others.
 
-<br>
+<br />
 
 ## General guidelines
 
 #### Optimize primarily for readability, maintainability, and robustness rather than for fewer lines of code.
 Newlines are cheap; people's time is expensive.
 
-<br>
+<br />
 
 #### Avoid large select statements with multiple tables instead utilize CTEs.
 If a `select` statement is so large it can't be easily comprehended, it would be better to refactor it into multiple smaller CTEs that are later joined back together.
 
-<br>
+<br />
 
 #### Lines should ideally not be longer than 120 characters.
 Very long lines are harder to read, especially in situations where space may be limited like on smaller screens or in side-by-side version control diffs.
 
-<br>
+<br />
 
 #### Identifiers such as aliases and CTE names should be in lowercase `snake_case`.
 It's more readable, easier to keep consistent, and avoids having to quote identifiers due to capitalization, spaces, or other special characters.
 
-<br>
+<br />
 
 #### Never use reserved words as identifiers.
 Otherwise the identifier will have to be quoted everywhere it's used. [(Snowflake's reserved words)](https://docs.snowflake.com/en/sql-reference/reserved-keywords)
 
-<br>
+<br />
 
 #### Never use tab characters.
 It's easier to keep things consistent in version control when only space characters are used. By default, VS Code inserts spaces and uses 4 space per `Tab` key. [(source)](https://code.visualstudio.com/docs/editor/codebasics#_indentation)
 
 --- 
-<br>
+<br />
 
 ## Syntax
 
@@ -68,12 +68,12 @@ select COUNT(*) as customers_count
 from customers
 ```
 
-<br>
+<br />
 
 #### Use `!=` instead of `<>`.
 `!=` reads like "not equal" which is closer to how we'd say it out loud.
 
-<br>
+<br />
 
 #### Always use the `as` keyword when aliasing columns, expressions, and tables.
 ```sql
@@ -86,7 +86,7 @@ select count(*) customers_count
 from customers
 ```
 
-<br>
+<br />
 
 #### Always alias grouping aggregates and other column expressions.
 ```sql
@@ -99,22 +99,22 @@ select max(id)
 from customers
 ```
 
-<br>
+<br />
 
 #### Use `where` instead of `having` when either would suffice.
 Queries filter on the `where` clause earlier in their processing, so `where` filters are more performant.
 
-<br>
+<br />
 
 #### Use `union all` instead of `union` unless duplicate rows really do need to be removed.
 `union all` is more performant because it doesn't have to sort and de-duplicate the rows.
 
-<br>
+<br />
 
 #### Avoid using an `order by` clause unless it's necessary to produce the correct result.
 There's no need to incur the performance hit.  If consumers of the query need the results ordered they can normally do that themselves.
 
-<br>
+<br />
 
 #### For functions that take date part parameters, specify the date part as a string rather than a keyword.
   - While some advanced SQL editors can helpfully auto-complete and validate date part keywords, if they get it wrong they'll show superfluous errors.
@@ -129,7 +129,7 @@ date_trunc('month', created_at)
 date_trunc(month, created_at)
 ```
 
-<br>
+<br />
 
 #### Use -- for single line comments (single comment) and /* */ for multiple line comments (block comment).
 By default, VS Code includes keyboard shortcuts to toggle single and block comments. [(Windows source)](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf) [(Mac source)](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-macos.pdf)
@@ -164,7 +164,7 @@ Dolor sed viverra ipsum nunc aliquet bibendum enim. */
 -- Dolor sed viverra ipsum nunc aliquet bibendum enim.
 ```
 
-<br>
+<br />
 
 #### Use single quotes for strings.
 Some SQL dialects like BigQuery support using double quotes or even triple quotes for strings, but for most dialects:
@@ -199,7 +199,7 @@ where email like '''%@domain.com'''
   - If additional join conditions need to be added later, `on` is easier to adapt.
   - `using` can produce inconsistent results with outer joins in some databases.
 
-<br>
+<br />
 
 #### Be explicit with all join types for example use `inner join` instead of just `join`.
 It's better to be explicit so that the join type is crystal clear.
@@ -216,7 +216,7 @@ from customers
 join orders on customers.id = orders.customer_id
 ```
 
-<br>
+<br />
 
 #### In join conditions, put the table that was referenced first immediately after `on`.
 This makes it easier to determine if the join is going to cause the results to fan out.
@@ -240,7 +240,7 @@ from customers
 left join orders on orders.customer_id = customers.id
 ```
 
-<br>
+<br />
 
 #### When joining multiple tables, always prefix the column names with the table name/alias.
 You should be able to tell at a glance where a column is coming from.
@@ -263,7 +263,7 @@ from customers
 inner join orders on customers.id = orders.customer_id
 ```
 
-<br>
+<br />
 
 #### When  joining, put filter conditions in the `where` clause instead of the `join` clause.
 Only join conditions should be put in a `join` clause. All filter conditions should be put together in the `where` clause.
@@ -297,7 +297,7 @@ where orders.total_amount >= 100
   - CTE names should not be prefixed or suffixed with `cte`.
   - CTEs with confusing or notable logic should be commented.
 
-<br>
+<br />
 
 #### Use CTEs rather than subqueries where possible.
 CTEs will make your queries more straightforward to read/reason about, can be referenced multiple times, and are easier to adapt/refactor later. If you think a subquery is unavoidable, it is a good time to ask for a second pair of eyes.
@@ -324,10 +324,10 @@ from (
 ```
 
 ---
-<br>
+<br />
 
 ## Naming
-The general guide for naming is to be descriptive over minimal.
+#### The general guide for naming is to be descriptive over minimal.
 ---
 
 #### Boolean column names:
@@ -338,7 +338,7 @@ The general guide for naming is to be descriptive over minimal.
 
   > It is also preferred that boolean column values take `true/false` over `yes/no` values.
 
-<br>
+<br />
 
 #### Avoid using unnecessary table aliases, especially initialisms.
 Suggested guidelines:
@@ -362,7 +362,7 @@ inner join orders as o on c.id = o.customer_id
 ```
 
 ---
-<br>
+<br />
 
 ## Formatting
 The general guide for formatting is:
@@ -385,7 +385,7 @@ select email
  where email like '%@domain.com'
 ```
 
-<br>
+<br />
 
 #### Indents should generally be 4 spaces.
 ```sql
@@ -407,7 +407,7 @@ where email like '%@domain.com'
   and plan_name != 'free'
 ```
 
-<br>
+<br />
 
 #### Never end a line with an operator like `and`, `or`, `+`, `||`, etc.
 If code containing such operators needs to be split across multiple lines, put the operators at the beginning of the subsequent lines.
@@ -430,7 +430,7 @@ where
     plan_name != 'free'
 ```
 
-<br>
+<br />
 
 #### Using trailing commas.
 
@@ -474,7 +474,7 @@ where email in (
     )
 ```
 
-<br>
+<br />
 
 #### `select` clause:
   - If there is only one column expression, put it on the same line as `select`.
@@ -511,7 +511,7 @@ select distinct
 select distinct state, country
 ```
 
-<br>
+<br />
 
 #### `from` clause:
   - Put the initial table being selected from on the same line as `from`.
@@ -557,7 +557,7 @@ left join orders
     and customers.region_id = orders.region_id
 ```
 
-<br>
+<br />
 
 #### `where` clause:
   - If there is only one condition, put it on the same line as `where`.
@@ -581,7 +581,7 @@ where email like '%@domain.com'
     and plan_name != 'free'
 ```
 
-<br>
+<br />
 
 #### `group by` and `order by` clauses:
   - If grouping/ordering by column numbers, put all numbers on the same line as `group by`/`order by`.
@@ -618,7 +618,7 @@ order by plan_name
     , signup_month
 ```
 
-<br>
+<br />
 
 #### CTEs:
   - Start each CTE on its own line, indented one level more than `with` (including the first one, and even if there is only one).
@@ -683,7 +683,7 @@ select ...
 from paying_customers_per_month
 ```
 
-<br>
+<br />
 
 #### `case` statements:
   - You can put a `case` statement all on one line if it only has a single `when` clause and doesn't cause the line's length to be too long.
@@ -729,7 +729,7 @@ select
     end as customer_status
 ```
 
-<br>
+<br />
 
 #### Window functions:
   - You can put a window function all on one line if it doesn't cause the line's length to be too long.
@@ -767,7 +767,7 @@ select
 from orders
 ```
 
-<br>
+<br />
 
 #### `in` lists:
   - Break long lists of `in` values into multiple indented lines with one value per line.
@@ -784,7 +784,7 @@ where email in (
 where email in ('user-1@example.com', 'user-2@example.com', 'user-3@example.com')
 ```
 
-<br>
+<br />
 
 #### Don't put extra spaces inside of parentheses.
 ```sql
@@ -800,7 +800,7 @@ where plan_name in ('monthly', 'yearly')
 ```
 
 ---
-<br>
+<br />
 
 ## Credits
 
