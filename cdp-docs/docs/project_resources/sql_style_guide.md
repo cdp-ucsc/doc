@@ -2,368 +2,809 @@
 sidebar_position: 2
 ---
 
-# CDP Style Guide - Draft
+# SQL Style Guide
 
+##### This guide establishes our standards for SQL and are enforced by code review. Some standards are also enforced by SQLFLuff. The purpose of the guide is to help developers write clear and concise SQL that can be worked on and understood by others.
 
-> copied from [dbt Style guide](https://github.com/dbt-labs/corp/blob/main/dbt_style_guide.md)
+<br>
 
-# Model Layer
-```
-├── dbt_project.yml
-└── models
-    ├── marts
-    |   └── intermediate
-    |   |   ├── intermediate.yml
-    |   |   ├── int_fis_addresses.sql
-    |   |   └── int_fis_guvalti.sql
-    |   └── dim_vendors.sql
-    |   └── legacy_active_vendors.sql
-    └── staging
-        └── [source]
-        |   ├── _stg_[source]__[schema]_sources.yml
-        |   └── stg_[source]_[table].sql
-        └── fis
-            ├── _stg_fis__fimsmgr_sources.yml
-            ├── _stg_fis__saturn_sources.yml
-            ├── stg_fis_ftvvend.sql
-            └── stg_fis_spbpers.sql
-```
-## Sources
-All raw data is in the `raw` database in Snowflake. In the dbt project, the raw data should be organized into subdirectories by business source system name in the `staging` directory.
+## General guidelines
 
-A .yml file should be created for each schema in the `raw` database. For one source system subdirectory there may be multiple .yml files.
+#### Optimize primarily for readability, maintainability, and robustness rather than for fewer lines of code.
+Newlines are cheap; people's time is expensive.
 
-**_TBD: Generating source .yml files with codegen_**
+<br>
 
-The source .yml file should be named in the following format:
-` _stg_[source]__[schema]_sources.yml `
+#### Avoid large select statements with multiple tables instead utilize CTEs.
+If a `select` statement is so large it can't be easily comprehended, it would be better to refactor it into multiple smaller CTEs that are later joined back together.
 
-  * where [source] is the `- name: `  field and [schema] is the ` schema: `  field in the .yml file
-  * [source] should identify the business name of the source system of the raw data (should match the subdirectory name)
-  * do not include un-informative prefixes of the schema name in the .yml file name
+<br>
 
-<details>
-<summary><i>Click to toggle an Example</i></summary>
+#### Lines should ideally not be longer than 120 characters.
+Very long lines are harder to read, especially in situations where space may be limited like on smaller screens or in side-by-side version control diffs.
 
-Example: `_stg_fis__fimsmgr_sources.yml`
-``` yml
-version: 2
+<br>
 
-sources:
-    - name: fis
-      database: raw
-      schema: bprd_fimsmgr
-      tables:
-        - name: ftvvend
-        - name: ftvvent
-        - name: fyredbs
-```
-</details>
+#### Identifiers such as aliases and CTE names should be in lowercase `snake_case`.
+It's more readable, easier to keep consistent, and avoids having to quote identifiers due to capitalization, spaces, or other special characters.
 
-### Notes:
-* Within a single .yml file, source blocks cannot have the same `- name: `  field.
-* The `{{ source('name', 'table') }}` function should only be used to reference sources in the staging models; it should not be used in any other model. 
+<br>
 
-## Staging
-A .sql file should be created for each table in the schema. The [codegen](https://github.com/dbt-labs/dbt-codegen/tree/0.8.0/) dbt package should be used to generate the stage models.
+#### Never use reserved words as identifiers.
+Otherwise the identifier will have to be quoted everywhere it's used. [(Snowflake's reserved words)](https://docs.snowflake.com/en/sql-reference/reserved-keywords)
 
-<details>
-<summary><i>Click to toggle codegen Instructions</i></summary>
+<br>
 
-* Check if codegen package is included in the packages.yml file in the dbt project (if not add it) 
-* Run `dbt deps` to install the package (if not already done so)
-* Copy the macro into a statement tab in the dbt Cloud IDE, or into an analysis file, and compile your code
-``` sql
-{{ codegen.generate_base_model(
-    source_name='raw_jaffle_shop',
-    table_name='customers'
-) }}
-```
-* Copy and paste the compiled code into a staging .sql file
+#### Never use tab characters.
+It's easier to keep things consistent in version control when only space characters are used. By default, VS Code inserts spaces and uses 4 space per `Tab` key. [(source)](https://code.visualstudio.com/docs/editor/codebasics#_indentation)
 
-More detailed instructions can be found at the codegen repo or at the [dbt packages hub](https://hub.getdbt.com/)
-</details>
+--- 
+<br>
 
+## Syntax
 
-The stage .sql file should be named in the following format:
-` stg_[source]__[table].sql`
-  * [source] should match the subdirectory name and the source name in the .yml name and file
-  * [table] should match the table name in the source .yml file 
+#### Keywords and function names should all be lowercase.
+Lowercase is more readable than uppercase, and you won't have to constantly be holding down a shift key.
 
-The content of the stage .sql file should be in the following format:
-``` sql
-with source as (
-
-    select * from {{ source('name', 'table') }}
-
-)
-
-renamed as (
-
-    select
-        -- Source columns
-        column1,
-        .
-        .
-        columnZ
-    
-        -- Add new columns below
-
-    from source
-
-)
-
-select * from renamed
-```
-
-<details>
-<summary><i>Click to toggle an Example</i></summary>
-
-Example: `stg_fis__ftvvend.sql`
-``` sql
-with source as (
-
-    select * from {{ source('fis', 'ftvvend') }}
-
-),
-
-renamed as (
-
-    select
-        -- Source columns
-        ftvvend_user_id,
-        ftvvend_entity_ind,
-        ftvvend_tax_form_status,
-        ...
-
-        -- Added columns
-        CASE
-        WHEN ftvvend_term_date IS NULL 
-        THEN 'Y'
-        ELSE 'N'
-        END     ftvvend_active_flag
-
-    from source
-
-)
-
-select * from renamed
-```
-</details>
-
-### Notes:
-* The `{{ ref('model') }}` function should be used to reference the staging models in any upstream models.
-
-## Model Naming
-_**dbt** Our models (typically) fit into three main categories: staging, marts, base/intermediate. For more detail about why we use this structure, check out [this discourse post](https://docs.getdbt.com/guides/best-practices/how-we-structure/1-guide-overview). The file and naming structures are as follows:_
-
-- All objects should be plural, such as: `stg_stripe__invoices`
-- Base tables are prefixed with `base__`, such as: `base__<source>_<object>`
-- Intermediate tables should end with a past tense verb indicating the action performed on the object, such as: `customers__unioned`
-- Marts are categorized between fact (immutable, verbs) and dimensions (mutable, nouns) with a prefix that indicates either, such as: `fct_orders` or `dim_customers`
-
-## Model configuration
-
-- Model-specific attributes (like sort/dist keys) should be specified in the model.
-- If a particular configuration applies to all models in a directory, it should be specified in the `dbt_project.yml` file.
-- In-model configurations should be specified like this:
-
-```python
-{{
-  config(
-    materialized = 'table',
-    sort = 'id',
-    dist = 'id'
-  )
-}}
-```
-- Marts should always be configured as tables
-
-## dbt conventions
-* Only `stg_` models (or `base_` models if your project requires them) should select from `source`s.
-* All other models should only select from other models.
-
-## Testing
-
-- Every subdirectory should contain a `.yml` file, in which each model in the subdirectory is tested. For staging folders, the naming structure should be `src_sourcename.yml`. For other folders, the structure should be `foldername.yml` (example `core.yml`).
-- At a minimum, unique and not_null tests should be applied to the primary key of each model.
-
-## Naming and field conventions
-
-* Schema, table and column names should be in `snake_case`.
-* Use names based on the _business_ terminology, rather than the source terminology.
-* Each model should have a primary key.
-* The primary key of a model should be named `<object>_id`, e.g. `account_id` – this makes it easier to know what `id` is being referenced in downstream joined models.
-* For base/staging models, fields should be ordered in categories, where identifiers are first and timestamps are at the end.
-* Timestamp columns should be named `<event>_at`, e.g. `created_at`, and should be in UTC. If a different timezone is being used, this should be indicated with a suffix, e.g `created_at_pt`.
-* Booleans should be prefixed with `is_` or `has_`.
-* Price/revenue fields should be in decimal currency (e.g. `19.99` for $19.99; many app databases store prices as integers in cents). If non-decimal currency is used, indicate this with suffix, e.g. `price_in_cents`.
-* Avoid reserved words as column names
-* Consistency is key! Use the same field names across models where possible, e.g. a key to the `customers` table should be named `customer_id` rather than `user_id`.
-
-## CTEs
-
-For more information about why we use so many CTEs, check out [this discourse post](https://discourse.getdbt.com/t/why-the-fishtown-sql-style-guide-uses-so-many-ctes/1091).
-
-- All `{{ ref('...') }}` statements should be placed in CTEs at the top of the file
-- Where performance permits, CTEs should perform a single, logical unit of work.
-- CTE names should be as verbose as needed to convey what they do
-- CTEs with confusing or noteable logic should be commented
-- CTEs that are duplicated across models should be pulled out into their own models
-- create a `final` or similar CTE that you select from as your last line of code. This makes it easier to debug code within a model (without having to comment out code!)
-- CTEs should be formatted like this:
-
-``` sql
-with
-
-events as (
-
-    ...
-
-),
-
--- CTE comments go here
-filtered_events as (
-
-    ...
-
-)
-
-select * from filtered_events
-```
-
-## SQL style guide
-
-- Use trailing commas
-- Indents should be four spaces (except for predicates, which should line up with the `where` keyword)
-- Lines of SQL should be no longer than 120 characters
-- Field names and function names should all be lowercase
-- The `as` keyword should be used when aliasing a field or table
-- Fields should be stated before aggregates / window functions
-- Aggregations should be executed as early as possible before joining to another table.
-- Ordering and grouping by a number (eg. group by 1, 2) is preferred over listing the column names (see [this rant](https://blog.getdbt.com/write-better-sql-a-defense-of-group-by-1/) for why). Note that if you are grouping by more than a few columns, it may be worth revisiting your model design.
-- Prefer `union all` to `union` [*](http://docs.aws.amazon.com/redshift/latest/dg/c_example_unionall_query.html)
-- Avoid table aliases in join conditions (especially initialisms) – it's harder to understand what the table called "c" is compared to "customers".
-- If joining two or more tables, _always_ prefix your column names with the table alias. If only selecting from one table, prefixes are not needed.
-- Be explicit about your join (i.e. write `inner join` instead of `join`). `left joins` are normally the most useful, `right joins` often indicate that you should change which table you select `from` and which one you `join` to.
-
-- *DO NOT OPTIMIZE FOR A SMALLER NUMBER OF LINES OF CODE. NEWLINES ARE CHEAP, BRAIN TIME IS EXPENSIVE*
-
-### Example SQL
 ```sql
-with
+-- Good
+select *
+from customers
 
-my_data as (
+-- Good
+select count(*) as customers_count
+from customers
 
-    select * from {{ ref('my_data') }}
+-- Bad
+SELECT *
+FROM customers
 
-),
+-- Bad
+Select *
+From customers
 
-some_cte as (
-
-    select * from {{ ref('some_cte') }}
-
-),
-
-some_cte_agg as (
-
-    select
-        id,
-        sum(field_4) as total_field_4,
-        max(field_5) as max_field_5
-
-    from some_cte
-    group by 1
-
-),
-
-final as (
-
-    select [distinct]
-        my_data.field_1,
-        my_data.field_2,
-        my_data.field_3,
-
-        -- use line breaks to visually separate calculations into blocks
-        case
-            when my_data.cancellation_date is null
-                and my_data.expiration_date is not null
-                then expiration_date
-            when my_data.cancellation_date is null
-                then my_data.start_date + 7
-            else my_data.cancellation_date
-        end as cancellation_date,
-
-        some_cte_agg.total_field_4,
-        some_cte_agg.max_field_5
-
-    from my_data
-    left join some_cte_agg  
-        on my_data.id = some_cte_agg.id
-    where my_data.field_1 = 'abc'
-        and (
-            my_data.field_2 = 'def' or
-            my_data.field_2 = 'ghi'
-        )
-    having count(*) > 1
-
-)
-
-select * from final
-
+-- Bad
+select COUNT(*) as customers_count
+from customers
 ```
 
-- Your join should list the "left" table first (i.e. the table you are selecting `from`):
+<br>
+
+#### Use `!=` instead of `<>`.
+`!=` reads like "not equal" which is closer to how we'd say it out loud.
+
+<br>
+
+#### Always use the `as` keyword when aliasing columns, expressions, and tables.
 ```sql
+-- Good
+select count(*) as customers_count
+from customers
+
+-- Bad
+select count(*) customers_count
+from customers
+```
+
+<br>
+
+#### Always alias grouping aggregates and other column expressions.
+```sql
+-- Good
+select max(id) as max_customer_id
+from customers
+
+-- Bad
+select max(id)
+from customers
+```
+
+<br>
+
+#### Use `where` instead of `having` when either would suffice.
+Queries filter on the `where` clause earlier in their processing, so `where` filters are more performant.
+
+<br>
+
+#### Use `union all` instead of `union` unless duplicate rows really do need to be removed.
+`union all` is more performant because it doesn't have to sort and de-duplicate the rows.
+
+<br>
+
+#### Avoid using an `order by` clause unless it's necessary to produce the correct result.
+There's no need to incur the performance hit.  If consumers of the query need the results ordered they can normally do that themselves.
+
+<br>
+
+#### For functions that take date part parameters, specify the date part as a string rather than a keyword.
+  - While some advanced SQL editors can helpfully auto-complete and validate date part keywords, if they get it wrong they'll show superfluous errors.
+  - Less advanced SQL editors won't syntax highlight date part keywords, so using strings helps them stand out.
+  - Using a string makes it unambiguous that it's not a column reference.
+
+```sql
+-- Good
+date_trunc('month', created_at)
+
+-- Bad
+date_trunc(month, created_at)
+```
+
+<br>
+
+#### Use -- for single line comments (single comment) and /* */ for multiple line comments (block comment).
+By default, VS Code includes keyboard shortcuts to toggle single and block comments. [(Windows source)](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf) [(Mac source)](https://code.visualstudio.com/shortcuts/keyboard-shortcuts-macos.pdf)
+- Single Comment:
+  - Windows `Ctrl+/`
+  - Mac `⌘/ `
+- Block Comment:
+  - Windows `Shift+Alt+A`
+  - Mac `⇧⌥A`
+
+When expanding a comment into multiple lines:
+  - Keep the opening `/*` on the same line as the first comment text and the closing `*/` on the same line as the last comment text.
+  - Indent subsequent lines by 4 spaces, and add an extra space before the first comment text to align it with the text on subsequent lines.
+
+```sql
+Single
+-- Good
+
+/* Bad */
+
+Block
+/*  Good:  Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    Dolor sed viverra ipsum nunc aliquet bibendum enim. */
+
+/* Bad:  Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Dolor sed viverra ipsum nunc aliquet bibendum enim. */
+
+-- Bad:  Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+-- sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+-- Dolor sed viverra ipsum nunc aliquet bibendum enim.
+```
+
+<br>
+
+#### Use single quotes for strings.
+Some SQL dialects like BigQuery support using double quotes or even triple quotes for strings, but for most dialects:
+  - Double quoted strings represent identifiers.
+  - Triple quoted strings will be interpreted like the value itself contains leading and trailing single quotes.
+
+```sql
+-- Good
+select *
+from customers
+where email like '%@domain.com'
+
+-- Bad
+select *
+from customers
+where email like "%@domain.com"
+-- Will probably result in an error like `column "%@domain.com" does not exist`.
+
+-- Bad
+select *
+from customers
+where email like '''%@domain.com'''
+-- Will probably be interpreted like '\'%domain.com\''.
+```
+
+---
+
+### Joins
+
+#### Don't use `using` in joins.
+  - Having all joins use `on` is more consistent.
+  - If additional join conditions need to be added later, `on` is easier to adapt.
+  - `using` can produce inconsistent results with outer joins in some databases.
+
+<br>
+
+#### Be explicit with all join types for example use `inner join` instead of just `join`.
+It's better to be explicit so that the join type is crystal clear.
+
+```sql
+-- Good
+select *
+from customers
+inner join orders on customers.id = orders.customer_id
+
+-- Bad
+select *
+from customers
+join orders on customers.id = orders.customer_id
+```
+
+<br>
+
+#### In join conditions, put the table that was referenced first immediately after `on`.
+This makes it easier to determine if the join is going to cause the results to fan out.
+
+```sql
+-- Good
+select *
+from customers
+left join orders on customers.id = orders.customer_id
+-- primary key = foreign key --> one-to-many --> fan out
+
+-- Good
+select *
+from orders
+left join customers on orders.customer_id = customers.id
+-- foreign key = primary key --> many-to-one --> no fan out
+
+-- Bad
+select *
+from customers
+left join orders on orders.customer_id = customers.id
+```
+
+<br>
+
+#### When joining multiple tables, always prefix the column names with the table name/alias.
+You should be able to tell at a glance where a column is coming from.
+
+```sql
+-- Good
 select
-    trips.*,
-    drivers.rating as driver_rating,
-    riders.rating as rider_rating
+    customers.email
+    , orders.invoice_number
+    , orders.total_amount
+from customers
+inner join orders on customers.id = orders.customer_id
 
-from trips
-left join users as drivers
-    on trips.driver_id = drivers.user_id
-left join users as riders
-    on trips.rider_id = riders.user_id
-
+-- Bad
+select
+    email
+    , invoice_number
+    , total_amount
+from customers
+inner join orders on customers.id = orders.customer_id
 ```
 
-## YAML style guide
+<br>
 
-* Indents should be two spaces
-* List items should be indented
-* Use a new line to separate list items that are dictionaries where appropriate
-* Lines of YAML should be no longer than 80 characters.
+#### When  joining, put filter conditions in the `where` clause instead of the `join` clause.
+Only join conditions should be put in a `join` clause. All filter conditions should be put together in the `where` clause.
 
-### Example YAML
-```yaml
-version: 2
+```sql
+-- Good
+select
+    ...
+from orders
+inner join customers on orders.customer_id = customers.id
+where
+    orders.total_amount >= 100
+    and customers.email like '%@domain.com'
 
-models:
-  - name: events
-    columns:
-      - name: event_id
-        description: This is a unique identifier for the event
-        tests:
-          - unique
-          - not_null
-
-      - name: event_time
-        description: "When the event occurred in UTC (eg. 2018-01-01 12:00:00)"
-        tests:
-          - not_null
-
-      - name: user_id
-        description: The ID of the user who recorded the event
-        tests:
-          - not_null
-          - relationships:
-              to: ref('users')
-              field: id
+-- Bad
+select
+    ...
+from orders
+inner join customers on
+    orders.customer_id = customers.id
+    and customers.email like '%@domain.com'
+where orders.total_amount >= 100
 ```
 
+---
 
-## Jinja style guide
+### CTEs
 
-* When using Jinja delimiters, use spaces on the inside of your delimiter, like `{{ this }}` instead of `{{this}}`
-* Use newlines to visually indicate logical blocks of Jinja
+  - Where performance permits, CTEs should perform a single, logical unit of work.
+  - CTE names should be as verbose as needed to convey what they do.
+  - CTE names should not be prefixed or suffixed with `cte`.
+  - CTEs with confusing or notable logic should be commented.
+
+<br>
+
+#### Use CTEs rather than subqueries where possible.
+CTEs will make your queries more straightforward to read/reason about, can be referenced multiple times, and are easier to adapt/refactor later. If you think a subquery is unavoidable, it is a good time to ask for a second pair of eyes.
+
+```sql
+-- Good
+with
+    paying_customers as (
+        select *
+        from customers
+        where plan_name != 'free'
+    )
+
+select ...
+from paying_customers
+
+-- Bad
+select ...
+from (
+    select *
+    from customers
+    where plan_name != 'free'
+) as paying_customers
+```
+
+---
+<br>
+
+## Naming
+The general guide for naming is to be descriptive over minimal.
+---
+
+#### Boolean column names:
+  - Boolean columns should be prefixed with a present or past tense third-person singular verb, such as:
+    - `is_` or `was_`.
+    - `has_` or `had_`.
+    - `does_` or `did_`
+
+  > It is also preferred that boolean column values take `true/false` over `yes/no` values.
+
+<br>
+
+#### Avoid using unnecessary table aliases, especially initialisms.
+Suggested guidelines:
+  - If the table name consists of 3 words or less don't alias it.
+  - Use a subset of the words as the alias if it makes sense (e.g. if `partner_shipments_order_line_items` is the only line items table being referenced it could be reasonable to alias it as just `line_items`).
+
+```sql
+-- Good
+select
+    customers.email,
+    orders.invoice_number
+from customers
+inner join orders on customers.id = orders.customer_id
+
+-- Bad
+select
+    c.email,
+    o.invoice_number
+from customers as c
+inner join orders as o on c.id = o.customer_id
+```
+
+---
+<br>
+
+## Formatting
+The general guide for formatting is:
+  - If there's only one thing, put it on the same line as the opening keyword.
+  - If there are multiple things, put each one on its own line (including the first one), indented one level more than the opening keyword.
+---
+
+#### Left align everything.
+This is easier to keep consistent, and is also easier to write.
+
+```sql
+-- Good
+select email
+from customers
+where email like '%@domain.com'
+
+-- Bad
+select email
+  from customers
+ where email like '%@domain.com'
+```
+
+<br>
+
+#### Indents should generally be 4 spaces.
+```sql
+-- Good
+select
+    id,
+    email
+from customers
+where
+    email like '%@domain.com'
+    and plan_name != 'free'
+
+-- Bad
+select
+  id,
+  email
+from customers
+where email like '%@domain.com'
+  and plan_name != 'free'
+```
+
+<br>
+
+#### Never end a line with an operator like `and`, `or`, `+`, `||`, etc.
+If code containing such operators needs to be split across multiple lines, put the operators at the beginning of the subsequent lines.
+  - You should be able to scan the left side of the query text to see the logic being used without having to read to the end of every line.
+  - The operator is only there for/because of what follows it.  If nothing followed the operator it wouldn't be needed, so putting the operator on the same line as what follows it makes it clearer why it's there.
+
+```sql
+-- Good
+select *
+from customers
+where
+    email like '%@domain.com'
+    and plan_name != 'free'
+
+-- Bad
+select *
+from customers
+where
+    email like '%@domain.com' and
+    plan_name != 'free'
+```
+
+<br>
+
+#### Using trailing commas.
+
+```sql
+-- Good
+with
+    customers as (
+        ...
+    ),
+    paying_customers as (
+        ...
+    )
+select
+    id,
+    email,
+    date_trunc('month', created_at) as signup_month
+from paying_customers
+where email in (
+        'user-1@example.com',
+        'user-2@example.com',
+        'user-3@example.com'
+    )
+
+-- Bad
+with
+    customers as (
+        ...
+    )
+    , paying_customers as (
+        ...
+    )
+select
+    id
+    , email
+    , date_trunc('month', created_at) as signup_month
+from paying_customers
+where email in (
+        'user-1@example.com'
+        , 'user-2@example.com'
+        , 'user-3@example.com'
+    )
+```
+
+<br>
+
+#### `select` clause:
+  - If there is only one column expression, put it on the same line as `select`.
+  - If there are multiple column expressions, put each one on its own line (including the first one), indented one level more than `select`.
+  - If there is a `distinct` qualifier, put it on the same line as `select`.
+
+```sql
+-- Good
+select id
+
+
+-- Good
+select
+    id,
+    email
+
+-- Bad
+select id, email
+
+-- Bad
+select id,
+    email
+
+
+-- Good
+select distinct country
+
+-- Good
+select distinct
+    state,
+    country
+
+-- Bad
+select distinct state, country
+```
+
+<br>
+
+#### `from` clause:
+  - Put the initial table being selected from on the same line as `from`.
+  - If there are other tables being joined:
+    - Put each `join` on its own line, at the same indentation level as `from`.
+    - If there is only one join condition, put it on the same line as the `join`.
+    - If there are multiple join conditions, put each condition on its own line (including the first one), indented one level more than the `join`.
+
+```sql
+-- Good
+from customers
+
+
+-- Good
+from customers
+left join orders on customers.id = orders.customer_id
+
+-- Bad
+from customers
+    left join orders on customers.id = orders.customer_id
+
+-- Bad
+from customers
+left join orders
+    on customers.id = orders.customer_id
+
+
+-- Good
+from customers
+left join orders on
+    customers.id = orders.customer_id
+    and customers.region_id = orders.region_id
+
+-- Bad
+from customers
+left join orders on customers.id = orders.customer_id
+    and customers.region_id = orders.region_id
+
+-- Bad
+from customers
+left join orders
+    on customers.id = orders.customer_id
+    and customers.region_id = orders.region_id
+```
+
+<br>
+
+#### `where` clause:
+  - If there is only one condition, put it on the same line as `where`.
+  - If there are multiple conditions, put each one on its own line (including the first one), indented one level more than `where`.
+
+```sql
+-- Good
+where email like '%@domain.com'
+
+
+-- Good
+where
+    email like '%@domain.com'
+    and plan_name != 'free'
+
+-- Bad
+where email like '%@domain.com' and plan_name != 'free'
+
+-- Bad
+where email like '%@domain.com'
+    and plan_name != 'free'
+```
+
+<br>
+
+#### `group by` and `order by` clauses:
+  - If grouping/ordering by column numbers, put all numbers on the same line as `group by`/`order by`.
+  - If grouping/ordering by column names/aliases:
+    - If there is only one column, put it on the same line as `group by`/`order by`.
+    - If there are multiple columns, put each on its own line (including the first one), indented one level more than `group by`/`order by`.
+> Grouping by column numbers is preferred over grouping by column names/aliases.
+
+```sql
+-- Good
+group by 1, 2, 3
+
+-- Bad
+group by
+    1
+    , 2
+    , 3
+
+
+-- Good
+order by plan_name
+
+
+-- Good
+order by
+    plan_name
+    , signup_month
+
+-- Bad
+order by plan_name, signup_month
+
+-- Bad
+order by plan_name
+    , signup_month
+```
+
+<br>
+
+#### CTEs:
+  - Start each CTE on its own line, indented one level more than `with` (including the first one, and even if there is only one).
+  - Use a single blank line around CTEs to add visual separation.
+  - Put any comments about the CTE within the CTE's parentheses, at the same indentation level as the `select`.
+
+```sql
+-- Good
+with
+    paying_customers as (
+        select ...
+        from customers
+    )
+
+select ...
+from paying_customers
+
+-- Bad
+with paying_customers as (
+
+    select ...
+    from customers
+
+)
+select ...
+from paying_customers
+
+
+-- Good
+with
+    paying_customers as (
+        select ...
+        from customers
+    )
+
+    , paying_customers_per_month as (
+        -- CTE comments...
+        select ...
+        from paying_customers
+    )
+
+select ...
+from paying_customers_per_month
+
+-- Bad
+with paying_customers as (
+
+        select ...
+        from customers
+
+    )
+
+    -- CTE comments...
+    , paying_customers_per_month as (
+
+        select ...
+        from paying_customers
+
+      )
+
+select ...
+from paying_customers_per_month
+```
+
+<br>
+
+#### `case` statements:
+  - You can put a `case` statement all on one line if it only has a single `when` clause and doesn't cause the line's length to be too long.
+  - For multi-line `case` statements:
+    - `case` and `end as` should align
+    - `when(s)` and `else` should align and be indented one more level than `case` (when there are multiple `whens` for a `case`)
+    - `and(s)` and `then(s)` should align and be indented one more level than `when` (when there are multiple conditions for one `when`)
+
+```sql
+-- Good
+select
+    case when customers.status_code = 1 then 'Active' else 'Inactive' end as customer_status
+
+-- Bad
+select
+    case when customers.status_code = 1 and customers.deleted_at is null then 'Active' else 'Inactive' end as customer_status
+
+
+-- Good
+select
+    ... ,
+    case
+        when customers.status_code = 1
+            and customers.deleted_at is null
+            and ...
+            then 'Active'
+        when customer.status_code = 2 
+            and customers.deleted_at is null
+            and ...
+            then 'Break'
+        else 'Inactive'
+      end as customer_status
+
+-- Bad
+select
+    ... ,
+    case
+        when customers.status_code = 1 and customers.deleted_at is null
+        then 'Active'
+        when customers.status_code = 2 and customers.deleted_at is null
+        then 'Break'
+        else 'Inactive'
+    end as customer_status
+```
+
+<br>
+
+#### Window functions:
+  - You can put a window function all on one line if it doesn't cause the line's length to be too long.
+  - If breaking a window function into multiple lines:
+    - Put each sub-clause within `over ()` on its own line, indented one level more than the window function:
+      - `partition by`
+      - `order by`
+      - `rows between` / `range between`
+    - Put the closing `over ()` parenthesis on its own line at the same indentation level as the window function.
+
+```sql
+-- Good
+select
+    customer_id,
+    invoice_number,
+    row_number() over (partition by customer_id order by created_at) as order_rank
+from orders
+
+-- Good
+select
+    customer_id,
+    invoice_number,
+    row_number() over (
+        partition by customer_id
+        order by created_at
+      ) as order_rank
+from orders
+
+-- Bad
+select
+    customer_id,
+    invoice_number,
+    row_number() over (partition by customer_id
+                         order by created_at) as order_rank
+from orders
+```
+
+<br>
+
+#### `in` lists:
+  - Break long lists of `in` values into multiple indented lines with one value per line.
+
+```sql
+-- Good
+where email in (
+        'user-1@example.com',
+        'user-2@example.com',
+        'user-3@example.com'
+    )
+
+-- Bad
+where email in ('user-1@example.com', 'user-2@example.com', 'user-3@example.com')
+```
+
+<br>
+
+#### Don't put extra spaces inside of parentheses.
+```sql
+-- Bad
+select *
+from customers
+where plan_name in ( 'monthly', 'yearly' )
+
+-- Good
+select *
+from customers
+where plan_name in ('monthly', 'yearly')
+```
+
+---
+<br>
+
+## Credits
+
+This style guide was inspired in part by:
+  - [Fishtown Analytics' dbt coding conventions](https://github.com/fishtown-analytics/corp/blob/b5c6f55b9e7594e1a1e562edf2378b6dd78a1119/dbt_coding_conventions.md)
+  - [Matt Mazur's SQL style guide](https://github.com/mattm/sql-style-guide/blob/3eaef3519ca5cc7f21feac6581b257638f9b1564/README.md)
+  - [GitLab's SQL style guide](https://about.gitlab.com/handbook/business-ops/data-team/sql-style-guide/)
