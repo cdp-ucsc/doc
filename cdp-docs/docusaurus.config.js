@@ -82,8 +82,8 @@ const config = {
             position: "right",
             items: [
               {
-                label: 'Modern Data Stack',
-                to: '/docs/architecture/mds.md',
+                label: 'CDP Infrastructure',
+                to: '/docs/architecture/mds',
               },              
               {
                 label: 'Snowflake',

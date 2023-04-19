@@ -2,7 +2,7 @@
 sidebar_position: 3
 ---
 
-# Kimball Subsystem Inventory
+# Kimball Subsystem Inventory - DRAFT
 
 The 34 sub systems will be updated to reflect what is still relavent with the shift from Extract Transform and Load to Extract, Load and Transform made possible by current technologies and methodologies.
 
