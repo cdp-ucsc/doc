@@ -87,15 +87,15 @@ const config = {
               },              
               {
                 label: 'Snowflake',
-                href: 'https://snowflake.com',
+                href: 'https://app.snowflake.com/us-west-2/zna67203',
               },
               {
                 label: 'Fivetran',
-                href: 'https://fivetran.com',
+                href: 'https://login.ucsc.edu/idp/profile/SAML2/Unsolicited/SSO?providerId=Fivetran',
               },
               {
                 label: 'dbt labs',
-                href: 'https://getdbt.com',
+                href: 'https://cloud.ucsc.getdbt.com/enterprise-login/ucsc/',
               },
             ],
           },

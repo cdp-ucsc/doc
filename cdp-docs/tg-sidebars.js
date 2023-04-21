@@ -18,31 +18,7 @@ const sidebars = {
     'introduction',
     {
       type: 'category',
-      label: 'Getting Started',
-      link: {
-        type: 'doc',
-        id: 'architecture/mds',
-      },
-      collapsed: false,
-      items: [
-        'architecture/intro',
-      ],
-      },    
-      {
-        type: 'category',
-        label: 'Resource Guides',
-        link: {
-          type: 'doc',
-          id: 'resource_guides/intro',
-        },
-        collapsed: false,
-        items: [
-          'resource_guides/a_style_guides/sql_style_guide',
-        ]
-        },
-    {
-      type: 'category',
-      label: 'Getting Started',
+      label: 'Information Architecture',
       link: {
         type: 'generated-index',
       },
@@ -62,7 +38,6 @@ const sidebars = {
         'business_process/intro',
       ],
     },
-    
     {
       type: 'category',
       label: 'Resource Guides',

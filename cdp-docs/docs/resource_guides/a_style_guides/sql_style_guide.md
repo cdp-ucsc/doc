@@ -473,8 +473,6 @@ where
     plan_name != 'free'
 ```
 
-<br />
-
 **Do** use trailing commas
 
 ```sql
@@ -657,8 +655,6 @@ order by plan_name
     , signup_month
 ```
 
-<br />
-
 **Don't** put extra spaces inside of parentheses.
 
 ```sql
@@ -757,7 +753,6 @@ select
 from orders
 ```
 
-<br />
 
 #### `in` lists:
   - Break long lists of `in` values into multiple indented lines with one value per line.

@@ -1,15 +1,115 @@
-# Intro
+
+# Common Data Platform - DRAFT
 
 
 
-This page documents the approach and high-level architectural considerations that will be followed in the design, development, and operation of the Common Data Platform (CDP). The Common Data Platform is an umbrella term that encompasses many aspects of the management of data on the campus and serves as the Campus Data Strategy to meet the current business needs as well as positioning ourselves to meet future demands.
+
+* Introduction
+* Mission
+* Direction–what are we doing to improve data at UCSC
+* Principles–inform how we accomplish our mission
+
+## 
+    Highest Level Navigation
+
+* How Data works at UCSC–The CDP Program
+* Data you can use–the Data Catalog
+* How the CDP Team Works
+* How the CDP Works
+* What the CDP team is working on
 
 
-### Develop an Enterprise Data Model, a single source of facts
+## How data works at UCSC-The CDP Program
 
-The design and development of the Enterprise Data Model (EDW) will primarily follow the Kimball approach to data warehousing. The Kimball methodology has been in existance since the late 1990's, and it's easy to dismiss the approach as a relic of the past. However, much of the content is still relavant today. For more information about the Kimball Methogology and how it applies to the modern data stack, please see  [A 2020 Readers' Guide to the Data Warehouse Toolkit](https://www.holistics.io/blog/how-to-read-data-warehouse-toolkit/).  Additional information can be found here: [Kimball Techniques](https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/books/data-warehouse-dw-toolkit/). The team will be using The Data Warehouse Toolkit as a reference. 
+The collective set of people, projects, and initiatives focused on advancing the state of data at UCSC is called the Common Data Platform Program.
 
-In a nutshell, the Kimball approach uses dimensional modeling techniques to design a [star schema](https://en.wikipedia.org/wiki/Star_schema). A star schema consists of fact tables to record the events of the business surrounded by dimension tables which hold the descriptive data related to those events. Important dimensions, like Student, Employees, Facility, and Finance, can be built once and used in many different fact tables. This reuse of dimension tables allows for consistent data for these important concepts and is called **"conformed dimensions"** in the Kimball approach.
 
-Another feature of the Kimball approach is that it is iterative. This works well within Scrum since the building of individual fact and dimension tables can be done in sprints.
 
+* Program overview
+* The teams involved
+* How the teams work together
+* Roles and responsibilities
+* How we measure impact
+* How to connect with the CDP Program
+
+
+## Data you can use–the Data Catalog
+
+The purpose of this Data Catalog is to help you understand and make use of the data that is available in the Common Data Platform for reporting and analysis. The Common Data Platform contains Data Sources extracted from Tech Stack Applications, then transformed and integrated into the Enterprise Model for simple and easy reporting and analysis.
+
+
+
+* How Extraction, Loading, and Transformation (ELT) works–Consumer view
+* dbt Data Lineage diagrams
+* dbt Data Dictionaries
+* Entity-Relationship Diagrams
+
+
+## How the CDP Team works
+
+
+
+* Working with the CDP Team
+* CDP Team Member resources
+    * Onboarding guide
+        * Getting Started
+        * Access Requests
+        * Slack Channels
+        * Team Introductions
+        * Computer Set Up
+        * Data Stack
+        * Data Operations
+        * Important Data Sets
+        * Supporting Information
+    * Roles and responsibilities
+    * Calendar
+    * Documentation
+    * Prioritization
+    * Issues and incidents
+
+
+## How The CDP works
+
+High-level diagrams and approach explanations down to links to standards, best practices, and how-to guides for CDP team members.
+
+
+
+* Architectural drawings and overview
+* Extract and load
+    * Approach
+    * Technology
+        * Fivetran
+        * Snowflake data lake
+    * Data sources
+        * PeopleSoft
+        * Banner
+        * .etc
+* Transform
+    * Approach
+    * Data merging and cleansing
+    * Technology
+        * dbt
+* Enterprise data warehouse
+    * Approach
+    * Principles
+        * Single version of the truth
+        * Transaction system independence
+        * Dimensional model
+    * Fact and Dimension builds
+    * Technology
+        * dbt
+        * Snowflake EDW
+* Data security
+* The semantic model
+
+
+## What the CDP team is working on
+
+
+
+* What has been implemented (once we have something)
+* What is in the current content release
+* What has been selected for the next content release(s)
+* The complete product backlog
+* The new content request process
+* The content release content selection and prioritization process
