@@ -18,14 +18,13 @@ const sidebars = {
     'introduction',
     {
       type: 'category',
-      label: 'Getting Started',
+      label: 'Architecture',
       link: {
         type: 'doc',
         id: 'architecture/mds',
       },
-      collapsed: false,
+      collapsed: true,
       items: [
-        'architecture/intro',
       ],
       },    
       {
@@ -40,18 +39,7 @@ const sidebars = {
           'resource_guides/a_style_guides/sql_style_guide',
         ]
         },
-    {
-      type: 'category',
-      label: 'Getting Started',
-      link: {
-        type: 'generated-index',
-      },
-      collapsed: false,
-      items: [
-        'architecture/mds',
-      ],
-    },
-    {
+/*     {
       type: 'category',
       label: 'Business Process',
       link: {
@@ -61,27 +49,17 @@ const sidebars = {
       items: [
         'business_process/intro',
       ],
-    },
-    
-    {
-      type: 'category',
-      label: 'Resource Guides',
-      link: {
-        type: 'generated-index',
-      },
-      collapsed: false,
-      items: [
-        'resource_guides/a_style_guides/sql_style_guide',
-      ],
-    },
+    }, */
     {
       type: 'category',
       label: 'Data Modeling',
       link: {
-        type: 'generated-index',
+        type: 'doc',
+        id: 'data_modeling/b_kimball_resources/kimball_intro',
+
       },
-      collapsed: false,
-      items: [
+      collapsed: true,
+      items: [        
         'data_modeling/b_kimball_resources/kimball_subsystem',
       ],
     },            
