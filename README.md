@@ -34,7 +34,9 @@ This site is deployed to GitHub through the use of GitHub actions, when a Pull R
      npm install [this command only needs to be run once to load dependencies]
      npx docusaurus start
      ```
-     The vulnerability warnings encountered when running npm install can be safely ignored. ![npm-install-warnings](https://user-images.githubusercontent.com/103523675/234999670-ecd06290-202b-4123-bd94-da1d607e8a39.png)
+     The vulnerability warnings encountered when running `npm install` can be safely ignored. 
+     
+     ![npm-install-warnings](https://user-images.githubusercontent.com/103523675/234999670-ecd06290-202b-4123-bd94-da1d607e8a39.png)
      
      These are false positives due to the audit differences of building an app vs generating static content with react([more info](https://github.com/facebook/create-react-app/issues/11174)).
     
