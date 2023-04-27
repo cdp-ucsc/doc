@@ -6,7 +6,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Common Data Platform - Under Construction',
+  title: 'Common Data Platform - Demo',
   tagline: 'Project Documentation Center',
   favicon: 'img/favicon.ico',
 
@@ -45,7 +45,13 @@ const config = {
           editUrl:
             'https://github.com/cdp-ucsc/doc/blob/main/cdp-docs/',
         },
-        blog: false,
+        blog:  {
+          // showReadingTime: true,
+          // Please change this to your repo.
+          // Remove this to remove the "edit this page" links.
+          // editUrl:
+          //  'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+        },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
@@ -70,8 +76,30 @@ const config = {
             sidebarId: 'documentationSidebar',
             position: 'left',
             label: 'Documentation',
+          },          
+          {
+            label: "Platform Logins",
+            position: "right",
+            items: [        
+              {
+                label: 'Snowflake',
+                href: 'https://app.snowflake.com/us-west-2/zna67203',
+              },
+              {
+                label: 'Fivetran',
+                href: 'https://login.ucsc.edu/idp/profile/SAML2/Unsolicited/SSO?providerId=Fivetran',
+              },
+              {
+                label: 'dbt labs',
+                href: 'https://cloud.ucsc.getdbt.com/enterprise-login/ucsc/',
+              },
+            ],
           },
-     //     {to: '/blog', label: 'Status Reports', position: 'left'},
+   //       { 
+   //             label: "Program Updates",
+   //         to: '/blog',
+   //         position: 'left'
+   //       }, 
           {
             href: 'https://github.com/cdp-ucsc/doc/',
             label: 'GitHub',
