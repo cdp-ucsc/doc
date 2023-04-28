@@ -28,4 +28,3 @@ The Inmon Method. Bill Inmon, the father of data warehousing, came up with the c
 
 - [What is a Data Vault ? | 3NF vs Dimensional model vs Data Vault | Quick Starter Guide in 2023](https://www.youtube.com/watch?v=l5UcUEt1IzM)
 - [Let's Compare the Kimball and Inmon Data Warehouse Architectures](https://www.youtube.com/watch?v=Tff34jj_V-0)
-- 
