@@ -12,10 +12,10 @@ This guide establishes our standards for SQL and are enforced by code review. So
 * Avoid large select statements with multiple tables instead utilize CTEs.
 * If a `select` statement is so large it can't be easily comprehended, it would be better to refactor it into multiple smaller CTEs that are later joined back together.
 
-* Lines should ideally not be longer than 120 characters.
+* Lines should ideally not be longer than 120 characters.**
 Very long lines are harder to read, especially in situations where space may be limited like on smaller screens or in side-by-side version control diffs.
 
-* Identifiers such as aliases and CTE names should be in lowercase `snake_case`.
+* Identifiers such as aliases and CTE names should be in lowercase `snake_case`.**
 It's more readable, easier to keep consistent, and avoids having to quote identifiers due to capitalization, spaces, or other special characters.
 
 * Never use reserved words as identifiers.
@@ -23,6 +23,11 @@ Otherwise the identifier will have to be quoted everywhere it's used. [(Snowflak
 
 * Never use tab characters.
 It's easier to keep things consistent in version control when only space characters are used. By default, VS Code inserts spaces and uses 4 space per `Tab` key. [(source)](https://code.visualstudio.com/docs/editor/codebasics#_indentation)
+
+| **SQL Style Guide Rule** | **SQLFluff Rule Code** | **SQLFluff Fix compatible** |
+|:---|:---|:---|
+| **Lines should ideally not be longer than 120 characters | max_line_length | Yes |
+| **Identifiers such as aliases and CTE names should be in lowercase. | [CP01](https://docs.sqlfluff.com/en/stable/rules.html#sqlfluff.rules.sphinx.Rule_CP01), [CP02](https://docs.sqlfluff.com/en/stable/rules.html#sqlfluff.rules.sphinx.Rule_CP02), [CP03](https://docs.sqlfluff.com/en/stable/rules.html#sqlfluff.rules.sphinx.Rule_CP03) | Yes |
 
 
 ## Syntax
@@ -52,11 +57,16 @@ select COUNT(*) as customers_count
 from customers
 ```
 
+| **SQLFluff Rule Code** | **SQLFluff Fix compatible** |
+|:---|:---|
+| [CP01](https://docs.sqlfluff.com/en/stable/rules.html#sqlfluff.rules.sphinx.Rule_CP01), [CP02](https://docs.sqlfluff.com/en/stable/rules.html#sqlfluff.rules.sphinx.Rule_CP02), [CP03](https://docs.sqlfluff.com/en/stable/rules.html#sqlfluff.rules.sphinx.Rule_CP03) | Yes |
+
 ### Operators 
 
  Use `!=` instead of `<>`.
  
  `!=` reads like "not equal" which is closer to how we'd say it out loud.
+
 
 ### Aliases 
 Always use the `as` keyword when aliasing columns, expressions, and tables.
@@ -70,6 +80,10 @@ from customers
 select count(*) customers_count
 from customers
 ```
+
+| **SQLFluff Rule Code** | **SQLFluff Fix compatible** |
+|:---|:---|
+| [AL01](https://docs.sqlfluff.com/en/stable/rules.html#sqlfluff.rules.sphinx.Rule_AL01), [AL02](https://docs.sqlfluff.com/en/stable/rules.html#sqlfluff.rules.sphinx.Rule_AL02), [AL03](https://docs.sqlfluff.com/en/stable/rules.html#sqlfluff.rules.sphinx.Rule_AL03)| Yes |
 
 ### Grouping 
 
