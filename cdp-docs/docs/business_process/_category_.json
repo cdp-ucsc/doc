@@ -1,8 +1,0 @@
-{
-  "label": "Business Process",
-  "position": 2,
-  "link": {
-    "type": "generated-index",
-    "description": "Business Process documentation organized by domain."
-  }
-}
