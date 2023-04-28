@@ -10,7 +10,7 @@ Implement secure automated data pipelines from source to target in near real tim
 
 ### Enterprise Data Model (EDW)
 
-The Enterprise Data Model, or EDW, will support integrating and blending data at scale from multiple domains. Information will be collaboratively and transparently curated from raw source data to trusted information available for reporting, analytics, and sharing.  [More Information](data_modeling/introduction)
+The Enterprise Data Model, or EDW, will support integrating and blending data at scale from multiple domains. Information will be collaboratively and transparently curated from raw source data to trusted information available for reporting, analytics, and sharing.  
 
 ### Data Stewardship & Governance Program
 

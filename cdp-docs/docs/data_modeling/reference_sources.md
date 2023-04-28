@@ -1,5 +1,7 @@
 # Modeling References
 
+Below are several of the more established methodologies for data modeling. 
+
 ### Kimball Methodology
 
 The Kimball lifecycle is a methodology for developing data warehouses, and has been developed by Ralph Kimball and a variety of colleagues. The methodology "covers a sequence of high level tasks for the effective design, development and deployment" of a data warehouse or business intelligence system. [The Kimball lifecycle - Wikipedia](https://en.wikipedia.org/wiki/The_Kimball_lifecycle#:~:text=The%20Kimball%20lifecycle%20is%20a,warehouse%20or%20business%20intelligence%20system)
