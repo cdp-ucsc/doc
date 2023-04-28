@@ -1,9 +1,6 @@
 {
     "label": "Data Modeling",
     "position": 3,
-    "link": {
-      "type": "generated-index",
-      "description": "Documentation for Data Modeling solutions and methodologies"
-    }
+    "link": {"type": "doc", "id": "introduction"}
   }
   
