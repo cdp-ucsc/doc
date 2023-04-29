@@ -6,7 +6,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Common Data Platform - Demo',
+  title: 'Common Data Platform',
   tagline: 'Project Documentation Center',
   favicon: 'img/favicon.ico',
 
