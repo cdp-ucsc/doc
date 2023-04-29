@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
     <channel>
-        <title>Common Data Platform - Demo Blog</title>
+        <title>Common Data Platform Blog</title>
         <link>https://cdp-ucsc.github.io/doc/blog</link>
-        <description>Common Data Platform - Demo Blog</description>
+        <description>Common Data Platform Blog</description>
         <lastBuildDate>Thu, 26 Aug 2021 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
