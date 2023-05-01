@@ -275,6 +275,11 @@ from customers
 inner join orders on customers.id = orders.customer_id
 ```
 
+| **SQLFluff Rule Code** | **SQLFluff Fix compatible** |
+|:---|:---|
+| [RF02](https://docs.sqlfluff.com/en/stable/rules.html#rule-RF02) | No |
+
+
 ### Filter using where
 
 When  joining, put filter conditions in the `where` clause instead of the `join` clause.

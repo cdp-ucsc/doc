@@ -2,7 +2,7 @@
 
 ### Background
 
-[UCSC Sql Style Guide](https://github.com/cdp-ucsc/dbt-pilot/wiki/Style-Guide-Draft#sql-style-guide)
+[UCSC Sql Style Guide](https://cdp-ucsc.github.io/doc/docs/project_resources/sql_style_guide)
 
 [Roles](https://towardsdatascience.com/sqlfluff-the-linter-for-modern-sql-8f89bd2e9117) of a linting tool are to enforce cosmetic rules and prevent code smells.
 > *"Code bases without a consistent style are hard to read and work with because of their unpredictable structure....
@@ -27,6 +27,7 @@ SQLFluff is a dialect-flexible and configurable SQL linter. Designed with ELT ap
 | Prefer union all to union| [AM02](https://docs.sqlfluff.com/en/stable/rules.html#sqlfluff.rules.sphinx.Rule_AM02) | N/A,<br>(not supported in snowflake)  | No |
 | Avoid using unnecessary table aliases, especially initialisms.<br> It's harder to understand what the table called "c" is <br>compared to "customers". | [AL07](https://docs.sqlfluff.com/en/stable/rules.html#rule-AL07) | Yes | No |
 | Be explicit with all join types <br> for example use `inner join` instead of just `join`. | [AM05](https://docs.sqlfluff.com/en/stable/rules.html#rule-AM05) | Yes | No |
+| When joining multiple tables, always prefix the column names with the table name | [RF02](https://docs.sqlfluff.com/en/stable/rules.html#rule-AM05) | No | Yes |
 | Use single quotes for strings. | [CV10](https://docs.sqlfluff.com/en/stable/rules.html#rule-CV10) | Yes | No |
 | Don't use `using` in joins. | [ST07](https://docs.sqlfluff.com/en/stable/rules.html#rule-STO7) | Yes | No |
 | Start each CTE on its own line, Use a single blank line around CTEs to add visual separation | [LT07](https://docs.sqlfluff.com/en/stable/rules.html#rule-LT07), <br> [LT08](https://docs.sqlfluff.com/en/stable/rules.html#rule-LT08) | Yes | No |
