@@ -59,7 +59,7 @@ from customers
 
 | **SQLFluff Rule Code** | **SQLFluff Fix compatible** |
 |:---|:---|
-| [CP01](https://docs.sqlfluff.com/en/stable/rules.html#sqlfluff.rules.sphinx.Rule_CP01), [CP02](https://docs.sqlfluff.com/en/stable/rules.html#sqlfluff.rules.sphinx.Rule_CP02), [CP03](https://docs.sqlfluff.com/en/stable/rules.html#sqlfluff.rules.sphinx.Rule_CP03) | Yes |
+| [CP01](https://docs.sqlfluff.com/en/stable/rules.html#sqlfluff.rules.sphinx.Rule_CP01), [CP02](https://docs.sqlfluff.com/en/stable/rules.html#sqlfluff.rules.sphinx.Rule_CP02), [CP03](https://docs.sqlfluff.com/en/stable/rules.html#sqlfluff.rules.sphinx.Rule_CP03), [CP04](https://docs.sqlfluff.com/en/stable/rules.html#sqlfluff.rules.sphinx.Rule_CP04) | Yes |
 
 ### Operators 
 
@@ -97,6 +97,10 @@ from customers
 select max(id)
 from customers
 ```
+| **SQLFluff Rule Code** | **SQLFluff Fix compatible** |
+|:---|:---|
+| [AL02](https://docs.sqlfluff.com/en/stable/rules.html#sqlfluff.rules.sphinx.Rule_AL02) | Yes |
+
 
 ### Where vs Having
 Use `where` instead of `having` when either would suffice.
@@ -107,6 +111,7 @@ Queries filter on the `where` clause earlier in their processing, so `where` fil
 
 Use `union all` instead of `union` unless duplicate rows really do need to be removed.
 `union all` is more performant because it doesn't have to sort and de-duplicate the rows.
+
 
 ### Order by
 
@@ -214,6 +219,10 @@ select *
 from customers
 join orders on customers.id = orders.customer_id
 ```
+
+| **SQLFluff Rule Code** | **SQLFluff Fix compatible** |
+|:---|:---|
+| [AM05](https://docs.sqlfluff.com/en/stable/rules.html#rule-AM05) | Yes |
 
 In join conditions, put the table that was referenced first immediately after `on`.
 This makes it easier to determine if the join is going to cause the results to fan out.
@@ -420,6 +429,11 @@ from customers as c
 inner join orders as o on c.id = o.customer_id
 ```
 
+| **SQLFluff Rule Code** | **SQLFluff Fix compatible** |
+|:---|:---|
+| [AL07](https://docs.sqlfluff.com/en/stable/rules.html#rule-AL07) | Yes |
+
+
 
 ## Formatting
 The general guide for formatting is:
@@ -528,6 +542,10 @@ where email in (
         , 'user-3@example.com'
     )
 ```
+| **SQLFluff Rule Code** | **SQLFluff Fix compatible** |
+|:---|:---|
+| [LT04](https://docs.sqlfluff.com/en/stable/rules.html#rule-LT04) | Yes |
+
 
 
 **Do** follow these standards when using the `select` clause:
@@ -668,6 +686,11 @@ order by plan_name, signup_month
 order by plan_name
     , signup_month
 ```
+
+| **SQLFluff Rule Code** | **SQLFluff Fix compatible** |
+|:---|:---|
+| [AM06](https://docs.sqlfluff.com/en/stable/rules.html#rule-AM06) | Yes |
+
 
 **Don't** put extra spaces inside of parentheses.
 
