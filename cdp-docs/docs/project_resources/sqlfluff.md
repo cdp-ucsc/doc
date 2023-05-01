@@ -31,7 +31,7 @@ SQLFluff is a dialect-flexible and configurable SQL linter. Designed with ELT ap
 | Use single quotes for strings. | [CV10](https://docs.sqlfluff.com/en/stable/rules.html#rule-CV10) | Yes | No |
 | Don't use `using` in joins. | [ST07](https://docs.sqlfluff.com/en/stable/rules.html#rule-STO7) | Yes | No |
 | Start each CTE on its own line, Use a single blank line around CTEs to add visual separation | [LT07](https://docs.sqlfluff.com/en/stable/rules.html#rule-LT07), <br> [LT08](https://docs.sqlfluff.com/en/stable/rules.html#rule-LT08) | Yes | No |
-| Don't end a line with an operator like `and`, `or`, `+`, `||`, etc | [LT03](https://docs.sqlfluff.com/en/stable/rules.html#rule-LT03) | Yes | Yes |
+| Don't end a line with an operator like `and`, `or`, `+`, <code>&vert;&vert;</code> etc | [LT03](https://docs.sqlfluff.com/en/stable/rules.html#rule-LT03) | Yes | Yes |
 | If there is only one column expression, put it on the same line as select. <br> If there are multiple column expressions, put each one on its own line (including the first one), indented one level more than select. <br> If there is a `distinct` qualifier, put it on the same line as `select`. | [LT09](https://docs.sqlfluff.com/en/stable/rules.html#rule-LT09), [LT10](https://docs.sqlfluff.com/en/stable/rules.html#rule-LT10) | Yes | Yes |
 | Don't put extra spaces inside of parentheses | [LT01](https://docs.sqlfluff.com/en/stable/rules.html#rule-LT01) | Yes | Yes |
 
