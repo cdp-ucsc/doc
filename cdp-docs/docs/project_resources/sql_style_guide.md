@@ -193,7 +193,9 @@ from customers
 where email like '''%@domain.com'''
 -- Will probably be interpreted like '\'%domain.com\''.
 ```
-
+| **SQLFluff Rule Code** | **SQLFluff Fix compatible** |
+|:---|:---|
+| [CV10](https://docs.sqlfluff.com/en/stable/rules.html#rule-CV10) | Yes |
 
 ## Joins
 
@@ -203,6 +205,10 @@ Don't use `using` in joins.
   - Having all joins use `on` is more consistent.
   - If additional join conditions need to be added later, `on` is easier to adapt.
   - `using` can produce inconsistent results with outer joins in some databases.
+
+| **SQLFluff Rule Code** | **SQLFluff Fix compatible** |
+|:---|:---|
+| [ST07](https://docs.sqlfluff.com/en/stable/rules.html#rule-ST07) | Yes |
 
 
 Be explicit with all join types for example use `inner join` instead of just `join`.
@@ -302,6 +308,7 @@ where orders.total_amount >= 100
   - CTE names should not be prefixed or suffixed with `cte`.
   - CTEs with confusing or notable logic should be commented.
 
+
 ### Formatting:
   - Start each CTE on its own line, indented one level more than `with` (including the first one, and even if there is only one).
   - Use a single blank line around CTEs to add visual separation.
@@ -364,7 +371,9 @@ with paying_customers as (
 select ...
 from paying_customers_per_month
 ```
-
+| **SQLFluff Rule Code** | **SQLFluff Fix compatible** |
+|:---|:---|
+| [LT07](https://docs.sqlfluff.com/en/stable/rules.html#rule-LT07), <br> [LT08](https://docs.sqlfluff.com/en/stable/rules.html#rule-LT08) | Yes |
 
 
 ### Subqueries 
@@ -478,6 +487,10 @@ where email like '%@domain.com'
   and plan_name != 'free'
 ```
 
+| **SQLFluff Rule Code** | **SQLFluff Fix compatible** |
+|:---|:---|
+| [LT02](https://docs.sqlfluff.com/en/stable/rules.html#rule-LT02) | Yes |
+
 ### Do's and Don't 
 
 **Don't** end a line with an operator like `and`, `or`, `+`, `||`, etc.
@@ -500,6 +513,11 @@ where
     email like '%@domain.com' and
     plan_name != 'free'
 ```
+
+| **SQLFluff Rule Code** | **SQLFluff Fix compatible** |
+|:---|:---|
+| [LT03](https://docs.sqlfluff.com/en/stable/rules.html#rule-LT03) | Yes |
+
 
 **Do** use trailing commas
 
@@ -582,6 +600,10 @@ select distinct
 -- Bad
 select distinct state, country
 ```
+| **SQLFluff Rule Code** | **SQLFluff Fix compatible** |
+|:---|:---|
+| [LT09](https://docs.sqlfluff.com/en/stable/rules.html#rule-LT09), [LT10](https://docs.sqlfluff.com/en/stable/rules.html#rule-LT109)  | Yes |
+
 
 
 **Do** follow these standards when using the `from` clause:
@@ -707,6 +729,9 @@ where plan_name in ( 'monthly', 'yearly' )
 
 
 ```
+| **SQLFluff Rule Code** | **SQLFluff Fix compatible** |
+|:---|:---|
+| [LT01](https://docs.sqlfluff.com/en/stable/rules.html#rule-LT01) | Yes |
 
 
 ### Case statements:
