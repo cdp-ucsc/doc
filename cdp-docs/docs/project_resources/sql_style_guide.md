@@ -97,9 +97,6 @@ from customers
 select max(id)
 from customers
 ```
-| **SQLFluff Rule Code** | **SQLFluff Fix compatible** |
-|:---|:---|
-| [AL02](https://docs.sqlfluff.com/en/stable/rules.html#sqlfluff.rules.sphinx.Rule_AL02) | Yes |
 
 
 ### Where vs Having
