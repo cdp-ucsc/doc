@@ -1,4 +1,4 @@
-## SQLFluff
+# SQLFluff
 
 ### Background
 
