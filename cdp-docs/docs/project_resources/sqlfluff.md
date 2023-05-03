@@ -14,7 +14,7 @@ SQLFluff is a dialect-flexible and configurable SQL linter. Designed with ELT ap
 
 [Source Reference](https://github.com/sqlfluff/sqlfluff#readme)
 
-### The .sqlfluff config in this project enforces the below rules.
+### SQLFLuff rules used in the .sqlfluff config in UCSC dbt project
 
 | **SQL Style Guide Rule** | **Rule Code** | **SQLFluff Fix compatible** | **SQLFluff Default Configuration** |
 |:---|:---|:---|:---|
@@ -36,30 +36,24 @@ SQLFluff is a dialect-flexible and configurable SQL linter. Designed with ELT ap
 | Don't put extra spaces inside of parentheses | [LT01](https://docs.sqlfluff.com/en/stable/rules.html#rule-LT01) | Yes | Yes |
 
 
-### Using the sqlfluff config in your project, please use the versions that are in the [requirements.txt](https://github.com/cdp-ucsc/dbt-pilot/blob/main/requirements.txt) e.g: 
+### How to use sqlfluff config in your project
+#### please use the versions that are in the [requirements.txt](https://github.com/cdp-ucsc/dbt-pilot/blob/main/requirements.txt) e.g: 
 
-- Install  SQLFluff
-`pip install sqlfluff==1.4.5`
- 
-- Install adapter
-`pip install dbt-snowflake==1.3.0`
+- Install  SQLFluff <br />
+`pip install -r requirements.txt `
 
-- Install templater
-`pip install sqlfluff-templater-dbt==1.4.5`
-
-- there is a configured.sqlfluff in the root of the project.  
-it follows the dbt sql style guide as closely as possible (there are some rules that are not able to be linted or fixed)
+- there is a configured .sqlfluff in the root of the project, which follows the dbt sql style guide as closely as possible (there are some rules that are not able to be fixed) <br />
 `.sqlfluff, .sqlfluffignore`
 
 #### cli examples:
-- lint a specific file
-`sqlfluff lint models/staging/fis/test_joins.sql`
+- lint a specific file<br />
+`sqlfluff lint models/staging/setl/stg_dwh__setl_step_log.sql`
 
-- lint all files in a directory
-`sqlfluff lint models/staging/fis`
+- lint all files in a directory<br />
+`sqlfluff lint models/staging/setl`
 
-- sqlfluff fix a specific file (caution: this will make changes to your file)
-`sqlfluff fix models/staging/fis/test_joins.sql`
+- sqlfluff fix a specific file (caution: this will make changes to your file)<br />
+`sqlfluff fix models/staging/setl/stg_dwh__setl_step_log.sql`
 
-- sqlfluff fix files in specific directory (caution: this will make changes to all files)
-`sqlfluff fix models/staging/fis`
+- sqlfluff fix files in specific directory (caution: this will make changes to all files)<br />
+`sqlfluff fix models/staging/setl`
