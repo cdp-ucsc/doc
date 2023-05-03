@@ -12,11 +12,9 @@ This guide establishes our standards for SQL and are enforced by code review. So
 * Avoid large select statements with multiple tables instead utilize CTEs.
 * If a `select` statement is so large it can't be easily comprehended, it would be better to refactor it into multiple smaller CTEs that are later joined back together.
 
-* Lines should ideally not be longer than 120 characters.**
-Very long lines are harder to read, especially in situations where space may be limited like on smaller screens or in side-by-side version control diffs.
+* Lines should ideally not be longer than 120 characters. Very long lines are harder to read, especially in situations where space may be limited like on smaller screens or in side-by-side version control diffs.**
 
-* Identifiers such as aliases and CTE names should be in lowercase `snake_case`.**
-It's more readable, easier to keep consistent, and avoids having to quote identifiers due to capitalization, spaces, or other special characters.
+* Identifiers such as aliases and CTE names should be in lowercase `snake_case`. It's more readable, easier to keep consistent, and avoids having to quote identifiers due to capitalization, spaces, or other special characters.**
 
 * Never use reserved words as identifiers.
 Otherwise the identifier will have to be quoted everywhere it's used. [(Snowflake's reserved words)](https://docs.snowflake.com/en/sql-reference/reserved-keywords)
