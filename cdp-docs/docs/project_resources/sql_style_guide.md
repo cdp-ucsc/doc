@@ -373,7 +373,7 @@ from paying_customers_per_month
 ```
 | **SQLFluff Rule Code** | **SQLFluff Fix compatible** |
 |:---|:---|
-| [LT07](https://docs.sqlfluff.com/en/stable/rules.html#rule-LT07), <br /> [LT08](https://docs.sqlfluff.com/en/stable/rules.html#rule-LT08) | Yes |
+| [LT07](https://docs.sqlfluff.com/en/stable/rules.html#rule-LT07), [LT08](https://docs.sqlfluff.com/en/stable/rules.html#rule-LT08) | Yes |
 
 
 ### Subqueries 
