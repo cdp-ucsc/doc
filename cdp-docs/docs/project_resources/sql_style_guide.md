@@ -231,17 +231,17 @@ You should be able to tell at a glance where a column is coming from.
 ```sql
 -- Good
 select
-    customers.email
-    , orders.invoice_number
-    , orders.total_amount
+    customers.email,
+    orders.invoice_number,
+    orders.total_amount
 from customers
 inner join orders on customers.id = orders.customer_id
 
 -- Bad
 select
-    email
-    , invoice_number
-    , total_amount
+    email,
+    invoice_number,
+    total_amount
 from customers
 inner join orders on customers.id = orders.customer_id
 ```
@@ -311,9 +311,9 @@ with
     paying_customers as (
         select ...
         from customers
-    )
+    ),
 
-    , paying_customers_per_month as (
+    paying_customers_per_month as (
         -- CTE comments...
         select ...
         from paying_customers
@@ -328,10 +328,10 @@ with paying_customers as (
         select ...
         from customers
 
-    )
+    ),
 
     -- CTE comments...
-    , paying_customers_per_month as (
+    paying_customers_per_month as (
 
         select ...
         from paying_customers
@@ -633,9 +633,9 @@ group by 1, 2, 3
 
 -- Bad
 group by
-    1
-    , 2
-    , 3
+    1,
+    2,
+    3
 
 
 -- Good
@@ -644,15 +644,15 @@ order by plan_name
 
 -- Good
 order by
-    plan_name
-    , signup_month
+    plan_name,
+    signup_month
 
 -- Bad
 order by plan_name, signup_month
 
 -- Bad
-order by plan_name
-    , signup_month
+order by plan_name,
+    signup_month
 ```
 
 **Don't** put extra spaces inside of parentheses.
