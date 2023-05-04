@@ -1,0 +1,9 @@
+{
+    "label": "Data Catalogs",
+    "position": 2,
+    "link": {
+      "type": "generated-index",
+      "description": "The purpose of this Data Catalog is to help you understand and make use of the data that is available in the Common Data Platform for reporting and analysis. The Common Data Platform contains Data Sources extracted from Tech Stack Applications, then transformed and integrated into the Enterprise Model for simple and easy reporting and analysis."
+    }
+  }
+  
