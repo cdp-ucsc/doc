@@ -1,1 +1,0 @@
-How Extraction, Loading, and Transformation (ELT) works–Consumer
