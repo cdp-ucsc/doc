@@ -838,4 +838,4 @@ where email in ('user-1@example.com', 'user-2@example.com', 'user-3@example.com'
 This style guide was inspired in part by:
   - [Fishtown Analytics' dbt coding conventions](https://github.com/fishtown-analytics/corp/blob/b5c6f55b9e7594e1a1e562edf2378b6dd78a1119/dbt_coding_conventions.md)
   - [Matt Mazur's SQL style guide](https://github.com/mattm/sql-style-guide/blob/3eaef3519ca5cc7f21feac6581b257638f9b1564/README.md)
-  - [GitLab's SQL style guide](https://about.gitlab.com/handbook/business-ops/data-team/sql-style-guide/)
+  - [GitLab's SQL style guide](https://about.gitlab.com/handbook/business-technology/data-team/platform/sql-style-guide/)
