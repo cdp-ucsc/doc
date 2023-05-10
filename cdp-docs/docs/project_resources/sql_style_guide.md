@@ -12,17 +12,20 @@ This guide establishes our standards for SQL and are enforced by code review. So
 * Avoid large select statements with multiple tables instead utilize CTEs.
 * If a `select` statement is so large it can't be easily comprehended, it would be better to refactor it into multiple smaller CTEs that are later joined back together.
 
-* Lines should ideally not be longer than 120 characters.
-Very long lines are harder to read, especially in situations where space may be limited like on smaller screens or in side-by-side version control diffs.
+* Lines should ideally not be longer than 120 characters. Very long lines are harder to read, especially in situations where space may be limited like on smaller screens or in side-by-side version control diffs.**
 
-* Identifiers such as aliases and CTE names should be in lowercase `snake_case`.
-It's more readable, easier to keep consistent, and avoids having to quote identifiers due to capitalization, spaces, or other special characters.
+* Identifiers such as aliases and CTE names should be in lowercase `snake_case`. It's more readable, easier to keep consistent, and avoids having to quote identifiers due to capitalization, spaces, or other special characters.**
 
 * Never use reserved words as identifiers.
 Otherwise the identifier will have to be quoted everywhere it's used. [(Snowflake's reserved words)](https://docs.snowflake.com/en/sql-reference/reserved-keywords)
 
 * Never use tab characters.
 It's easier to keep things consistent in version control when only space characters are used. By default, VS Code inserts spaces and uses 4 space per `Tab` key. [(source)](https://code.visualstudio.com/docs/editor/codebasics#_indentation)
+
+| **SQL Style Guide Rule** | **SQLFluff Rule Code** | **SQLFluff Fix compatible** |
+|:---|:---|:---|
+| **Lines should ideally not be longer than 120 characters | max_line_length | Yes |
+| **Identifiers such as aliases and CTE names should be in lowercase. | [CP01](https://docs.sqlfluff.com/en/stable/rules.html#sqlfluff.rules.sphinx.Rule_CP01), [CP02](https://docs.sqlfluff.com/en/stable/rules.html#sqlfluff.rules.sphinx.Rule_CP02), [CP03](https://docs.sqlfluff.com/en/stable/rules.html#sqlfluff.rules.sphinx.Rule_CP03) | Yes |
 
 
 ## Syntax
@@ -52,11 +55,16 @@ select COUNT(*) as customers_count
 from customers
 ```
 
+| **SQLFluff Rule Code** | **SQLFluff Fix compatible** |
+|:---|:---|
+| [CP01](https://docs.sqlfluff.com/en/stable/rules.html#sqlfluff.rules.sphinx.Rule_CP01), [CP02](https://docs.sqlfluff.com/en/stable/rules.html#sqlfluff.rules.sphinx.Rule_CP02), [CP03](https://docs.sqlfluff.com/en/stable/rules.html#sqlfluff.rules.sphinx.Rule_CP03), [CP04](https://docs.sqlfluff.com/en/stable/rules.html#sqlfluff.rules.sphinx.Rule_CP04) | Yes |
+
 ### Operators 
 
  Use `!=` instead of `<>`.
  
  `!=` reads like "not equal" which is closer to how we'd say it out loud.
+
 
 ### Aliases 
 Always use the `as` keyword when aliasing columns, expressions, and tables.
@@ -71,6 +79,10 @@ select count(*) customers_count
 from customers
 ```
 
+| **SQLFluff Rule Code** | **SQLFluff Fix compatible** |
+|:---|:---|
+| [AL01](https://docs.sqlfluff.com/en/stable/rules.html#sqlfluff.rules.sphinx.Rule_AL01), [AL02](https://docs.sqlfluff.com/en/stable/rules.html#sqlfluff.rules.sphinx.Rule_AL02), [AL03](https://docs.sqlfluff.com/en/stable/rules.html#sqlfluff.rules.sphinx.Rule_AL03)| Yes |
+
 ### Grouping 
 
 Always alias grouping aggregates and other column expressions.
@@ -84,6 +96,7 @@ select max(id)
 from customers
 ```
 
+
 ### Where vs Having
 Use `where` instead of `having` when either would suffice.
 Queries filter on the `where` clause earlier in their processing, so `where` filters are more performant.
@@ -93,6 +106,7 @@ Queries filter on the `where` clause earlier in their processing, so `where` fil
 
 Use `union all` instead of `union` unless duplicate rows really do need to be removed.
 `union all` is more performant because it doesn't have to sort and de-duplicate the rows.
+
 
 ### Order by
 
@@ -174,7 +188,9 @@ from customers
 where email like '''%@domain.com'''
 -- Will probably be interpreted like '\'%domain.com\''.
 ```
-
+| **SQLFluff Rule Code** | **SQLFluff Fix compatible** |
+|:---|:---|
+| [CV10](https://docs.sqlfluff.com/en/stable/rules.html#rule-CV10) | Yes |
 
 ## Joins
 
@@ -184,6 +200,10 @@ Don't use `using` in joins.
   - Having all joins use `on` is more consistent.
   - If additional join conditions need to be added later, `on` is easier to adapt.
   - `using` can produce inconsistent results with outer joins in some databases.
+
+| **SQLFluff Rule Code** | **SQLFluff Fix compatible** |
+|:---|:---|
+| [ST07](https://docs.sqlfluff.com/en/stable/rules.html#rule-ST07) | Yes |
 
 
 Be explicit with all join types for example use `inner join` instead of just `join`.
@@ -200,6 +220,10 @@ select *
 from customers
 join orders on customers.id = orders.customer_id
 ```
+
+| **SQLFluff Rule Code** | **SQLFluff Fix compatible** |
+|:---|:---|
+| [AM05](https://docs.sqlfluff.com/en/stable/rules.html#rule-AM05) | Yes |
 
 In join conditions, put the table that was referenced first immediately after `on`.
 This makes it easier to determine if the join is going to cause the results to fan out.
@@ -231,20 +255,25 @@ You should be able to tell at a glance where a column is coming from.
 ```sql
 -- Good
 select
-    customers.email
-    , orders.invoice_number
-    , orders.total_amount
+    customers.email,
+    orders.invoice_number,
+    orders.total_amount
 from customers
 inner join orders on customers.id = orders.customer_id
 
 -- Bad
 select
-    email
-    , invoice_number
-    , total_amount
+    email,
+    invoice_number,
+    total_amount
 from customers
 inner join orders on customers.id = orders.customer_id
 ```
+
+| **SQLFluff Rule Code** | **SQLFluff Fix compatible** |
+|:---|:---|
+| [RF02](https://docs.sqlfluff.com/en/stable/rules.html#rule-RF02) | No |
+
 
 ### Filter using where
 
@@ -279,6 +308,7 @@ where orders.total_amount >= 100
   - CTE names should not be prefixed or suffixed with `cte`.
   - CTEs with confusing or notable logic should be commented.
 
+
 ### Formatting:
   - Start each CTE on its own line, indented one level more than `with` (including the first one, and even if there is only one).
   - Use a single blank line around CTEs to add visual separation.
@@ -311,9 +341,9 @@ with
     paying_customers as (
         select ...
         from customers
-    )
+    ),
 
-    , paying_customers_per_month as (
+    paying_customers_per_month as (
         -- CTE comments...
         select ...
         from paying_customers
@@ -328,10 +358,10 @@ with paying_customers as (
         select ...
         from customers
 
-    )
+    ),
 
     -- CTE comments...
-    , paying_customers_per_month as (
+    paying_customers_per_month as (
 
         select ...
         from paying_customers
@@ -341,7 +371,9 @@ with paying_customers as (
 select ...
 from paying_customers_per_month
 ```
-
+| **SQLFluff Rule Code** | **SQLFluff Fix compatible** |
+|:---|:---|
+| [LT07](https://docs.sqlfluff.com/en/stable/rules.html#rule-LT07), [LT08](https://docs.sqlfluff.com/en/stable/rules.html#rule-LT08) | Yes |
 
 
 ### Subqueries 
@@ -406,6 +438,11 @@ from customers as c
 inner join orders as o on c.id = o.customer_id
 ```
 
+| **SQLFluff Rule Code** | **SQLFluff Fix compatible** |
+|:---|:---|
+| [AL07](https://docs.sqlfluff.com/en/stable/rules.html#rule-AL07) | Yes |
+
+
 
 ## Formatting
 The general guide for formatting is:
@@ -450,6 +487,10 @@ where email like '%@domain.com'
   and plan_name != 'free'
 ```
 
+| **SQLFluff Rule Code** | **SQLFluff Fix compatible** |
+|:---|:---|
+| [LT02](https://docs.sqlfluff.com/en/stable/rules.html#rule-LT02) | Yes |
+
 ### Do's and Don't 
 
 **Don't** end a line with an operator like `and`, `or`, `+`, `||`, etc.
@@ -472,6 +513,11 @@ where
     email like '%@domain.com' and
     plan_name != 'free'
 ```
+
+| **SQLFluff Rule Code** | **SQLFluff Fix compatible** |
+|:---|:---|
+| [LT03](https://docs.sqlfluff.com/en/stable/rules.html#rule-LT03) | Yes |
+
 
 **Do** use trailing commas
 
@@ -514,6 +560,10 @@ where email in (
         , 'user-3@example.com'
     )
 ```
+| **SQLFluff Rule Code** | **SQLFluff Fix compatible** |
+|:---|:---|
+| [LT04](https://docs.sqlfluff.com/en/stable/rules.html#rule-LT04) | Yes |
+
 
 
 **Do** follow these standards when using the `select` clause:
@@ -550,6 +600,10 @@ select distinct
 -- Bad
 select distinct state, country
 ```
+| **SQLFluff Rule Code** | **SQLFluff Fix compatible** |
+|:---|:---|
+| [LT09](https://docs.sqlfluff.com/en/stable/rules.html#rule-LT09), [LT10](https://docs.sqlfluff.com/en/stable/rules.html#rule-LT109)  | Yes |
+
 
 
 **Do** follow these standards when using the `from` clause:
@@ -633,9 +687,9 @@ group by 1, 2, 3
 
 -- Bad
 group by
-    1
-    , 2
-    , 3
+    1,
+    2,
+    3
 
 
 -- Good
@@ -644,16 +698,21 @@ order by plan_name
 
 -- Good
 order by
-    plan_name
-    , signup_month
+    plan_name,
+    signup_month
 
 -- Bad
 order by plan_name, signup_month
 
 -- Bad
-order by plan_name
-    , signup_month
+order by plan_name,
+    signup_month
 ```
+
+| **SQLFluff Rule Code** | **SQLFluff Fix compatible** |
+|:---|:---|
+| [AM06](https://docs.sqlfluff.com/en/stable/rules.html#rule-AM06) | Yes |
+
 
 **Don't** put extra spaces inside of parentheses.
 
@@ -670,6 +729,9 @@ where plan_name in ( 'monthly', 'yearly' )
 
 
 ```
+| **SQLFluff Rule Code** | **SQLFluff Fix compatible** |
+|:---|:---|
+| [LT01](https://docs.sqlfluff.com/en/stable/rules.html#rule-LT01) | Yes |
 
 
 ### Case statements:
@@ -776,4 +838,4 @@ where email in ('user-1@example.com', 'user-2@example.com', 'user-3@example.com'
 This style guide was inspired in part by:
   - [Fishtown Analytics' dbt coding conventions](https://github.com/fishtown-analytics/corp/blob/b5c6f55b9e7594e1a1e562edf2378b6dd78a1119/dbt_coding_conventions.md)
   - [Matt Mazur's SQL style guide](https://github.com/mattm/sql-style-guide/blob/3eaef3519ca5cc7f21feac6581b257638f9b1564/README.md)
-  - [GitLab's SQL style guide](https://about.gitlab.com/handbook/business-ops/data-team/sql-style-guide/)
+  - [GitLab's SQL style guide](https://about.gitlab.com/handbook/business-technology/data-team/platform/sql-style-guide/)
