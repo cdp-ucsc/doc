@@ -10,6 +10,8 @@ const config = {
   tagline: 'Project Documentation Center',
   favicon: 'img/favicon.ico',
 
+  themes: ['@docusaurus/theme-mermaid'],
+  
   // Set the production url of your site here
   url: 'https://cdp-ucsc.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
@@ -33,6 +35,10 @@ const config = {
     locales: ['en'],
   },
 
+  markdown: {
+    mermaid: true,
+  },
+  
   presets: [
     [
       'classic',
@@ -100,6 +106,7 @@ const config = {
    //         to: '/blog',
    //         position: 'left'
    //       }, 
+
           {
             href: 'https://github.com/cdp-ucsc/doc/',
             label: 'GitHub',
