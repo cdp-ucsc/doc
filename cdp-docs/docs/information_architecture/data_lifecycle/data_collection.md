@@ -7,11 +7,21 @@ tags:
 
 # Data Collection
 
-:::tip
+The CDP is using [Fivetran](https://fivetran.com) for extracting and loading data from campus information systems (sources) into [Snowflake](https://snowflake.com) the foundational layer in the CDP.  Fivetran continuously syncs data into the [Data Lake](/docs/glossary/#data-lake)
 
-Good opportunity to link to fivetran analysis to visualize data ingestion status.
+## Current Data Sources
 
-:::
+### Student 
+- Academic Information System (AIS)
+- Curriculum Planning (CourseDog)
+
+### Human Resources
+- UCPath 
+
+### Financials
+- Financial Information System (FIS)
+
+### Identidy Management
 
 ### Sources: 
 A source is any application or website that generates relevant data for your organization. Customer apps, software used for marketing, sales or CRM, internal databases and document stores are examples of sources.
