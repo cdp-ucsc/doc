@@ -20,6 +20,8 @@ For MacOS developers, the default shell will be the default shell used in your t
 ### 2. Install `pyenv`
 `pyenv` is a tool used to manage multiple versions of Python on your computer. It allows you to download multiple versions and switch between desired versions from the CLI. 
 
+Learn more about `pyenv` [here](https://github.com/pyenv/pyenv). 
+
 #### MacOS Instructions
 Before `pyenv` can be installed, the following must be installed:
 XCode command line tools, Homebrew, `openssl`, `readline`, `sqlite3`, `xz` and `zlib`.
@@ -170,6 +172,8 @@ $ pyenv local [PYTHON_VERSION]
 `venv` is already included in Python's standard library so there is no additional action needed to install `venv`.
 
 `venv` is a package that allows you to create and use virtual environments. Virtual environments create isolated environments to manage different package versions and allow developers to switch between various ones. With the addition of `pyenv` developers can also set different Python versions for each virtual environment. 
+
+Learn more about `venv` [here](https://docs.python.org/3.9/library/venv.html#module-venv).
 
 Each virtual environment is stored and represented as a directory. Since it is possible and likely that developers will have multiple virtual environments we use the practice of storing all virtual environments in a central directory. 
 
