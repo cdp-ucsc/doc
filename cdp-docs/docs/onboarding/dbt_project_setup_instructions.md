@@ -1,5 +1,5 @@
 ---
-sidebar_position: 3
+sidebar_position: 4
 ---
 
 # dbt Project Setup Instructions
@@ -35,7 +35,7 @@ In `.dbt` create the `profiles.yml` file.
 $ cd .dbt/
 $ touch profiles.yml
 ```
-The contents of the `profiles.yml` file is specific to each developer. If you have not been provided with your profile information, then contact [BLANK]. If you have been provided your profile information, then enter it the `profiles.yml`. It is recommended to open `profiles.yml` via VSCode to enter in your profile information than from the command line. 
+The contents of the `profiles.yml` file is specific to each developer's access to Snowflake. Instructions to request access can be found [here](request_access). If you have been provided your Snowflake profile information, then enter it the `profiles.yml`. It is recommended to open `profiles.yml` via VSCode to enter in your profile information rather than from the command line. 
 
 For example, a `profiles.yml` should look similar to
 ```yml
@@ -53,13 +53,27 @@ For example, a `profiles.yml` should look similar to
       warehouse: <warehouse>
   target: <target>
 ```
+ | Configuration Key| Definition
+      |-------------------------------|------------------------------------------------------------------------------------------------------------------|
+      | my_project                    | This is defining a profile - this specific name should be the profile that is referenced in our dbt_project.yml  |
+      | target: dev                   | This is the default environment that will be used during our runs.                                               |
+      | outputs:                      | This is a prompt to start defining targets and their configurations. You likely won't need more than `dev`, but this and any other targets you define can be used to accomplish certain functionalities throughout dbt.|
+      | dev:                          | This is defining a target named `dev`.                                                                           |
+      | type: [warehous_name]         | This is the type of target connection we are using, based on our warehouse.                                      |
+      | threads: 8                    | This is the amount of concurrent models that can run against our warehouse, for this user, at one time when conducting a `dbt run` |
+      | account: [abc12345.us-west-1] | Change this out to the warehouse's account.                                                                      |
+      | user: [your_username]         | Change this to use your own username that you use to log in to the warehouse                                     |
+      | password: [your_password]     | Change this to use your own password for the warehouse                                                           |
+      | role: transformer             | This is the role that has the correct permissions for working in this project.                                   |
+      | database: analytics           | This is the database name where our models will build                                                            |
+      | schema: dbt_[your_name]       | Change this to a custom name. Follow the convention `dbt_[first initial][last_name]`. This is the schema that models will build into / test from when conducting runs locally.|
 
 Learn more about Snowflake specific `profiles.yml` [here](https://docs.getdbt.com/reference/warehouse-setups/snowflake-setup).
 
 ### 4. `dbt build` project
 At this point you should be able to `build` the dbt project. 
 
-In VSCode, open the project directory. From the terminal command line, activate the project's virtual environment. Enter the following in the command line.
+In VSCode, open the project directory. From the terminal command line, activate the project's virtual environment. Enter the following in the command line. Note, since dbt is connecting to Snowflake the campus VPN must be active.
 ```shell
 (project_name)
 $ dbt build
@@ -69,3 +83,9 @@ This will build all the models in the Snowflake database and schema specified in
 
 ## dbt Cloud
 dbt Cloud is a dbt managed service that is web based. Learn more about dbt Cloud [here](https://docs.getdbt.com/docs/cloud/about-cloud-setup).
+
+### 1. Request access to dbt Cloud
+Instructions can be found on the [Request Access](request_access) page.
+
+### 2. Login to dbt Cloud
+Activate the campus VPN and use UC Santa Cruz's dbt Cloud login [link](https://cloud.ucsc.getdbt.com/enterprise-login/ucsc/).
