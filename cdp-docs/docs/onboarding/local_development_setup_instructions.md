@@ -8,7 +8,7 @@ How to set up a developer's local workstation so it is aligned with project stan
 ### 1. Install Visual Studio Code (VSCode)
 Visual Studio Code (VSCode) is the integrated development environment (IDE) of choice for our developers. Download VSCode [here](https://code.visualstudio.com/) for your specific operating system (OS).
 
-For Windows developers, set the default shell for VSCode's integrate terminal as `Git Bash`. To do this go to Settings and in the search bar enter `Terminal>Integrated>Default Profile` and for Windows select `Git Bash` from the dropdown box.
+For Windows developers, set the default shell for VSCode's integrated terminal as `Git Bash`. To do this go to Settings and in the search bar enter `Terminal>Integrated>Default Profile` and for Windows select `Git Bash` from the dropdown box.
 
 ![Windows VSCode Default Shell](/img/onboarding/windows_vscode_terminal_default.png)
 
@@ -18,7 +18,7 @@ For MacOS developers, the default shell will be the default shell used in your t
 
 
 ### 2. Install `pyenv`
-`pyenv` is a tool used to manage multiple versions of Python on your computer. It allows you to download multiple versions and switch between desired versions all from the CLI. 
+`pyenv` is a tool used to manage multiple versions of Python on your computer. It allows you to download multiple versions and switch between desired versions from the CLI. 
 
 #### MacOS Instructions
 Before `pyenv` can be installed, the following must be installed:
@@ -82,20 +82,24 @@ $ brew update
 $ brew install pyenv
 ```
 
-After `pyenv` has successfully installed, add `pyenv` to your `$PATH` by entering the following in the command line.
+After `pyenv` has been successfully installed, add `pyenv` to your `$PATH` by entering the following in the command line. For `bash` replace `.zshrc` with `.bashrc`.
 ```shell
 $ echo 'eval "$(pyenv init --path)"' >> ~/.zshrc
 ```
 
 Close/exit the current terminal for the command to be applied.
 
+Open a new terminal and enter the following in the command line to confirm pyenv has been installed successfully.
+```shell
+$ pyenv
+```
 
 #### Windows Instructions
 Create a directory in your user folder called `.pyenv` by entering the following in PowerShell's command line.
 ```powershell
 > mkdir $HOME/.pyenv
 ```
-Download the `pyenv-win` ZIP-archive [here](https://github.com/pyenv-win/pyenv-win/archive/master.zip). Download the ZIP-archive somewhere you can access it. Once the ZIP-archive is downloaded, extract and move all the files to `.pyenv` directory you just created.
+Download the `pyenv-win` ZIP-archive [here](https://github.com/pyenv-win/pyenv-win/archive/master.zip). Download the ZIP-archive somewhere you can access it. Once the ZIP-archive is downloaded, extract and move all the files to the `.pyenv` directory you just created.
 
 Set the environment variables `PYENV` and `PYENV_HOME` that point to the installation folder by entering the following in the command line.
 ```powershell
@@ -120,7 +124,7 @@ Open a new window of PowerShell and enter the following in the command line to c
 
 To avoid confusion between different OS systems Windows developers should use VSCode's integrated terminal. It is also recommended that MacOS developers complete the next steps in VSCode's integrated terminal as well so they can become familiar with VSCode's terminal.
 
-To see all available versions of Python to install enter the following in the terminal command line.
+To see all available versions of Python for installation enter the following in the terminal command line.
 ```shell
 $ pyenv install -l
 ```
@@ -139,31 +143,237 @@ To view which versions of Python have been installed enter the following in the 
 ```shell
 $ pyenv versions
 ```
-The version with the (`*`) in front of it is the currently active version. For example,
+The version with the (`*`) in front is the current active version. For example,
 ```shell
   3.10.0rc1
-* 3.9.6 (set by /home/Programming/ml_acc_timing_model_extraction/.python-version)
+* 3.9.6
   pypy3.7-7.3.5
 ```
 
-To view just the active version enter the following in the command line.
+To view only the current active version enter the following in the command line.
 ```shell
 $ pyenv version
 ```
-It is important to set a global version of Python when having multiple versions of Python installed. The global version of Python is like the default version of Python that will be used unless otherwise specified. To set the global version of python enter the following in the command line.
+It is important to set a global version of Python when having multiple versions of Python installed. The global version of Python is the default version of Python that will be used unless otherwise specified. To set the global version of Python enter the following in the command line.
 ```shell
 $ pyenv global [PYTHON_VERSION]
 ```
 
-The global version of Python does not necessarily need to be version 3.9.13. A specific version of Python will be necessary for a dbt project when we get there. For now, you may set the global version of Python as 3.9.13.
+The global version of Python does not necessarily need to be version 3.9.13. (A specific version of Python will be necessary for different projects and can be different than an operating system's global version.) For now, you may set the global version of Python as 3.9.13.
 
 The other key benefit of `pyenv` is the ability to set a local version of Python for specific directories. This will be important when setting up virtual environments. The following is the command to specify a local version of Python in a directory.
 ```shell
 $ cd [DESIRED_DIRECTORY]
 $ pyenv local [PYTHON_VERSION]
 ```
-### 4. Install `venv` using Python
+### 5. Make a virtual environment using `venv`
+`venv` is already included in Python's standard library so there is no additional action needed to install `venv`.
 
-### 5. Setup a `venv`
+`venv` is a package that allows you to create and use virtual environments. Virtual environments create isolated environments to manage different package versions and allow developers to switch between various ones. With the addition of `pyenv` developers can also set different Python versions for each virtual environment. 
 
-### 6. Use a `venv`
+Each virtual environment is stored and represented as a directory. Since it is possible and likely that developers will have multiple virtual environments we use the practice of storing all virtual environments in a central directory. 
+
+At the same directory level as `.pyenv` create a virtual environment central directory called `.venv`. To do this enter the following in VSCode's integrated terminal command line.
+```shell
+$ cd [DIRECTORY_LEVEL_OF_.PYENV]
+$ mkdir .venv
+```
+
+All virtual environments should be created inside the `.venv` directory. To create a virtual environment enter the following in the command line.
+```shell
+$ cd .venv/
+$ python -m venv [NAME_OF_VENV]
+```
+
+The above action will have created a directory inside `.venv` with the name that was entered. For example,
+```shell
+$ cd .venv/
+$ python -m venv my_first_venv
+$ ls -a
+./ ../ my_first_venv/
+```
+
+Now that the virtual environment has been created you need to set desired Python version for the virtual environment. (This step must been done before installing any Python packages for the virtual environment.) To set the Python version for the virtual environment you must be inside the virtual environment first. Enter the following in the command line.
+```shell
+$ cd [NAME_OF_VENV]/
+$ pyenv local [PYTHON_VERSION]
+```
+
+For example,
+```shell
+$ cd my_first_venv/
+$ pyenv local 3.9.13
+```
+
+Note, you cannot change the Python version of a virtual environment after you have set it. To use a different version of Python you must create a new virtual environment.
+
+### 6. Activate/deactivate virtual environment with alias
+From the previous steps we have created a virtual environment. Before we can install packages to a virtual environment we must be able to `activate` the virtual environment.
+
+In order to activate a virtual environment, you must refer to a specific activate script that is stored in the virtual environment's directory. Activation is slightly different between MacOS and Windows.
+
+#### MacOS Instructions
+
+For MacOS users, you activate the virtual environment by referring to the `activate` script in the `bin` directory. For example,
+```shell
+$ cd [NAME_OF_VENV]/bin/
+$ ls -a
+./ ../ activate activate.bat Activate.ps1 ...
+```
+
+Therefore, to activate the virtual environment enter the following in the command line.
+```shell
+$ . /path_to_[NAME_OF_VENV]/bin/activate
+```
+
+#### Windows Instructions
+For Windows users, you activate the virtual environment by referring to the `activate` script in the `Scripts` directory. For example,
+```shell
+$ cd [NAME_OF_VENV]/Scripts/
+$ ls -a
+./ ../ activate activate.bat Activate.ps1 ...
+```
+
+Therefore, to activate the virtual environment enter the following in the command line.
+```shell
+$ . /path_to_[NAME_OF_VENV]/Scripts/activate
+```
+
+That is the end of the MacOS and Windows specific instructions.
+
+Once the virtual environment has been activated, the command line will indicate that a virtual environment is active. Above the current line you will see the name of the active virtual environment in parentheses. 
+```shell
+([NAME_OF_VENV])
+$ 
+```
+
+For example,
+```shell
+$ . /path/.venv/my_first_venv/bin/activate
+
+(my_first_venv)
+$ 
+```
+
+To deactivate the virtual environment simply enter the following in the command line.
+```shell
+(my_first_vend)
+$ deactivate
+
+$
+```
+Once the virtual environment has been deactivated you will no longer see its name above the command line's current line.
+
+Since it is a lot of manual work to specify the entire path to the `activate` script of the virtual environment every time you would like to activate it we recommend using aliases. To set the activation command for a virtual environment as an alias complete the following steps.
+
+`cd` to your home directory.
+```shell
+$ cd
+```
+Check if you have a `.zshrc` file (or `.bashrc` if using `bash`).
+```shell
+$ ls -a
+./ ../ .zshrc ...
+```
+
+If you do not have a `.zshrc` file, then create one.
+```shell
+$ touch .zshrc
+```
+
+Add the activation command as an alias to the `.zshrc` file. 
+```shell
+$ cat >> .zshrc
+alias [NAME_OF_VENV]='. /path/.venv/[NAME_OF_VENV]/bin/activate'
+
+# ENTER CTRL+D TO SAVE AND EXIT EDIT MODE
+```
+
+Close/exit the current terminal for the alias to be applied.
+
+Now, to activate the virtual environment enter the alias' name in the command line and the deactivate use the same method.
+```shell
+$ [NAME_OF_VENV]
+
+([NAME_OF_VENV])
+$
+
+([NAME_OF_VENV])
+$ deactivate
+
+$
+```
+
+For example, if I have already added the activate command for `my_first_venv` in my `.zshrc` file
+```shell
+$ my_first_venv
+
+(my_first_venv)
+$
+
+(my_first_venv)
+$ deactivate
+
+$
+```
+
+Note, these instructions work because Windows developers are using `bash` via VSCode's integrated terminal. The instructions do not work for Windows developers using PowerShell. Windows users should use VSCode's integrated terminal as the default terminal for their command line needs.
+
+### 7. Set up virtual environment from `requirements.txt`
+Virtual environments can be set up to a project's specific specifications by using the project's `requirement.txt`. The `requirement.txt` will specify all of the necessary packages and their exact versions that are required by the project.
+
+For example,
+```
+dbt-core==1.4.4
+dbt-snowflake==1.4.1
+```
+
+Assuming you have cloned the project repo, the `requirements.txt` that specifies the exact project requirements can be found at the top level of the directory and in the `main` branch. To install all of the packages from the `requirements.txt` to a virtual environment complete the following instructions from the terminal command line.
+
+Make a new virtual environment in the `.venv` directory dedicated for the specified project. The naming convention for the virtual environment should indicate the specific project. Commonly the project name can be used as the virtual environment's name.
+```shell
+$ cd /path/.venv/
+$ python -m venv [PROJECT_NAME]
+```
+
+Set the Python version for the virtual environment.
+```shell
+$ cd /path/.venv/[PROJECT_NAME]
+$ pyenv local [PYTHON_VERSION]
+```
+
+Create an alias for the virtual environment.
+```shell
+$ cd
+$ cat >> .zshrc
+$ [PROJECT_NAME] = '. /path/.venv/[PROJECT_NAME]/bin/activate'
+
+# ENTER CTRL+D TO SAVE AND EXIT EDIT MODE
+```
+
+Close/exit the current terminal for the alias to be applied.
+
+Open a new terminal and activate the virtual environment.
+```shell
+$ [PROJECT_NAME]
+
+([PROJECT_NAME])
+$
+```
+
+Install the packages from the `requirements.txt` to the virtual environment.
+```shell
+([PROJECT_NAME])
+$ pip install -r /path/project/requirements.txt
+```
+
+Check the packages that have been installed.
+```shell
+([PROJECT_NAME])
+$ pip list
+```
+
+The virtual environment is now set up to the project's requirements. Every time you are working on the project activate the virtual environment first!
+
+
+
