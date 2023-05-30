@@ -8,9 +8,9 @@ The Common Data Platform will transform the information experience, empower busi
 
 Implement secure automated data pipelines from source to target in near real time. Identify, classify and manage access to sensitive data through efficient governance processes.
 
-### Enterprise Data Model (EDW)
+### Enterprise Data Model (EDM)
 
-The Enterprise Data Model, or EDW, will support integrating and blending data at scale from multiple domains. Information will be collaboratively and transparently curated from raw source data to trusted information available for reporting, analytics, and sharing.  
+The Enterprise Data Model, or EDM, will support integrating and blending data at scale from multiple domains. Information will be collaboratively and transparently curated from raw source data to trusted information available for reporting, analytics, and sharing.  
 
 ### Data Stewardship & Governance Program
 
