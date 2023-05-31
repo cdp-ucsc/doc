@@ -8,8 +8,14 @@ Developers/users will need to request access to the tools that are relevant to t
 - Campus VPN
 - [dbt Cloud](https://cloud.ucsc.getdbt.com/enterprise-login/ucsc/)
 - [Fivetran](https://login.ucsc.edu/idp/profile/SAML2/Unsolicited/SSO?providerId=Fivetran)
-- [GitHub](https://github.com/cdp-ucsc)
+- [GitHub](https://github.com/cdp-ucsc) Project
+- Google Drive folder
 - [Infoview](https://datamgmt.ucsc.edu/launch-infoview.html)
+- LucidChart
+- Slack channels
+  - #[cdp-notifications](https://uctech.slack.com/archives/C047778P8DT)
+  - #[cdp-data-engineering](https://uctech.slack.com/archives/C03CD7UNPSQ)
+  - #[cdp-analytics-engineering](https://uctech.slack.com/archives/C03R2GF42V7)
 - [Snowflake](https://app.snowflake.com/us-west-2/zna67203)
 
 
