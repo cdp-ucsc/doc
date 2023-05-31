@@ -15,7 +15,7 @@ To support the objective of establishing more efficient, automated workflows, th
     - documentation
     - project management
     - issue collection
-    - ci/cd production deployment, validation and valididty testing
+    - ci/cd production deployment, validation and validity testing
     
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
