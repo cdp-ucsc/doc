@@ -2,19 +2,54 @@
 sidebar_position: 2
 ---
 
-# Local Development Setup Instructions
+# Workstation Setup
 How to set up a developer's local workstation so it is aligned with project standards and requirements. Managing Python versions and utilizing virtual environments is key to a developer's local environment.
 
 ### 1. Install Visual Studio Code (VSCode)
 Visual Studio Code (VSCode) is the integrated development environment (IDE) of choice for our developers. Download VSCode [here](https://code.visualstudio.com/) for your specific operating system (OS).
 
-For Windows developers, set the default shell for VSCode's integrated terminal as `Git Bash`. To do this go to Settings and in the search bar enter `Terminal>Integrated>Default Profile` and for Windows select `Git Bash` from the dropdown box.
 
-![Windows VSCode Default Shell](/img/onboarding/windows_vscode_terminal_default.png)
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-Now as a Windows developer you have access to `bash`.
+<Tabs>
+  <TabItem value="windows" label="Windows" default>
+    
+   For Windows developers, set the default shell for VSCode's integrated terminal as `Git Bash`. To do this go to Settings and in the search bar enter `Terminal>Integrated>Default Profile` and for Windows select `Git Bash` from the dropdown box.
 
-For MacOS developers, the default shell will be the default shell used in your terminal. For many, this is now `zsh`. Note, the core functionality of `zsh` and `bash` do not differ greatly. But some instructions in this document may need to be modified depending on the shell you are using. 
+    ![Windows VSCode Default Shell](/img/onboarding/windows_vscode_terminal_default.png)
+
+    Now as a Windows developer you have access to `bash`.
+
+    #### Windows Instructions
+Create a directory in your user folder called `.pyenv` by entering the following in PowerShell's command line.
+```powershell
+> mkdir $HOME/.pyenv
+```
+Download the `pyenv-win` ZIP-archive [here](https://github.com/pyenv-win/pyenv-win/archive/master.zip). Download the ZIP-archive somewhere you can access it. Once the ZIP-archive is downloaded, extract and move all the files to the `.pyenv` directory you just created.
+
+Set the environment variables `PYENV` and `PYENV_HOME` that point to the installation folder by entering the following in the command line.
+```powershell
+> [System.Environment]::SetEnvironmentVariable('PYENV',$env:USERPROFILE + "\.pyenv\pyenv-win\","User")
+> [System.Environment]::SetEnvironmentVariable('PYENV_HOME',$env:USERPROFILE + "\.pyenv\pyenv-win\","User")
+```
+
+Add the bin folder to the `PATH` variable so `pyenv` can be found when using the command line by entering the following in the command line.
+```powershell
+> [System.Environment]::SetEnvironmentVariable('path', $env:USERPROFILE + "\.pyenv\pyenv-win\bin;" + $env:USERPROFILE + "\.pyenv\pyenv-win\shims;" + [System.Environment]::GetEnvironmentVariable('path', "User"),"User")
+```
+
+Close the current window of PowerShell for the commands to be applied.
+
+Open a new window of PowerShell and enter the following in the command line to confirm `pyenv` has been installed successfully.
+```powershell
+> pyenv
+```
+
+  </TabItem>
+
+  <TabItem value="macos" label="Mac OS">
+    For MacOS developers, the default shell will be the default shell used in your terminal. For many, this is now `zsh`. Note, the core functionality of `zsh` and `bash` do not differ greatly. But some instructions in this document may need to be modified depending on the shell you are using. 
 
 
 ### 2. Install `pyenv`
@@ -95,31 +130,17 @@ Open a new terminal and enter the following in the command line to confirm pyenv
 ```shell
 $ pyenv
 ```
+  </TabItem>
 
-#### Windows Instructions
-Create a directory in your user folder called `.pyenv` by entering the following in PowerShell's command line.
-```powershell
-> mkdir $HOME/.pyenv
-```
-Download the `pyenv-win` ZIP-archive [here](https://github.com/pyenv-win/pyenv-win/archive/master.zip). Download the ZIP-archive somewhere you can access it. Once the ZIP-archive is downloaded, extract and move all the files to the `.pyenv` directory you just created.
+</Tabs>
 
-Set the environment variables `PYENV` and `PYENV_HOME` that point to the installation folder by entering the following in the command line.
-```powershell
-> [System.Environment]::SetEnvironmentVariable('PYENV',$env:USERPROFILE + "\.pyenv\pyenv-win\","User")
-> [System.Environment]::SetEnvironmentVariable('PYENV_HOME',$env:USERPROFILE + "\.pyenv\pyenv-win\","User")
-```
 
-Add the bin folder to the `PATH` variable so `pyenv` can be found when using the command line by entering the following in the command line.
-```powershell
-> [System.Environment]::SetEnvironmentVariable('path', $env:USERPROFILE + "\.pyenv\pyenv-win\bin;" + $env:USERPROFILE + "\.pyenv\pyenv-win\shims;" + [System.Environment]::GetEnvironmentVariable('path', "User"),"User")
-```
 
-Close the current window of PowerShell for the commands to be applied.
 
-Open a new window of PowerShell and enter the following in the command line to confirm `pyenv` has been installed successfully.
-```powershell
-> pyenv
-```
+
+
+
+
 
 ### 3. Install Python using `pyenv`
 `pyenv` is our Python version manager. Therefore, when installing any version of Python we will be using `pyenv`. 

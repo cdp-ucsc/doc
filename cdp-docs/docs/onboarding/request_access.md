@@ -2,9 +2,17 @@
 sidebar_position: 1
 ---
 
-# Request Access
+# Access Requests
+
+
+## Developer Access
+
+Certain accounts will need to be setup in various tools that facilitate the modeling and curating of the data.  
 
 Developers/users will need to request access to the tools that are relevant to their needs. Developers can request access to the following by contacting the Data Management team at data-services@ucsc.edu.
+
+###  Account 
+
 - Campus VPN
 - [dbt Cloud](https://cloud.ucsc.getdbt.com/enterprise-login/ucsc/)
 - [Fivetran](https://login.ucsc.edu/idp/profile/SAML2/Unsolicited/SSO?providerId=Fivetran)
@@ -20,4 +28,5 @@ Developers/users will need to request access to the tools that are relevant to t
 
 
 
-Note, the campus VPN must be active and each tool must be accessed through the UC Santa Cruz's specific login page. The hyperlinks above will take you to the pages.
+Note, the campus's `dc-vpn` must be active and each tool must be accessed through the UC Santa Cruz's specific login page. The hyperlinks above will take you to the pages.
+
