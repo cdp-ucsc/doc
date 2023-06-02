@@ -4,7 +4,7 @@ tags:
   - Informative
 ---
 
-# Glossary
+# CDP Glossary
 
 
 
@@ -28,6 +28,9 @@ A destination can be a centralized storage system like a cloud data warehouse or
 
 ### Docusaurus 
 Docusaurus is a set of npm packages that builds, deploys and maintains websites. Learn more [here](https://docusaurus.io/docs).
+
+### Fivetran
+[Fivetran](https://fivetran.com) is a market leader in Extract and Load data processing. The CDP is leveraging Fivetran to move data from [Source](#sources) to [Destination](#destinations) on a continuous automated schedule.
 
 ### Git
 Git is a free and open-source distributed version control system software that tracks modifications/manages source code history. Learn more [here](https://git-scm.com/about).

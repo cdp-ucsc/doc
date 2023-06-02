@@ -7,7 +7,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Common Data Platform',
-  tagline: 'Project Documentation Center',
+  tagline: 'Information Hub',
   favicon: 'img/favicon.ico',
 
   themes: ['@docusaurus/theme-mermaid'],
@@ -122,15 +122,6 @@ const config = {
       footer: {
         style: 'dark',
         links: [
-          {
-            title: 'Docs',
-            items: [
-              {
-                label: 'Tutorial',
-                to: '/docs/tutorial/intro',
-              },
-            ],
-          },
           {
             title: 'Community',
             items: [
