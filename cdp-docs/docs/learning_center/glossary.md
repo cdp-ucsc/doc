@@ -7,7 +7,6 @@ tags:
 # CDP Glossary
 
 
-
 ### Continuous Deployment (CD)
 Continuous Deployment makes up the CD portion of CI/CD. (Note CD can also stand for continuous delivery which is different that continuous deployment.) Continuous deployment is the practice of pushing code that has passed the CI tests automatically into production.
 
@@ -20,23 +19,26 @@ The term data lake refers to the section of the CDP where raw data is continuous
 ### Data Stack
 A data stack is a collection of various technologies that allow for raw data to be processed before it can be used. A modern data stack (MDS) consists of the specific tools that are used to organize, store, and transform data. Modern typically refers to cloud-native technologies.
 
-### dbt
-dbt (data build tool) is a Python package command line tool that is used to transform data in warehouses. dbt compiles code into SQL and runs it against the data warehouse. Learn more [here](https://docs.getdbt.com/docs/introduction) and [here](https://www.getdbt.com/blog/what-exactly-is-dbt/).
+### dbt-core
+dbt (data build tool) is an open source software package that is used to transform data in warehouses. dbt compiles code into SQL and runs it against the data warehouse. Learn more [here](https://docs.getdbt.com/docs/introduction) and [here](https://www.getdbt.com/blog/what-exactly-is-dbt/).
+
+### dbt-labs
+[dbt-labs](https://www.getdbt.com/dbt-labs/about-us/) is the commercial enterprise that created and maintains the dbt-core software package. dbt-labs is rapidly developing the dbt-cloud experience to assist organizations in deploying dbt at scale, with a web-based development environment, job scheduling, documentation, and GitHub integration to enable CI/CD.   
 
 ### Destinations
 A destination can be a centralized storage system like a cloud data warehouse or a data lake. It can also be an application, like a business intelligence tool or messaging system.
 
 ### Docusaurus 
-Docusaurus is a set of npm packages that builds, deploys and maintains websites. Learn more [here](https://docusaurus.io/docs).
+[Docusaurus](https://docusaurus.io/docs) is an open source documentation framework based on nodejs. The product was developed internally at Facebook and enjoys a strong adoption rate by organizations worldwide. This website was created with Docusaurus. 
 
 ### Fivetran
 [Fivetran](https://fivetran.com) is a market leader in Extract and Load data processing. The CDP is leveraging Fivetran to move data from [Source](#sources) to [Destination](#destinations) on a continuous automated schedule.
 
 ### Git
-Git is a free and open-source distributed version control system software that tracks modifications/manages source code history. Learn more [here](https://git-scm.com/about).
+[Git](https://git-scm.com/about) is a free and open-source distributed version control system software that tracks modifications/manages source code history.
 
 ### GitHub
-GitHub is a web-based service that hosts Git repositories using cloud-based storage. In addition to providing the distributed version control of Git, GitHub provides a variety of other services like access control, bug tracking, pull requests, task management, continuous integration, and documentation. Learn more about GitHub's features and services [here](https://github.com/features).
+[GitHub](https://github.com/features) is a web-based service that hosts Git repositories using cloud-based storage. In addition to providing the distributed version control of Git, GitHub provides a variety of other services like access control, bug tracking, pull requests, task management, continuous integration, and documentation.
 
 ### Production
 Production is the environment where the latest version of data ready to be consumed by users is available. Compared to the development environment.
@@ -46,3 +48,6 @@ A pull request (PR) is used to initiate the process of integrating code changes 
 
 ### Sources 
 A source is any application or system that generates relevant data in support of the campus administrative operations. AIS, FIS, ODS, IAM, internal databases and document stores are examples of sources.
+
+### SqlFluff
+[SQLFluff](https://sqlfluff.com/) is a dialect-flexible and configurable SQL linter. Designed with ELT applications in mind, SQLFluff also works with Jinja templating and dbt. SQLFluff will auto-fix most linting errors, allowing you to focus your time on what matters.

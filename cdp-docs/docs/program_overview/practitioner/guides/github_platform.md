@@ -1,6 +1,10 @@
 ---
 sidebar_position: 3
+tags:
+    - Draft
+    - Placeholder
 ---
+
 
 # CDP Activity Center
 

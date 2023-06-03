@@ -1,10 +1,10 @@
-# Data Modeling
 ---
 tags:
   - Draft
   - Modeling
 ---
 
+# Data Modeling
 
 Below are several of the more established methodologies for data modeling. 
 
