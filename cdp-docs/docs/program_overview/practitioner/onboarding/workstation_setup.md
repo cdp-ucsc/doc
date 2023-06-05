@@ -1,8 +1,15 @@
 ---
 sidebar_position: 2
+tags:
+  - Draft
+  - Onboarding
 ---
 
 # Workstation Setup
+:::caution
+This page is a work in progress
+
+:::
 How to set up a developer's local workstation so it is aligned with project standards and requirements. Managing Python versions and utilizing virtual environments is key to a developer's local environment.
 
 ### 1. Install Visual Studio Code (VSCode)

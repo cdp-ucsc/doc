@@ -6,8 +6,8 @@ tags:
 ---
 
 # Data Collection
+The CDP (Common Data Platform) is utilizing [Fivetran](/docs/learning_center/glossary/#fivetran) to extract and load data from campus information systems, which are the [sources](/docs/learning_center/glossary/#sources) of data. The extracted data is loaded into [Snowflake](/docs/learning_center/glossary/#snowflake), which serves as the foundational layer in the CDP. Fivetran continuously syncs data from the campus information systems into the Data Lake, this continuous syncing ensures that the most recent data from the campus information systems is available for analysis and usage within the CDP.
 
-The CDP is using [Fivetran](/docs/learning_center/glossary/#fivetran) for extracting and loading data from campus information systems (sources) into [Snowflake](https://snowflake.com) the foundational layer in the CDP.  Fivetran continuously syncs data into the [Data Lake](/docs/learning_center/glossary/#data-lake)
 
 ## Active Data Sources
 

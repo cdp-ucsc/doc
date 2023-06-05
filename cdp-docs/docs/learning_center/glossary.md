@@ -20,7 +20,7 @@ The term data lake refers to the section of the CDP where raw data is continuous
 A data stack is a collection of various technologies that allow for raw data to be processed before it can be used. A modern data stack (MDS) consists of the specific tools that are used to organize, store, and transform data. Modern typically refers to cloud-native technologies.
 
 ### dbt-core
-dbt (data build tool) is an open source software package that is used to transform data in warehouses. dbt compiles code into SQL and runs it against the data warehouse. Learn more [here](https://docs.getdbt.com/docs/introduction) and [here](https://www.getdbt.com/blog/what-exactly-is-dbt/).
+[dbt (data build tool)](https://docs.getdbt.com/docs/introduction)  is an open source software package that is used to transform data in warehouses. dbt compiles code into SQL and runs it against the data warehouse. 
 
 ### dbt-labs
 [dbt-labs](https://www.getdbt.com/dbt-labs/about-us/) is the commercial enterprise that created and maintains the dbt-core software package. dbt-labs is rapidly developing the dbt-cloud experience to assist organizations in deploying dbt at scale, with a web-based development environment, job scheduling, documentation, and GitHub integration to enable CI/CD.   
@@ -45,6 +45,9 @@ Production is the environment where the latest version of data ready to be consu
 
 ### Pull Request
 A pull request (PR) is used to initiate the process of integrating code changes into a project. A PR will only contain the code changes relevant to the request and must be reviewed by others before it can be approved. Once the PR is approved the new code will be merged into the project repository, usually the main branch of the repo. Learn more about pull requests in GitHub [here](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests).
+
+### Snowflake
+Developed in 2012, [Snowflake](https://snowflake.com) is a fully managed SaaS (software as a service) that provides a single platform for data warehousing, data lakes, data engineering, data science, data application development, and secure sharing and consumption of real-time / shared data. Snowflake features out-of-the-box features like separation of storage and compute, on-the-fly scalable compute, data sharing, data cloning, and third-party tools support in order to handle the demanding needs of growing enterprises.
 
 ### Sources 
 A source is any application or system that generates relevant data in support of the campus administrative operations. AIS, FIS, ODS, IAM, internal databases and document stores are examples of sources.

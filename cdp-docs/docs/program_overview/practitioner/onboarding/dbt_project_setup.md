@@ -1,8 +1,16 @@
 ---
 sidebar_position: 4
+tags:
+  - Draft
 ---
 
-# dbt Project Setup Instructions
+# dbt Project Setup
+:::caution
+
+This page is a work in progress
+
+:::
+
 dbt is the transformation tool that we use to compile and execute our data models. Developers will need to set up and configure several items to use dbt.
 
 ## dbt Core
