@@ -3,7 +3,6 @@ sidebar_position: 1
 tags:
   - Draft
   - Data Lifecycle
-  - ChatGPT
 ---
 
 # Data Catalogs
