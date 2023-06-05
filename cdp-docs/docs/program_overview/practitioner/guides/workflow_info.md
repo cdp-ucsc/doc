@@ -6,7 +6,7 @@ tags:
 
 # CDP Workflows
 
-### Worlflow Processes - DRAFT
+### Workflow Processes - DRAFT
 
-The CDP will challenge the status quo of our typical operations and strive for automation and efficientices.  
+The CDP will challenge the status quo of our typical operations and strive for automation and efficiencies.  
 

@@ -59,7 +59,7 @@ For example, a `profiles.yml` should look similar to
       | target: dev                   | This is the default environment that will be used during our runs.                                               |
       | outputs:                      | This is a prompt to start defining targets and their configurations. You likely won't need more than `dev`, but this and any other targets you define can be used to accomplish certain functionalities throughout dbt.|
       | dev:                          | This is defining a target named `dev`.                                                                           |
-      | type: [warehous_name]         | This is the type of target connection we are using, based on our warehouse.                                      |
+      | type: [warehouse_name]         | This is the type of target connection we are using, based on our warehouse.                                      |
       | threads: 8                    | This is the amount of concurrent models that can run against our warehouse, for this user, at one time when conducting a `dbt run` |
       | account: [abc12345.us-west-1] | Change this out to the warehouse's account.                                                                      |
       | user: [your_username]         | Change this to use your own username that you use to log in to the warehouse                                     |

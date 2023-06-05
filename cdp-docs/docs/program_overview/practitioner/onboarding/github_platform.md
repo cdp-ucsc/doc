@@ -48,7 +48,7 @@ GitHub hosts our project repositories (repos). Developers will need access to th
 
 :clipboard: [MFA/2FA How To Documentation](https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication)
 
-Once your account is created you will need to enable **MFA/2FA** authentication prior to being added to the UCSC GitHub Organization where you will have access to project documentation, git repositories, and additional project resouces. 
+Once your account is created you will need to enable **MFA/2FA** authentication prior to being added to the UCSC GitHub Organization where you will have access to project documentation, git repositories, and additional project resources. 
 
 
 ### 2. YouTube Git Tutorials
