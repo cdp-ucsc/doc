@@ -13,7 +13,7 @@ Business and data analysts at the University of California, Santa Cruz (UCSC) pl
 
 ## Analytics Engineering
 - Provide clean, transformed data ready for analysis 
-- Apply software engineering best practices to analytics code (ex: version control, testing, continuous integration)
+- Apply software engineering best practices to analytics code (e.g. version control, testing, continuous integration)
 - Maintain data documentation & definitions
 - Train business users on how to use data visualization tools
 
