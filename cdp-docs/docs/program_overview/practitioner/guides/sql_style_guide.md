@@ -9,7 +9,7 @@ tags:
 This guide establishes our standards for SQL and are enforced by code review. Some standards are also enforced by [SQLFLuff](https://sqlfluff.com/). The purpose of the guide is to help developers write clear and concise SQL that can be worked on and understood by others.
 
 ## General guidelines
-* Optimize primarily for readability, maintainability, and robustness rather than for fewer lines of code. Newlines are cheap; people's time is expensive.
+* Optimize primarily for readability, maintainability, and robustness rather than for fewer lines of code. New lines are cheap; people's time is expensive.
 
 * Avoid large select statements with multiple tables instead utilize CTEs.
 * If a `select` statement is so large it can't be easily comprehended, it would be better to refactor it into multiple smaller CTEs that are later joined back together.
