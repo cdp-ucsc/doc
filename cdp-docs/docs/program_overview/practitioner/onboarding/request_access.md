@@ -32,5 +32,5 @@ Developers/users will need to request access to the tools that are relevant to t
 
 
 
-Note, the campus's `dc-vpn` must be active and each tool must be accessed through the UC Santa Cruz's specific login page. The hyperlinks above will take you to the pages.
+Note: the campus's `dc-vpn` must be active and each tool must be accessed through the UC Santa Cruz's specific login page. The hyperlinks above will take you to the pages.
 

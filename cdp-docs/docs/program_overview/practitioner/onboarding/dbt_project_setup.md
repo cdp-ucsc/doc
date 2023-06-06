@@ -81,7 +81,7 @@ Learn more about Snowflake specific `profiles.yml` [here](https://docs.getdbt.co
 ### 4. `dbt build` project
 At this point you should be able to `build` the dbt project. 
 
-In VSCode, open the project directory. From the terminal command line, activate the project's virtual environment. Enter the following in the command line. Note, since dbt is connecting to Snowflake the campus VPN must be active.
+In VSCode, open the project directory. From the terminal command line, activate the project's virtual environment. Enter the following in the command line. Note: since dbt is connecting to Snowflake, the campus VPN must be active.
 ```shell
 (project_name)
 $ dbt build
