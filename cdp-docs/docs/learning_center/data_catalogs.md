@@ -24,6 +24,6 @@ A data catalog facilitates data governance efforts by providing visibility into 
 A data catalog promotes collaboration among different departments and stakeholders within the institution. It enables users to share data assets, annotations, and insights with others, fostering a culture of data-driven decision-making and knowledge sharing.
 
 ### Data Integration and Analysis:
-By providing information about available data sources, their structure, and relationships, a data catalog facilitates data integration and analysis efforts. It helps administrators identify relevant datasets for specific analytical needs, understand data transformations and data marts, and streamline the process of data preparation and analysis.
+A data catalog facilitates data integration and analysis efforts by providing information about available data sources, their structure, and relationships. It helps administrators identify relevant datasets for specific analytical needs, understand data transformations and data marts, and streamline the process of data preparation and analysis.
 
 Overall, a data catalog in higher education administration plays a vital role in enabling data-driven decision-making, improving data governance, and fostering collaboration among different stakeholders. It enhances the efficiency and effectiveness of data management processes and supports the institution in leveraging its data assets for strategic planning, performance measurement, and institutional research.
