@@ -15,20 +15,24 @@ How to set up a developer's local workstation so it is aligned with project stan
 ### 1. Install Visual Studio Code (VSCode)
 Visual Studio Code (VSCode) is the integrated development environment (IDE) of choice for our developers. Download VSCode [here](https://code.visualstudio.com/) for your specific operating system (OS).
 
+For Windows developers, set the default shell for VSCode's integrated terminal as `Git Bash`. To do this go to Settings and in the search bar enter `Terminal>Integrated>Default Profile` and for Windows select `Git Bash` from the dropdown box.
+![Windows VSCode Default Shell](/img/onboarding/windows_vscode_terminal_default.png)
+
+Now as a Windows developer you have access to `bash`.
+
+### 2. Install `pyenv`
+`pyenv` is a tool used to manage multiple versions of Python on your computer. It allows you to download multiple versions and switch between desired versions from the CLI. 
+
+Learn more about `pyenv` [here](https://github.com/pyenv/pyenv). 
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 <Tabs>
   <TabItem value="windows" label="Windows" default>
-    
-   For Windows developers, set the default shell for VSCode's integrated terminal as `Git Bash`. To do this go to Settings and in the search bar enter `Terminal>Integrated>Default Profile` and for Windows select `Git Bash` from the dropdown box.
 
-    ![Windows VSCode Default Shell](/img/onboarding/windows_vscode_terminal_default.png)
+#### Windows Instructions:
 
-    Now as a Windows developer you have access to `bash`.
-
-    #### Windows Instructions
 Create a directory in your user folder called `.pyenv` by entering the following in PowerShell's command line.
 ```powershell
 > mkdir $HOME/.pyenv
@@ -56,15 +60,11 @@ Open a new window of PowerShell and enter the following in the command line to c
   </TabItem>
 
   <TabItem value="macos" label="Mac OS">
-    For MacOS developers, the default shell will be the default shell used in your terminal. For many, this is now `zsh`. Note, the core functionality of `zsh` and `bash` do not differ greatly. But some instructions in this document may need to be modified depending on the shell you are using. 
 
+#### MacOS Instructions:
 
-### 2. Install `pyenv`
-`pyenv` is a tool used to manage multiple versions of Python on your computer. It allows you to download multiple versions and switch between desired versions from the CLI. 
+For MacOS developers, the default shell will be the default shell used in your terminal. For many, this is now `zsh` rather than `bash`. The core functionality of `zsh` and `bash` do not differ greatly but some instructions in this document may need to be modified depending on the shell you are using. 
 
-Learn more about `pyenv` [here](https://github.com/pyenv/pyenv). 
-
-#### MacOS Instructions
 Before `pyenv` can be installed, the following must be installed:
 XCode command line tools, Homebrew, `openssl`, `readline`, `sqlite3`, `xz` and `zlib`.
 
@@ -140,13 +140,6 @@ $ pyenv
   </TabItem>
 
 </Tabs>
-
-
-
-
-
-
-
 
 
 ### 3. Install Python using `pyenv`
@@ -244,7 +237,28 @@ From the previous steps we have created a virtual environment. Before we can ins
 
 In order to activate a virtual environment, you must refer to a specific activate script that is stored in the virtual environment's directory. Activation is slightly different between MacOS and Windows.
 
-#### MacOS Instructions
+
+<Tabs>
+  <TabItem value="windows" label="Windows" default>
+
+#### Windows Instructions:
+For Windows users, you activate the virtual environment by referring to the `activate` script in the `Scripts` directory. For example,
+```shell
+$ cd [NAME_OF_VENV]/Scripts/
+$ ls -a
+./ ../ activate activate.bat Activate.ps1 ...
+```
+
+Therefore, to activate the virtual environment enter the following in the command line.
+```shell
+$ . /path_to_[NAME_OF_VENV]/Scripts/activate
+```
+
+</TabItem>
+
+  <TabItem value="macos" label="Mac OS">
+
+#### MacOS Instructions:
 
 For MacOS users, you activate the virtual environment by referring to the `activate` script in the `bin` directory. For example,
 ```shell
@@ -258,18 +272,9 @@ Therefore, to activate the virtual environment enter the following in the comman
 $ . /path_to_[NAME_OF_VENV]/bin/activate
 ```
 
-#### Windows Instructions
-For Windows users, you activate the virtual environment by referring to the `activate` script in the `Scripts` directory. For example,
-```shell
-$ cd [NAME_OF_VENV]/Scripts/
-$ ls -a
-./ ../ activate activate.bat Activate.ps1 ...
-```
+  </TabItem>
 
-Therefore, to activate the virtual environment enter the following in the command line.
-```shell
-$ . /path_to_[NAME_OF_VENV]/Scripts/activate
-```
+</Tabs>
 
 That is the end of the MacOS and Windows specific instructions.
 
