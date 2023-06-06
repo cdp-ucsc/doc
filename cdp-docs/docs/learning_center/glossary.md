@@ -20,7 +20,7 @@ The term data lake refers to the section of the CDP where raw data is continuous
 A data stack is a collection of various technologies that allow for raw data to be processed before it can be used. A modern data stack (MDS) consists of the specific tools that are used to organize, store, and transform data. Modern typically refers to cloud-native technologies.
 
 ### dbt-core
-[dbt (data build tool)](https://docs.getdbt.com/docs/introduction)  is an open source software package that is used to transform data in warehouses. dbt compiles code into SQL and runs it against the data warehouse. 
+[dbt (data build tool)](https://docs.getdbt.com/docs/introduction) is an open source software package that is used to transform data in warehouses. dbt compiles code into SQL and runs it against the data warehouse. 
 
 ### dbt-labs
 [dbt-labs](https://www.getdbt.com/dbt-labs/about-us/) is the commercial enterprise that created and maintains the dbt-core software package. dbt-labs is rapidly developing the dbt-cloud experience to assist organizations in deploying dbt at scale, with a web-based development environment, job scheduling, documentation, and GitHub integration to enable CI/CD.   
