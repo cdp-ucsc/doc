@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkcdp_docs=self.webpackChunkcdp_docs||[]).push([[3398],{351:e=>{e.exports=JSON.parse('{"permalink":"/doc/blog/tags/placeholder","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);
