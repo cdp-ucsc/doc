@@ -1,0 +1,8 @@
+{
+  "label": "Practitioner Resources",
+  "position": 1,
+  "link": {
+    "type": "generated-index",
+    "description": "Resources for the data practitioners; skilled individuals supporting the data life cycle: collecting, transforming, analyzing, communicating, and sharing data to guide decision-making."
+  }
+}

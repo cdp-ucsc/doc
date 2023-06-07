@@ -7,9 +7,11 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Common Data Platform',
-  tagline: 'Project Documentation Center',
+  tagline: 'Information Hub',
   favicon: 'img/favicon.ico',
 
+  themes: ['@docusaurus/theme-mermaid'],
+  
   // Set the production url of your site here
   url: 'https://cdp-ucsc.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
@@ -33,6 +35,10 @@ const config = {
     locales: ['en'],
   },
 
+  markdown: {
+    mermaid: true,
+  },
+  
   presets: [
     [
       'classic',
@@ -63,6 +69,11 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // Replace with your project's social card
+      docs: {
+        sidebar: {
+          hideable: true,
+        },
+      },      
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
         title: 'Home',
@@ -100,6 +111,7 @@ const config = {
    //         to: '/blog',
    //         position: 'left'
    //       }, 
+
           {
             href: 'https://github.com/cdp-ucsc/doc/',
             label: 'GitHub',
@@ -111,28 +123,11 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: 'Docs',
-            items: [
-              {
-                label: 'Tutorial',
-                to: '/docs/tutorial/intro',
-              },
-            ],
-          },
-          {
             title: 'Community',
             items: [
               {
                 label: 'Stack Overflow',
                 href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-              },
-              {
-                label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
-              },
-              {
-                label: 'Twitter',
-                href: 'https://twitter.com/docusaurus',
               },
             ],
           },
@@ -151,6 +146,7 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
+        additionalLanguages: ['sql', 'powershell', 'bash']
       },
     }),
 };

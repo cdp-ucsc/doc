@@ -1,8 +1,14 @@
+---
+sidebar_position: 2
+tags:
+    - Active
+---
+
 # SQLFluff
 
 ### Background
 
-[UCSC SQL Style Guide](https://cdp-ucsc.github.io/doc/docs/project_resources/sql_style_guide)
+SQLFluff is a dialect-flexible and configurable SQL linter. Designed with ELT applications in mind, SQLFluff also works with Jinja templating and dbt. SQLFluff will auto-fix most linting errors, allowing you to focus your time on what matters.
 
 [Roles](https://towardsdatascience.com/sqlfluff-the-linter-for-modern-sql-8f89bd2e9117) of a linting tool are to enforce cosmetic rules and prevent code smells.
 > *"Code bases without a consistent style are hard to read and work with because of their unpredictable structure....
@@ -10,7 +16,6 @@ Beyond “ugly” code, there is another category of “problematic” code. Cod
 
 Use [SQLFluff](https://docs.sqlfluff.com/en/stable/) to enforce these rules.
 
-SQLFluff is a dialect-flexible and configurable SQL linter. Designed with ELT applications in mind, SQLFluff also works with Jinja templating and dbt. SQLFluff will auto-fix most linting errors, allowing you to focus your time on what matters.
 
 [Source Reference](https://github.com/sqlfluff/sqlfluff#readme)
 

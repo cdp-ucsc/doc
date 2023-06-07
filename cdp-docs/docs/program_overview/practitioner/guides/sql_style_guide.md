@@ -1,5 +1,7 @@
 ---
-sidebar_position: 2
+sidebar_position: 1
+tags:
+    - Active
 ---
 
 # SQL Style Guide
@@ -7,7 +9,7 @@ sidebar_position: 2
 This guide establishes our standards for SQL and are enforced by code review. Some standards are also enforced by [SQLFLuff](https://sqlfluff.com/). The purpose of the guide is to help developers write clear and concise SQL that can be worked on and understood by others.
 
 ## General guidelines
-* Optimize primarily for readability, maintainability, and robustness rather than for fewer lines of code. Newlines are cheap; people's time is expensive.
+* Optimize primarily for readability, maintainability, and robustness rather than for fewer lines of code. New lines are cheap; people's time is expensive.
 
 * Avoid large select statements with multiple tables instead utilize CTEs.
 * If a `select` statement is so large it can't be easily comprehended, it would be better to refactor it into multiple smaller CTEs that are later joined back together.
@@ -838,4 +840,4 @@ where email in ('user-1@example.com', 'user-2@example.com', 'user-3@example.com'
 This style guide was inspired in part by:
   - [Fishtown Analytics' dbt coding conventions](https://github.com/fishtown-analytics/corp/blob/b5c6f55b9e7594e1a1e562edf2378b6dd78a1119/dbt_coding_conventions.md)
   - [Matt Mazur's SQL style guide](https://github.com/mattm/sql-style-guide/blob/3eaef3519ca5cc7f21feac6581b257638f9b1564/README.md)
-  - [GitLab's SQL style guide](https://about.gitlab.com/handbook/business-ops/data-team/sql-style-guide/)
+  - [GitLab's SQL style guide](https://about.gitlab.com/handbook/business-technology/data-team/platform/sql-style-guide/)
