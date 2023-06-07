@@ -13,7 +13,7 @@ Implement secure automated data pipelines from source to target in near real tim
 
 #### Enterprise Data Model (EDM)
 
-The Enterprise Data Model, or EDM, will support integrating and blending data at scale from multiple domains. Information will be collaboratively and transparently curated from raw source data to trusted information available for reporting, analytics, and sharing.  
+The Enterprise Data Model, or EDM, will support integrating and blending data at scale from multiple domains. Information will be collaboratively and transparently curated from raw source data to trusted information available for reporting, analytics and sharing.  
 
 #### Data and System & Governance Program
 
