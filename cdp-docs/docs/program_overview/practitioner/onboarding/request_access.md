@@ -13,7 +13,7 @@ This page is a work in progress
 
 Certain accounts will need to be setup in various tools that facilitate the modeling and curating of the data.  
 
-Developers/users will need to request access to the tools that are relevant to their needs. Developers can request access to the following by contacting the Data Management team at data-services@ucsc.edu.
+Developers/users will need to request access to the tools that are relevant to their needs. Permissions and access are granted on a case-by-case basis. 
 
 ###  Account 
 
