@@ -43,7 +43,7 @@ In `.dbt` create the `profiles.yml` file.
 $ cd .dbt/
 $ touch profiles.yml
 ```
-The contents of the `profiles.yml` file is specific to each developer's access to Snowflake. Instructions to request access can be found [here](request_access). If you have been provided your Snowflake profile information, then enter it the `profiles.yml`. It is recommended to open `profiles.yml` via VSCode to enter in your profile information rather than from the command line. 
+The contents of the `profiles.yml` file is specific to each developer's access to Snowflake. Instructions to request access can be found [here](access_overview). If you have been provided your Snowflake profile information, then enter it the `profiles.yml`. It is recommended to open `profiles.yml` via VSCode to enter in your profile information rather than from the command line. 
 
 For example, a `profiles.yml` should look similar to
 ```yml
@@ -93,7 +93,7 @@ This will build all the models in the Snowflake database and schema specified in
 dbt Cloud is a dbt managed service that is web based. Learn more about dbt Cloud [here](https://docs.getdbt.com/docs/cloud/about-cloud-setup).
 
 ### 1. Request access to dbt Cloud
-Instructions can be found on the [Request Access](request_access) page.
+Instructions can be found on the [Request Access](account_request_form) page.
 
 ### 2. Login to dbt Cloud
 Activate the campus VPN and use UC Santa Cruz's dbt Cloud login [link](https://cloud.ucsc.getdbt.com/enterprise-login/ucsc/).
