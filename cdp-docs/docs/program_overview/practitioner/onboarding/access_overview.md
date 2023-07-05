@@ -16,7 +16,7 @@ flowchart LR
 
 A[Submit Request] -->|Task created in Asana| B(Pending Approval)
 B --> C{Decision on Approval}
-C -->|Approved| D[Assigned  for  provisions account]
+C -->|Approved| D[Assigned for Account Creation]
 C -->|Declined| E[No Further Action]
 ```
 
