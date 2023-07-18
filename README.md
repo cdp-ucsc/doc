@@ -1,11 +1,52 @@
-### CDP Project Documentation 
+### CDP Information Hub
 
-This repo hosts the code for the [CDP Documentation Center](https://cdp-ucsc.github.io/doc) site, and is intended to be 
-the documentation center for the CDP Project. The site is based on the [Docusaurus](https://docusaurus.io/), framework which is an open source project developed in house at Facebook. The CDP Documentation Center website, is deployed to [Github Pages](https://pages.github.com/) and is publically accessible. 
+This repo hosts the code for the [CDP Information Hub](https://cdp-ucsc.github.io/doc), and is intended to be 
+the goto resource for the CDP Project. The site is based on the [Docusaurus](https://docusaurus.io/), framework which is an open source project developed in house at Facebook. The Information Hub, is deployed to [Github Pages](https://pages.github.com/) and is publically accessible. 
 
-The team is currently evaluating the viablitly of the product, in the hopes of landing on a solution that will allow building a robust workflow around documentation and communication, while leveraging git as a source of truth.
+The project team discussed several documentation solutions including, github wiki, wcms, github pages, before finally deciding that Docusaurus would best meet our needs.  Search the GitHub discussions for details. 
 
-This site is deployed to GitHub through the use of GitHub actions, when a Pull Request (PR) is merged to main, The site will be re-deployed to include the changes from the PR.
+### Contributing
+
+The workflow behind this project is intended to be simplistic and encourgage rapid development and corrections.
+Below is the simple feature based workflow that this repository follows.
+
+- create tile to track and describe the objective
+- branch main to #_tile_number_descriptive_name
+- create documentation on the feature branch
+- submit Pull Request(PR) and select a teammate to review
+- reviewer merges PR 
+- github actions will deploy changes on merge to main
+
+```mermaid
+---
+title: Documentation Branching Strategy
+---
+
+
+%%{init: { 'logLevel': 'debug', 'theme': 'base', 'gitGraph': {'showCommitLabel': false}} }%%
+gitGraph
+   commit
+   commit
+   checkout main
+   branch feature_1
+   commit
+   commit
+   commit
+   checkout main
+   merge feature_1
+   checkout main
+   branch feature_2
+   commit
+   commit
+   checkout main
+   merge feature_2
+   checkout main
+   commit
+   commit
+
+```
+
+### Workstation Setup
 
 #### Docusaurus Installation Instructions
 
