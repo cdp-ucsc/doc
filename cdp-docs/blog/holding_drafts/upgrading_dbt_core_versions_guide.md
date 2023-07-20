@@ -147,9 +147,9 @@ This document provides the process guidelines that should be followed when upgra
   - [ ] Audit pass
   - [ ] Successful `qa build` in cloud
 
-  # New Features/Modified Functionality to Note
+  # New Features/Modified Functionality to Note:
 
-  # Breaking Changes and their Corrections
+  # Breaking Changes and their Corrections:
 
   # After merge to-do:
   - [ ] All developers must use the updated `requirements.txt`
