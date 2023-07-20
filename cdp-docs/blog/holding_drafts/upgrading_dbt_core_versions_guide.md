@@ -147,12 +147,15 @@ This document provides the process guidelines that should be followed when upgra
   - [ ] Audit pass
   - [ ] Successful `qa build` in cloud
 
+  # New Features/Modified Functionality to Note
+
+  # Breaking Changes and their Corrections
+
   # After merge to-do:
   - [ ] All developers must use the updated `requirements.txt`
   > To update existing venv:
   > i. active venv
   > ii. `pip install -r requirements.txt --upgrade`
   ```
-<br />
 
 - Follow and complete the issue and PR tasks
