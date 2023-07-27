@@ -102,7 +102,7 @@ const config = {
               },
               {
                 label: 'dbt labs',
-                href: 'https://cloud.ucsc.getdbt.com/enterprise-login/ucsc/',
+                href: 'https://cloud.getdbt.com/enterprise-login/ucsc',
               },
             ],
           },
