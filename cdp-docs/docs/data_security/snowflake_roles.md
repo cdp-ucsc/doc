@@ -13,13 +13,13 @@ This page is a work in progress
 :::
 
 
-This document provides a broad view into the role bases access controls that have been collaboratively developed to provide access for development, analysis and consumption of information through the Common Data Platform. 
+This document provides a broad view into the role bases access controls that have been collaboratively developed to provide access for development, analysis and the consumption of information through the Common Data Platform. 
 
 
 ## Source Roles
- Provide direct access to source data.
+- Provide direct access to source data.
 
-Source roles are foundational and typically map one-to-one with a source system. As new sources are brought into the platform, a source role is created and assigned.  These roles will be granted the necessary privileges to allow access to the source system's raw data and also provide compute resources in the form of warehouses.
+Source roles are foundational and typically map one-to-one with a source system. As new sources are brought into the platform, a source role is created and assigned.  These roles will be granted the necessary privileges to allow access to the source system's raw data and also provide computing resources in the form of warehouses.
 
 **Utility**
 
@@ -42,20 +42,18 @@ Source roles are foundational and typically map one-to-one with a source system.
 
 
 
-**Compute Resouces**
+**Compute Resources**
 
-At this time shared compute will be used in favor of keeping things simple.  Eventually a cost model could be developed and measured based on consumption
-
+A virtual warehouse, often referred to simply as a “warehouse”, is a cluster of compute resources in Snowflake. These resources are generally granted at the source role and usage cascades up the role hierarchy. 
 
 
 ***
 
-
 ## Domain Analyst Roles
 
-<sup> Provide broad access for specific domains. </sup>
+- Provide broad access for specific domains.
 
-Domain Analyst Roles are intended for individuals with subject matter expertise who are comfortable working with raw data. These roles inherit access to raw source data from `Source Roles.` Typically these roles have access to more than one data source and have and can be used to create models in development databases.
+Domain Analyst Roles are intended for individuals with subject matter expertise who are comfortable working with raw data. These roles inherit access to raw source data from [Source Roles](#source-roles). Typically these roles have access to more than one data source and can be used to transform and model data in development databases.
 
 **Utility**
 
@@ -93,7 +91,7 @@ graph TB
 
 ***
 ## Development Roles
-Broad access across multiple domains.
+- Broad access across multiple domains.
 
 
 Development roles provide broad access and are used to build models that blend information from multiple domains. 
@@ -119,7 +117,7 @@ graph TB
 ***
 ## Infrastructure Roles
 
-Roles that are used in support of automation and operations typically have broad access and are only available to account administrators.
+- Roles that are used in support of automation and operations typically have broad access and are only available to account administrators.
 
 **Utility**
 
@@ -134,9 +132,20 @@ Roles that are used in support of automation and operations typically have broad
 | LOADER_ROLE | Loads data from source systems (Fivetran). |
 
 
+```mermaid
+
+graph TB
+    Z(DEPLOYMENT_ROLE)
+    Z --> A(DEVELOPER_ROLE)
+    A --> B(BUSINESS_OPS_ROLE)
+    A --> C(STUDENT_OPS_ROLE)
+    A --> D(DATA_OPS_ROLE)
+```
+
+
 ***
 ## Consumer Roles
-These roles are meant to be integrated with the BI layer of the Data Stack. 
+- Roles meant to be integrated with the BI layer and work in conjunction with the tools security features.
 
 **Utility**
 
@@ -150,5 +159,6 @@ These roles are meant to be integrated with the BI layer of the Data Stack.
 | P4_CONSUMER_ROLE | Access to assets with a P4 or P3 data classification |
 
 ***
+
 ## System Defined Roles
 These roles are provided by the Snowflake Platform, and will not be discussed in this document, if you would like more information please see the following link. [Snowflake Docs](https://docs.snowflake.com/en/user-guide/security-access-control-overview.html#system-defined-roles)
