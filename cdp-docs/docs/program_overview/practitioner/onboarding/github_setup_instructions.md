@@ -1,11 +1,11 @@
 ---
-sidebar_position: 3
+sidebar_position: 4
 tags:
     - Draft
 ---
 
 # GitHub Setup
-GitHub hosts our project repositories (repos). Practitioners will need access to the project repositories in order to contribute to the project. In addition, we utilize many other features of GitHub and an account will be necessary to access those as well.
+GitHub hosts our project repositories (repos). Practitioners will need access to the project repositories in order to contribute to the project. In addition, we utilize many other features of GitHub. An account will be necessary to access those as well.
 
 ### 1. Create GitHub Account
 
@@ -20,7 +20,7 @@ GitHub hosts our project repositories (repos). Practitioners will need access to
 
 :clipboard: [MFA/2FA How To Documentation](https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication)
 
-Once your account is created you will need to enable **MFA/2FA** authentication prior to being added to the UCSC GitHub Organization where you will have access to project documentation, git repositories, and additional project resources. 
+Once your account is created you will need to enable **MFA/2FA** authentication. This needs to happen prior to being added to the UCSC GitHub Organization where you will have access to project documentation, git repositories, and additional project resources. 
 
 
 ### 2. YouTube Git Tutorials
