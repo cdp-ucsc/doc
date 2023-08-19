@@ -1,5 +1,5 @@
 ---
-sidebar_position: 4
+sidebar_position: 5
 tags:
   - Draft
 ---
@@ -96,4 +96,4 @@ dbt Cloud is a dbt managed service that is web based. Learn more about dbt Cloud
 Instructions can be found on the [Request Access](account_request_form) page.
 
 ### 2. Login to dbt Cloud
-Activate the campus VPN and use UC Santa Cruz's dbt Cloud login [link](https://cloud.ucsc.getdbt.com/enterprise-login/ucsc/).
+Activate the campus VPN and use UC Santa Cruz's dbt Cloud login [link](https://cloud.getdbt.com/enterprise-login/ucsc).
