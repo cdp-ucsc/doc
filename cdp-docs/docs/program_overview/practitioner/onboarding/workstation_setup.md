@@ -121,6 +121,8 @@ If a version is returned, then `pyenv` has successfully been installed.
 
 For MacOS developers, the default shell will be the default shell used in your terminal. For many, this is now `zsh` rather than `bash`. The core functionality of `zsh` and `bash` do not differ greatly but some instructions in this document may need to be modified depending on the shell you are using. 
 
+Note, for users who do not already have Homebrew installed and would like to install using Homebrew an Administration account will be needed to complete the install.
+
 Before `pyenv` can be installed, the following must be installed:
 XCode command line tools, Homebrew, `openssl`, `readline`, `sqlite3`, `xz` and `zlib`.
 
