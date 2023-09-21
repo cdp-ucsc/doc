@@ -23,7 +23,7 @@ Now as a Windows developer you have access to `bash`.
 ### 2. Install `pyenv`
 `pyenv` is a tool used to manage multiple versions of Python on your computer. It allows you to download multiple versions and switch between desired versions from the CLI. 
 
-Learn more about `pyenv` [here](https://github.com/pyenv/pyenv). 
+Learn more about `pyenv` [here](https://github.com/pyenv/pyenv).
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -59,7 +59,63 @@ Open a new window of PowerShell and enter the following in the command line to c
 
   </TabItem>
 
-  <TabItem value="macos" label="Mac OS">
+  <TabItem value="macos1" label="Mac OS (Manual Installation)">
+
+#### MacOS Instructions:
+
+For MacOS developers, the default shell will be the default shell used in your terminal. For many, this is now `zsh` rather than `bash`. The core functionality of `zsh` and `bash` do not differ greatly but some instructions in this document may need to be modified depending on the shell you are using. 
+
+Before `pyenv` can be installed, the following must be installed:
+XCode command line tools.
+
+<details>
+<summary> Installation instructions: XCode </summary>
+
+To check if XCode is installed already, in the terminal command line enter the following to print the location of the package.
+```shell
+$ xcode-select -p
+```
+If a directory is printed, then XCode is installed. For example,
+```shell
+/Library/Developer/CommandLineTools
+```
+If an error is printed, then XCode is not installed. For example,
+```shell
+xcode-select: error: unable to get active developer directory...
+```
+To install XCode enter the following in the command line.
+```shell
+$ xcode-select --install
+```
+</details>
+
+Using the [basic GitHub checkout](https://github.com/pyenv/pyenv#basic-github-checkout) method, install `pyenv` by entering the following in the terminal command line.
+```shell
+$ git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+```
+Users should see a `.pyenv` directory in their Home folder. 
+
+After `pyenv` has been successfully installed, add `pyenv` to your `$PATH` by entering the following in the command line. For `bash` replace `.zshrc` with `.bashrc`.
+```shell
+$ echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
+$ echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
+$ echo 'eval "$(pyenv init -)"' >> ~/.zshrc
+```
+If the user did not have a `.zshrc` startup file, the above commands will have created one. Else, the new lines have been appended to the existing file.
+
+Reload the terminal session for the changes to be applied by entering the following the in the command line.
+```shell
+$ . ~/.zshrc
+```
+
+Users can confirm a successful installation by entering the following in the terminal command line.
+```shell
+$ pyenv --version
+```
+If a version is returned, then `pyenv` has successfully been installed.
+  </TabItem>
+
+  <TabItem value="macos2" label="Mac OS (Homebrew Installation)">
 
 #### MacOS Instructions:
 
@@ -116,11 +172,12 @@ $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/
 
 To install `openssl`, `readline`, `sqlite3`, `xz` and `zlib` libraries enter the following in the command line.
 ```shell
+$ brew update
 $ brew install openssl readline sqlite3 xz zlib
 ```
 </details>
 
-Using Homebrew install `pyenv` by entering the following in the terminal command line.
+Using Homebrew, install `pyenv` by entering the following in the terminal command line.
 ```shell
 $ brew update
 $ brew install pyenv
@@ -130,13 +187,18 @@ After `pyenv` has been successfully installed, add `pyenv` to your `$PATH` by en
 ```shell
 $ echo 'eval "$(pyenv init --path)"' >> ~/.zshrc
 ```
+If the user did not have a `.zshrc` startup file, the above commands will have created one. Else, the new lines have been appended to the existing file.
 
-Close/exit the current terminal for the command to be applied.
-
-Open a new terminal and enter the following in the command line to confirm pyenv has been installed successfully.
+Reload the terminal session for the changes to be applied by entering the following the in the command line.
 ```shell
-$ pyenv
+$ . ~/.zshrc
 ```
+
+Users can confirm a successful installation by entering the following in the terminal command line.
+```shell
+$ pyenv --version
+```
+If a version is returned, then `pyenv` has successfully been installed.
   </TabItem>
 
 </Tabs>
@@ -145,7 +207,7 @@ $ pyenv
 ### 3. Install Python using `pyenv`
 `pyenv` is our Python version manager. Therefore, when installing any version of Python we will be using `pyenv`. 
 
-To avoid confusion between different OS systems Windows developers should use VSCode's integrated terminal. It is also recommended that MacOS developers complete the next steps in VSCode's integrated terminal as well so they can become familiar with VSCode's terminal.
+To avoid confusion between different OS systems Windows developers should use VSCode's integrated terminal. It is also recommended that MacOS developers complete the next steps in VSCode's integrated terminal as well so they can become familiar with VSCode's terminal. **Again, for steps 3 and onward use VSCode's terminal.**
 
 To see all available versions of Python for installation enter the following in the terminal command line.
 ```shell
@@ -189,7 +251,7 @@ The other key benefit of `pyenv` is the ability to set a local version of Python
 $ cd [DESIRED_DIRECTORY]
 $ pyenv local [PYTHON_VERSION]
 ```
-### 5. Make a virtual environment using `venv`
+### 4. Make a virtual environment using `venv`
 `venv` is already included in Python's standard library so there is no additional action needed to install `venv`.
 
 `venv` is a package that allows you to create and use virtual environments. Virtual environments create isolated environments to manage different package versions and allow developers to switch between various ones. With the addition of `pyenv` developers can also set different Python versions for each virtual environment. 
@@ -232,7 +294,7 @@ $ pyenv local 3.9.13
 
 Note, you cannot change the Python version of a virtual environment after you have set it. To use a different version of Python you must create a new virtual environment.
 
-### 6. Activate/deactivate virtual environment with alias
+### 5. Activate/deactivate virtual environment with alias
 From the previous steps we have created a virtual environment. Before we can install packages to a virtual environment we must be able to `activate` the virtual environment.
 
 In order to activate a virtual environment, you must refer to a specific activate script that is stored in the virtual environment's directory. Activation is slightly different between MacOS and Windows.
@@ -269,7 +331,7 @@ $ ls -a
 
 Therefore, to activate the virtual environment enter the following in the command line.
 ```shell
-$ . /path_to_[NAME_OF_VENV]/bin/activate
+$ source /path_to_[NAME_OF_VENV]/bin/activate
 ```
 
   </TabItem>
@@ -278,59 +340,36 @@ $ . /path_to_[NAME_OF_VENV]/bin/activate
 
 That is the end of the MacOS and Windows specific instructions.
 
-Once the virtual environment has been activated, the command line will indicate that a virtual environment is active. Above the current line you will see the name of the active virtual environment in parentheses. 
+Once the virtual environment has been activated, the command line prompt will indicate that a virtual environment is active. Usually, the current line you will see the name of the active virtual environment in parentheses. 
 ```shell
 ([NAME_OF_VENV])
 $ 
 ```
 
-For example,
-```shell
-$ . /path/.venv/my_first_venv/bin/activate
-
-(my_first_venv)
-$ 
-```
-
 To deactivate the virtual environment simply enter the following in the command line.
 ```shell
-(my_first_vend)
+([NAME_OF_VENV])
 $ deactivate
 
 $
 ```
-Once the virtual environment has been deactivated you will no longer see its name above the command line's current line.
+Once the virtual environment has been deactivated you will no longer see its name in the command line's prompt.
 
 Since it is a lot of manual work to specify the entire path to the `activate` script of the virtual environment every time you would like to activate it we recommend using aliases. To set the activation command for a virtual environment as an alias complete the following steps.
 
-`cd` to your home directory.
-```shell
-$ cd
+Add the activation command as an alias to the `.zshrc` file. Users can open and edit the `.zshrc` file in any text editor. A MacOS example,
 ```
-Check if you have a `.zshrc` file (or `.bashrc` if using `bash`).
-```shell
-$ ls -a
-./ ../ .zshrc ...
+alias [NAME_OF_VENV]='source /path/.venv/[NAME_OF_VENV]/bin/activate'
 ```
 
-If you do not have a `.zshrc` file, then create one.
+Back in terminal, reload the session for the changes to be applied by entering the following the in the command line.
 ```shell
-$ touch .zshrc
+$ . ~/.zshrc
 ```
 
-Add the activation command as an alias to the `.zshrc` file. 
+Now, to activate the virtual environment enter the alias name in the command line and the deactivate use the same method.
 ```shell
-$ cat >> .zshrc
-alias [NAME_OF_VENV]='. /path/.venv/[NAME_OF_VENV]/bin/activate'
-
-# ENTER CTRL+D TO SAVE AND EXIT EDIT MODE
-```
-
-Close/exit the current terminal for the alias to be applied.
-
-Now, to activate the virtual environment enter the alias' name in the command line and the deactivate use the same method.
-```shell
-$ [NAME_OF_VENV]
+$ [VENV_ALIAS_NAME]
 
 ([NAME_OF_VENV])
 $
@@ -356,7 +395,7 @@ $
 
 Note, these instructions work because Windows developers are using `bash` via VSCode's integrated terminal. The instructions do not work for Windows developers using PowerShell. Windows users should use VSCode's integrated terminal as the default terminal for their command line needs.
 
-### 7. Set up virtual environment from `requirements.txt`
+### 6. Set up virtual environment from `requirements.txt`
 Virtual environments can be set up to a project's specific specifications by using the project's `requirement.txt`. The `requirement.txt` will specify all of the necessary packages and their exact versions that are required by the project.
 
 For example,
@@ -379,18 +418,9 @@ $ cd /path/.venv/[PROJECT_NAME]
 $ pyenv local [PYTHON_VERSION]
 ```
 
-Create an alias for the virtual environment.
-```shell
-$ cd
-$ cat >> .zshrc
-$ [PROJECT_NAME] = '. /path/.venv/[PROJECT_NAME]/bin/activate'
+If desired, create and add an alias for the virtual environment in the `.zshrc` file. Restart or close/exit the current terminal for the alias to be applied.
 
-# ENTER CTRL+D TO SAVE AND EXIT EDIT MODE
-```
-
-Close/exit the current terminal for the alias to be applied.
-
-Open a new terminal and activate the virtual environment.
+In the terminal activate the virtual environment.
 ```shell
 $ [PROJECT_NAME]
 
