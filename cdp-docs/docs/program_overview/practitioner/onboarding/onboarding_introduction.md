@@ -11,9 +11,10 @@ The Onboarding Introduction provides a high-level overview of the onboarding pro
 The goal of the onboarding process for Business/Data Analysts is to enable them to interact and contribute to projects in a quick and efficient manner. These individuals should begin with reviewing the following Onboarding documentations:
 - Access Overview
 - Account Request Form
-  - Consider requesting access for GitHub and dbt-cloud
+  - Consider requesting access for GitHub, dbt-cloud, and Snowflake
 - GitHub Setup
 - dbt Cloud Setup
+- Snowflake Setup
 
 ## Analytics Engineers
 The goal of the onboarding process for Analytics Engineers is to provide them access to the tools that will allow them to contribute in managing and building projects with an emphasis in data. These individuals should begin with reviewing the following Onboarding documentations:
