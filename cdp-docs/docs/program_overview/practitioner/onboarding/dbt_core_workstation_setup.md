@@ -5,12 +5,11 @@ tags:
   - Onboarding
 ---
 
-# Workstation Setup
+# dbt Core Workstation Setup
 :::caution
 This page is a work in progress
-
 :::
-How to set up a developer's local workstation so it is aligned with project standards and requirements. Managing Python versions and utilizing virtual environments is key to a developer's local environment.
+The following documentation provides an example workstation setup that has been confirmed to be aligned with project requirements. 
 
 ### 1. Install Visual Studio Code (VSCode)
 Visual Studio Code (VSCode) is the integrated development environment (IDE) of choice for our developers. Download VSCode [here](https://code.visualstudio.com/) for your specific operating system (OS).
