@@ -12,6 +12,7 @@ The goal of the onboarding process for Business/Data Analysts is to enable them 
 - Access Overview
 - Account Request Form
   - Consider requesting access for GitHub, dbt-cloud, and Snowflake
+  - A GitHub account is needed before requesting GitHub Organization access
 - GitHub Setup
 - dbt Cloud Setup
 - Snowflake Setup
@@ -21,6 +22,7 @@ The goal of the onboarding process for Analytics Engineers is to provide them ac
 - Access Overview
 - Account Request From
   - Consider requesting access for GitHub, dbt-cloud, and Snowflake
+  - A GitHub account is needed before requesting GitHub Organization access
 - GitHub Setup
 - dbt Cloud Setup
 - dbt Core Workstation Setup
@@ -31,6 +33,7 @@ Similar to the Analytics Engineers, the goal of the onboarding process for the D
 - Access Overview
 - Account Request From
   - Consider requesting access for GitHub, dbt-cloud, Snowflake, and Fivetran
+  - A GitHub account is needed before requesting GitHub Organization access
 - GitHub Setup
 - dbt Cloud Setup
 - Snowflake Setup
