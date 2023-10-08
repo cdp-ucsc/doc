@@ -20,7 +20,7 @@ dbt Core is dbt's CLI version. Learn more about dbt Core [here](https://docs.get
 Instructions can be found on the [GitHub Setup Instructions](github_setup_instructions) page.
 
 ### 2. Setup project virtual environment
-Instructions can be found on the [Workstation Setup](workstation_setup) page. This step also covers dbt installation.
+Instructions can be found on the [Workstation Setup](dbt_core_workstation_setup) page. This step also covers dbt installation.
 
 ### 3. Setup `profiles.yml`
 Since dbt compiles and runs SQL in our data warehouse, dbt needs to connect to the warehouse. The `profiles.yml` provides dbt with the necessary information to make the connection.

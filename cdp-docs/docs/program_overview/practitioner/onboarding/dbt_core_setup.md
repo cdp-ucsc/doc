@@ -5,11 +5,12 @@ tags:
   - Onboarding
 ---
 
-# dbt Core Workstation Setup
+# dbt Core Setup
 :::caution
 This page is a work in progress
 :::
-The following documentation provides an example workstation setup that has been confirmed to be aligned with project requirements. 
+
+The following documentation provides an example workstation setup confirmed to be aligned with project requirements. **If you are not comfortable or do not enjoy managing complex software configurations on your workstation**, please refer to the [dbt cloud setup](dbt_cloud_setup) docs.
 
 ### 1. Install Visual Studio Code (VSCode)
 Visual Studio Code (VSCode) is the integrated development environment (IDE) of choice for our developers. Download VSCode [here](https://code.visualstudio.com/) for your specific operating system (OS).
