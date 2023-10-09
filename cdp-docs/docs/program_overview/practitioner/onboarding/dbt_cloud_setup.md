@@ -4,18 +4,18 @@ sidebar_position: 6
 # dbt Cloud Setup
 
 ## General Information:
-What is dbt Cloud? The depth of this answer is slightly different depending on your role and responsibilities. Generally for Business/Data Analysts, simply put dbt Cloud is the platform where they can perform data analysis and model data (i.e. write and execute SQL queries). Additionally, they can quickly find information regarding the status of the data (i.e. was the last run successful and when did it run) or the relationship between different data models (i.e. what is the DAG). For Analytics Engineers and Data Engineers, dbt Cloud provides things like the ability to manage project deployments and environments or access API for integrations.
+**What is dbt Cloud?** 
 
-This setup documentation will provide an express coverage of dbt Cloud to allow analysts to quickly and efficiently access Cloud for data analysis and development.
+dbt Cloud is a feature rich hosted platform that provides a sql editor for dbt project engagement, role based access control (RBCA), model documentation, job scheduling, and capabilities for the deployment of production grade data products. dbt Cloud is the quickest way to come up to speed with the tools and technologies that will be used to model and deliver curated trusted data to information consumers across the campus and beyond. dbt is a data transformation tool that enables data analysts and engineers to transform data from raw source data to curated, trusted models that enable business units to make informed strategic decisions and maximize operational efficiencies.  
+
+This setup documentation will provide an express coverage of dbt Cloud to allow analysts to quickly and efficiently access Cloud for data analysis and development. Please reach out to the core-team for support if you would like assistance with the setup process. 
 
 For those wanting to expand their knowledge on dbt and dbt Cloud specifically, [dbt Lab's official documentation](https://docs.getdbt.com/docs/cloud/about-cloud-setup) is a fantastic place to start.
 
 ## Setup and Walk Through:
-### 0. Approved Access to GitHub, dbt Cloud, and Snowflake
-In order to successfully set up dbt Cloud, users need to have received access to the organization's GitHub, Snowflake, and dbt Cloud via the [Account Request Form(s)](/doc/docs/program_overview/practitioner/onboarding/account_request_form).
 
 ### 1. Log on to dbt Cloud
-UCSC's specific logon site for Cloud can be found in the top right corner of the CDP documentation website. In the top right corner, there is a drop down labeled "Platform Logins" where the link **[dbt Labs](https://cloud.getdbt.com/enterprise-login/ucsc)** will direct users to Cloud. Users will log in with their CruzId and Gold Password (UCSC SSO).
+UCSC's specific logon site for Cloud can be found in the top right corner of the CDP documentation website. In the top right corner, there is a drop down labeled "Platform Logins" where the link **[dbt Labs](https://cloud.getdbt.com/enterprise-login/ucsc)** will direct users to Cloud. Users will log in with their CruzId and Gold Password (UCSC SSO). If your request for a dbt cloud account has been approved, you will receive and email invitation that will walk you through logging in. 
 
 ### 2. Home Page
 Users' home page of dbt Cloud should look similar to this where a project name can be seen in the top right corner. In this screenshot, the user has access to the `example-project` project. Users can click on the project name to toggle a list of all projects they have been given access to. As part of the account request, users should have been given access to all of their relevant projects.
