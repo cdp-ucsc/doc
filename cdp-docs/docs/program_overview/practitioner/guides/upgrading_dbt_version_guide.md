@@ -128,7 +128,7 @@ To finalize the upgrade the following should be completed in sequence,
 - The PR is reviewed and approved by the reviewers. 
 
 After the final approval, the PR should not be immediately merged and closed.
-- After the final approval, in dbt Cloud, update all of the remaining environments (unless otherwise stated).
+- After the final approval, in dbt Cloud, update all of the remaining environments' dbt version (unless otherwise stated).
 - Verify all of the PR CI/CD checks pass.
 - Merge and close the PR.
 
