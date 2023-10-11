@@ -79,14 +79,14 @@ Manually run the build all job that was created in step four.
 
 If the job runs successfully, then the project is compatible with the new version. 
 
-If the job runs unsuccessfully including any errors or warnings, then the project is not 100% compatible with the new version. Identify, document, and resolve all the issues. The issues should be treated accordingly to their severity and impact to the project. (i.e. Low impact issues should be resolved relatively quickly while large impact issues may need to be discussed with the team to decide on a resolution path.) For documentation of the issues, create their own issue and list the issue in the main issue's **Related Issues** section. Include all of the code changes in the `dbt-upgrade-test` branch.
+If the job runs unsuccessfully including any errors or warnings, then the project is not 100% compatible with the new version. Identify, document, and resolve all the issues. The issues should be treated according to their severity and impact on the project. (i.e. Low impact issues should be resolved relatively quickly while large impact issues may need to be discussed with the team to decide on a resolution path.) For documentation of the issues, create their own issue and list the issue in the main issue's **Related Issues** section. Include all of the code changes in the `dbt-upgrade-test` branch.
 
 In a dbt Cloud only world this step would be the last step before finalizing the version upgrade. However, an additional step is needed to enable dbt Core users to upgrade as well.
 
 ### 7. Update `requirements.txt` for dbt Core
-Update the dbt Core package, `dbt-core`, and the adapter plugin , `dbt-snowflake`, in the `requirements.txt` file in the testing branch, `dbt-upgrade-test`. Updating these two packages is what is required to update the dbt version. 
+Update the dbt Core package, `dbt-core`, and the adapter plugin, `dbt-snowflake`, in the `requirements.txt` file in the testing branch, `dbt-upgrade-test`. Updating these two packages is what is required to update the dbt version. 
 
-However, in `requirements.txt` there are other secondary packages that are used. The command `pip list --outdated` will output **all** installed packages that have updated versions (only in the CLI not in the Cloud IDE). Many of the packages outputted are packages installed from the packages listed in the requirements file. For example, the requirements files includes `dbt-core`, `dbt-snowflake`, `sqlfluff`, `yamllint`, `sqlfluff-templater-dbt`, `python-dotenv` and the output is
+However, in `requirements.txt` there are other secondary packages that are used. The command `pip list --outdated` will output **all** installed packages that have updated versions (only in the CLI not in the Cloud IDE). Many of the packages outputted are packages installed from the packages listed in the requirements file. For example, the requirements file includes `dbt-core`, `dbt-snowflake`, `sqlfluff`, `yamllint`, `sqlfluff-templater-dbt`, `python-dotenv` and the output is
 ```shell
 Package                    Version Latest Type
 -------------------------- ------- ------ -----
@@ -120,14 +120,14 @@ Similar to the process of updating the `packages.yml`, please review relevant pa
 
 After reviewing, update the other secondary packages in `requirements.txt`.
 
->It is important to include an updated `requirements.txt` for developers/analysts that are working locally. Without an updated requirements file their local workstation (often managed by virtual environments) will no longer be compatible with the project.
+>It is important to include an updated `requirements.txt` for developers/analysts who are working locally. Without an updated requirements file their local workstation (often managed by virtual environments) will no longer be compatible with the project.
 
 ### 6. Finalize and complete the upgrade
 To finalize the upgrade the following should be completed in sequence,
 - Open and fill out the PR. The template is attached at the end of this document.
 - The PR is reviewed and approved by the reviewers. 
 
-After the final approval, the PR is should not be immediately merged and closed.
+After the final approval, the PR should not be immediately merged and closed.
 - After the final approval, in dbt Cloud, update all of the remaining environments (unless otherwise stated).
 - Verify all of the PR CI/CD checks pass.
 - Merge and close the PR.
@@ -135,7 +135,7 @@ After the final approval, the PR is should not be immediately merged and closed.
 **Both the Production environment dbt version needs to be updated and the PR merged before the next Production job or the Production job will fail.**
 
 ### 7. Post upgrade maintenance
-After step 6, dbt Cloud is fully upgraded and ready for users. For dbt Core/local development, users will needed to upgrade their local workstations based on the new `requirements.txt` file. And if there were any breaking changes to any of the secondary Python packages those will need to be addressed.
+After step 6, dbt Cloud is fully upgraded and ready for users. For dbt Core/local development, users will need to upgrade their local workstations based on the new `requirements.txt` file. And if there were any breaking changes to any of the secondary Python packages those will need to be addressed.
 
 Also, any remaining open sub-issues listed in the main issue's **Related Issues** section must be addressed.
 
