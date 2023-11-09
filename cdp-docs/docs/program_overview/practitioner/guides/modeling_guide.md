@@ -203,4 +203,7 @@ _stg_[source]__sources_effdt.yml
 ## dbt_project_name/tests/
 - Description of the `tests` folder
 
-## 
+## Common Modeling Topics
+### Optimizing query times with CTEs
+### Parsing semi-structured data
+### Joining SCD2 tables
