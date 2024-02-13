@@ -1,4 +1,9 @@
-# Modeling Guide
+---
+description: Documentation for CDP's individual dbt projects.
+sidebar_position: 2
+---
+
+# dbt Project Modeling Guide
 
 # Project Structure and Guide
 ```
@@ -28,6 +33,30 @@
      ├─── README.md
      └─── requirements.txt
 ```
+## dbt_project_name/
+```
+└─── dbt_project_name
+     ├─── .github
+     ├─── .vscode
+     .
+     .
+     .
+     ├─── .gitignore
+     ├─── .sqlfluffignore
+     ├─── dbt_project.yml
+     ├─── packages.yml
+     ├─── README.md
+     └─── requirements.txt
+```
+Comments on the stand alone files.
+
+## dbt_project_name/analyses/
+
+## dbt_project_name/data/
+
+## dbt_project_name/dbt_packages/
+
+## dbt_project_name/logs/
 
 ## dbt_project_name/macros/
 - Description of the `macros` folder
@@ -39,7 +68,10 @@
 > - Coding Principals – in coding, entities are always singular (e.g., Public Class Inventory)
 > - English Language Learners – pluralization is difficult, e.g., “inventory” vs “inventories”
 - All models should be documented and tested.
-- All model table documentation should utilize doc blocks. 
+
+#### Model Documentation of `source.yml` and `model.yml`
+- All model documentation should utilize doc blocks.
+- **Should we organize using a subfolder?** Things can get really messy if we want to document down to the columns. And using doc blocks. Or we should just have one .yml for each model.
 
 ### models/base/
 ```
@@ -200,10 +232,7 @@ _stg_[source]__sources_effdt.yml
 ## dbt_project_name/snapshots/
 - Description of the `snapshots` folder
 
+## dbt_project_name/target/
+
 ## dbt_project_name/tests/
 - Description of the `tests` folder
-
-## Common Modeling Topics
-### Optimizing query times with CTEs
-### Parsing semi-structured data
-### Joining SCD2 tables
