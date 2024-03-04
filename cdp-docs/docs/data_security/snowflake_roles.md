@@ -6,9 +6,9 @@ tags:
 ---
 # Snowflake Role based Access Controls (RBAC)
 
-:::caution
+:::info
 
-This page is a work in progress
+This page will be updated as roles are added.
 
 :::
 
@@ -28,19 +28,24 @@ Source roles are foundational and typically map one-to-one with a source system.
 - In some cases, they may remain stand-alone for security purposes and not be granted to secondary roles.
 - Stand-alone grants are not intended for development work 
 
-**Source Role**
+<details>
+  <summary>Current Source Roles</summary>
 
-| Role Name | Role Purpose |
-| --- | --- |
-| AIS_ROLE | Direct access to raw Campus Solutions/AIS data (CSPRD) |
-| COURSEDOG_ROLE | Direct access to raw Curricum Planning data (CourseDog) |
-| CRUZBUY_ROLE | Direct access to raw purchasing and procurement data (CruzBuy) |
-| FIS_ROLE | Direct access to raw finacial system data (FIS) |
-| HR_PATH_ROLE | Direct access to raw hr/payroll  data (UCPath) |
-| IDM_ROLE | Direct access to raw identity management data (IDM) |
-| PPS_ROLE | Direct access to raw legacy payroll data (PPS) |
+| Role Name | Role Purpose | Domain |
+| --- | --- | --- |
+| AIS_ROLE | Access to raw source data from: Campus Solutions  | Student |
+| AFFINIQUEST_ROLE | Access to raw source data from: Affiniquest / Salesforce  | Advancement |
+| BO_AUDIT_ROLE | Access to raw source data from: infoview usage logs | Internal |
+| COURSEDOG_ROLE | Access to raw source data from: Curricum Planning (CourseDog) | Student |
+| FIS_ROLE | Access to raw source data from: Finacial Information System (FIS)| Financial |
+| FINANCE_PATH_ROLE | Access to raw source data from: personnel financial data (UCPath) | Financial |
+| FIVETRAN_LOG_ROLE | Access to fivetran logs  | Internal |
+| HR_PATH_ROLE | Access to raw source data from: personnel data (UCPath) | Personnel |
+| IDM_ROLE | Access to raw source data from: IDM  | Internal |
+| PPS_ROLE | Access to raw source data from: legacy payroll (PPS) | Financial |
+| SETL_ROLE | Access to setl log data | Internal |
 
-
+</details>
 
 **Compute Resources**
 
@@ -60,34 +65,19 @@ Domain Analyst Roles are intended for individuals with subject matter expertise 
 - These roles are granted to individuals tasked with preparing data for consumption. 
 - Allow board access across domain-specific systems. 
 
-
-**Domain Analyst Role**
+<details>
+  <summary>Current Domain Analyst Roles</summary>
 
 | Role Name | Role Purpose |
 | --- | --- |
-| BUSINESS_OPS_ROLE | Broad access to data from administrative business systems (HR, Finance, Procurement, Identity) |
-| STUDENT_OPS_ROLE | Broad across to data from academic business systems (AIS, ALEKS, CourseDog, Identity) |
-| DATA_OPS_ROLE | Broad access to data operations sources (System usage, job logs) |
+| ADVANCEMENT_OPS_ROLE | Broad access to data from administrative systems supporting University Relations. |
+| FINANCIAL_OPS_ROLE | Broad access to data from administrative financial systems.  |
+| INTERNAL_OPS_ROLE | Broad access to operational data assests and log information.  |
+| PERSONNEL_OPS_ROLE | Broad access to data from administrative personnel systems. 
+| STUDENT_OPS_ROLE | Broad across to data from administrative academic systems. |
 
 
-
-```mermaid
-
-graph TB
-    A(BUSINESS_OPS_ROLE)
-    A --> B(CRUZBUY_ROLE)
-    A --> C(FIS_ROLE)
-    A --> D(HR_UCPATH_ROLE)
-    A --> E(PPS_ROLE)
-    A --> F(IDM_ROLE)
-    G(STUDENT_OPS_ROLE)
-    G --> H(AIS_ROLE)
-    G --> I(COURSEDOG_ROLE)
-    G --> J(IDM_ROLE) 
-
-
-
-```
+</details>
 
 ***
 ## Development Roles
@@ -99,20 +89,17 @@ Development roles provide broad access and are used to build models that blend i
 **Utility**
 
 - These roles are typically reserved for members of the data team and are primarily used in developing enterprise data models. 
-- These roles have the ability to create models and data sets in the development databases.
+- These roles have the ability to create models and and blend data from across domains.
+
+<details>
+  <summary>Current Developer Role</summary>
 
 | Role Name | Role Purpose |
 | --- | --- |
-| DEVELOPER_ROLE| Broad access to both academic and administrative business systems (HR, Finance, Student, etc)
+| DEVELOPER_ROLE| Granted all Domain Analyst Roles.
 
-```mermaid
+</details>
 
-graph TB
-    A(DEVELOPER_ROLE)
-    A --> B(BUSINESS_OPS_ROLE)
-    A --> C(STUDENT_OPS_ROLE)
-    A --> D(DATA_OPS_ROLE)
-```
 
 ***
 ## Infrastructure Roles
@@ -124,6 +111,8 @@ graph TB
 - Used for daily operations and administration.
 - Allow board access across domain-specific systems. 
 
+<details>
+  <summary>Current Infrastructure Roles</summary>
 
 | Role Name | Role Purpose |
 | --- | --- |
@@ -131,16 +120,8 @@ graph TB
 | DEPLOYMENT_ROLE | Builds production models through automated processes. |
 | LOADER_ROLE | Loads data from source systems (Fivetran). |
 
+</details>
 
-```mermaid
-
-graph TB
-    Z(DEPLOYMENT_ROLE)
-    Z --> A(DEVELOPER_ROLE)
-    A --> B(BUSINESS_OPS_ROLE)
-    A --> C(STUDENT_OPS_ROLE)
-    A --> D(DATA_OPS_ROLE)
-```
 
 
 ***
@@ -152,13 +133,17 @@ graph TB
 - Integrated with the BI layer.
 - Access is granted at the data asset / model level at build time.
 
+<details>
+  <summary>Current Consumer Roles</summary>
 
 | Role Name | Role Purpose |
 | --- | --- |
 | P2_CONSUMER_ROLE | Access to assets with a P2 or P1 data classification |
 | P4_CONSUMER_ROLE | Access to assets with a P4 or P3 data classification |
 
-***
+</details>
+
+*** 
 
 ## System Defined Roles
 These roles are provided by the Snowflake Platform, and will not be discussed in this document, if you would like more information please see the following link. [Snowflake Docs](https://docs.snowflake.com/en/user-guide/security-access-control-overview.html#system-defined-roles)
