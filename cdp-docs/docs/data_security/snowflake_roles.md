@@ -33,12 +33,12 @@ Source roles are foundational and typically map one-to-one with a source system.
 
 | Role Name | Role Purpose | Domain |
 | --- | --- | --- |
-| AIS_ROLE | Access to raw source data from: Campus Solutions  | Student |
 | AFFINIQUEST_ROLE | Access to raw source data from: Affiniquest / Salesforce  | Advancement |
+| AIS_ROLE | Access to raw source data from: Campus Solutions  | Student |
 | BO_AUDIT_ROLE | Access to raw source data from: infoview usage logs | Internal |
 | COURSEDOG_ROLE | Access to raw source data from: Curricum Planning (CourseDog) | Student |
-| FIS_ROLE | Access to raw source data from: Finacial Information System (FIS)| Financial |
 | FINANCE_PATH_ROLE | Access to raw source data from: personnel financial data (UCPath) | Financial |
+| FIS_ROLE | Access to raw source data from: Finacial Information System (FIS)| Financial |
 | FIVETRAN_LOG_ROLE | Access to fivetran logs  | Internal |
 | HR_PATH_ROLE | Access to raw source data from: personnel data (UCPath) | Personnel |
 | IDM_ROLE | Access to raw source data from: IDM  | Internal |
@@ -89,7 +89,7 @@ Development roles provide broad access and are used to build models that blend i
 **Utility**
 
 - These roles are typically reserved for members of the data team and are primarily used in developing enterprise data models. 
-- These roles have the ability to create models and and blend data from across domains.
+- These roles have the ability to create models and blend data from across domains.
 
 <details>
   <summary>Current Developer Role</summary>
