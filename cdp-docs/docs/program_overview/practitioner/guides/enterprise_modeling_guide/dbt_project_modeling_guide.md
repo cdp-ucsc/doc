@@ -229,11 +229,15 @@ sources:
     schema:
     tables:
       - name:
-        description: 
+        description:
         meta:
           contains_pii: <TRUE/FALSE>
           effective_dated: <TRUE/FALSE>
           partition_columns: ["column1", "column2", ...]
+        columns:
+          - name:
+            meta:
+              alias:
 ```
 All sources at the staging layer must declare the above meta keys.
 
