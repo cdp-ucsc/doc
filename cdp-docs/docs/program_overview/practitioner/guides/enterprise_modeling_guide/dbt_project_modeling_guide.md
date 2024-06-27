@@ -154,7 +154,7 @@ This document will build upon dbt Labs documentation and further discuss specifi
 > Documentation needed.
 
 ## dbt_project_name/models/
-### Modeling Best Practices
+### Model Best Practices
 - The general naming convention for all models and fields should be singular.
 > - If you had a dimension that held attributes for a student in a given term, would you call it “dim_student_term”, “dim_student_terms”, or “dim_students_terms”?
 > - Simplicity – singular is shorter and doesn’t vary based on word (e.g., “ies”, “es”, “s”)
@@ -199,20 +199,16 @@ The base layer should be organized by source. Each base folder should contain a 
 - The base models should be materialized as a view.
 
 ### models/intermediate/
-- Description of the `intermediate` folder
-- Best practices of `intermediate` folder
-  
+> Documentation needed.er
+
 ### models/legacy/
-- Description of the `legacy` folder
-- Best practices of `base` folder
+> Documentation needed.
 
 ### models/marts/
-- Description of the `marts` folder
-- Best practices of `marts` folder
+> Documentation needed.
 
-### models/reports/
-- Description of the `reports` folder
-- Best practices of `reports` folder
+### models/reverse_etl/
+> Documentation needed.
 
 ### models/staging/
 ```
@@ -307,12 +303,13 @@ All models at the staging layer must be tested for uniqueness and emptyness usin
 - Renames at the staging layer should be independent from business names/logic. Business friendly names can be declared in downstream layers.
 
 ## dbt_project_name/seeds/
-- Description of the `seeds` folder
+> Documentation needed.
 
 ## dbt_project_name/snapshots/
-- Description of the `snapshots` folder
+> Documentation needed.
 
 ## dbt_project_name/target/
+> Documentation needed.
 
 ## dbt_project_name/tests/
-- Description of the `tests` folder
+> Documentation needed.
