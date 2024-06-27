@@ -208,7 +208,80 @@ The base layer should be organized by source. Each base folder should contain a 
 > Documentation needed.
 
 ### models/reverse_etl/
-> Documentation needed.
+```
+└─── dbt_project_name
+     ├─── ...
+     ├─── models
+     │    ├─── ...
+     │    ├─── reverse_etl
+               ├─── destination_system1
+               │    ├─── _retl_destination_system1_exposure.yml
+               │    ├─── _retl_destination_system1_model.yml
+               │    ├─── retl_destination_system1__model1.sql
+               │    ├─── retl_destination_system1__model2.sql
+               │    ├─── ...
+               │    └─── retl_destination_system1__modeln.sql
+               ├─── destination_system2
+               │    ├─── ...
+               ├─── ...
+     │    ├─── ...
+     ├─── ...
+```
+The reverse etl layer is organized by destination systems. Each destination system will have a model YAML and exposure YAML.
+
+#### RESOURCE NAMING CONVENTION
+Model Property YAML:
+```
+_retl_[destination_system]_model.yml
+```
+
+Exposure Property YAML:
+```
+_retl_[destination_system]_exposure.yml
+```
+
+Reverse ETL Model:
+```
+retl_[destination_system]__[model_name].sql
+```
+
+#### MODEL.YML
+```yml
+version: 2
+models:
+  - name:
+    description: 
+```
+There is no set of standard tests recommended for reverse etl models. Suggested tests are tests related to data integrity/formatting required by the reverse etl tool Census and the destination system.
+
+The model descriptions should detail the business requirements that the model is meeting for the specific destination system.
+
+See more model properties [here](https://docs.getdbt.com/reference/model-properties).
+
+#### EXPOSURE.YML
+```yml
+version: 2
+exposures:
+  - name:
+    label:
+    description:
+    type:
+    maturity:
+    depends_on:
+    tags:
+    owner:
+      name:
+      email: 
+```
+All reverse etl models should be referenced under an exposure's `depends_on` key. Exposures are important to surface the destination system in the project DAG. 
+
+See more exposure properties [here](https://docs.getdbt.com/reference/exposure-properties).
+
+#### REVERSE ETL MODEL BEST PRACTICES
+- Ideally models are not directly referencing staging models and are referencing mart models.
+  - Beware of models referencing resources of different materializations (i.e. view vs table).
+- Keep in mind the reverse etl layer is intended to extract business requirements/logic out of the reverse etl tool and manage it in the dbt project.
+  - Reverse etl tools can change. Managing the business requirements in the dbt project makes it easily transferrable. The dbt project also provides version management that is already integrated with CDP's workflow.
 
 ### models/staging/
 ```
@@ -278,6 +351,8 @@ sources:
 ```
 CDP utilizes the source YAML as per dbt lab's documentation. CDP also utilizes dbt's meta tag to declare additional information specific to CDP's staging process. Further information can be found [here](https://github.com/cdp-ucsc/cdp-ucsc-dbt-codegen/tree/staging-layer-macros/macros/cdp-ucsc-staging-layer).
 
+See more source properties [here](https://docs.getdbt.com/reference/source-properties).
+
 #### MODEL.YML
 ```yml
 version: 2
@@ -294,6 +369,8 @@ models:
           min_value: 1
 ```
 All models at the staging layer must be tested for uniqueness and emptyness using the above tests.
+
+See more model properties [here](https://docs.getdbt.com/reference/model-properties).
 
 #### STAGING MODEL BEST PRACTICES
 - All models in the stager layer should be materialized as a view.
