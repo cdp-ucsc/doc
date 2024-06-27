@@ -5,6 +5,12 @@ sidebar_position: 2
 
 # dbt Mesh Modeling Guide
 
+:::caution
+
+This page is a work in progress. Currently this page is a placeholder for a future guide. This guide may be reorganized and incorporated into a different guide in the future. 
+
+:::
+
 ### Project Types
 
 #### I. dbt Projects
