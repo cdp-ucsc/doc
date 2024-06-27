@@ -1,6 +1,6 @@
 ---
 description: Documentation for CDP's multi-project structure using dbt mesh.
-sidebar_position: 1
+sidebar_position: 2
 ---
 
 # dbt Mesh Modeling Guide

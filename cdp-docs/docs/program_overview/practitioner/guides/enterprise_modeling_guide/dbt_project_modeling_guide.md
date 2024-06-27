@@ -1,15 +1,20 @@
 ---
 description: Documentation for CDP's individual dbt projects.
-sidebar_position: 2
+sidebar_position: 1
 ---
 
 # dbt Project Modeling Guide
+
+:::caution
+
+This page is a work in progress
+
+:::
 
 # Project Structure and Guide
 ```
 └─── dbt_project_name
      ├─── .github
-     ├─── .vscode
      ├─── analyses
      ├─── data
      ├─── dbt_packages
@@ -25,50 +30,88 @@ sidebar_position: 2
      ├─── seeds
      ├─── snapshots
      ├─── target
+     ├─── template
      ├─── tests
      ├─── .gitignore
+     ├─── .sqlfluff
      ├─── .sqlfluffignore
      ├─── dbt_project.yml
      ├─── packages.yml
      ├─── README.md
      └─── requirements.txt
 ```
+The naming convention of projects are:
+```bash
+[project]-analytics
+```
+
+For example, the financial domain project is named `financial-analytics`.
+
 ## dbt_project_name/
+### Template Repo
 ```
 └─── dbt_project_name
      ├─── .github
-     ├─── .vscode
-     .
-     .
-     .
+     ├─── ...
+     ├─── template
+     ├─── ...
      ├─── .gitignore
+     ├─── .sqlfluff
      ├─── .sqlfluffignore
-     ├─── dbt_project.yml
+     ├─── ...
      ├─── packages.yml
      ├─── README.md
      └─── requirements.txt
 ```
-Comments on the stand alone files.
+The selected resources above are managed by the template repo, [dbt-project-template](https://github.com/cdp-ucsc/dbt-project-template). Therefore, the resources shared by all of the dbt projects are centrally managed. All dbt projects are created from the template repo.
 
-### Project Properties and Configurations (YAMLs)
+### dbt Project
 ```
 └─── dbt_project_name
+     ├─── ...
+     ├─── analyses
+     ├─── data
+     ├─── dbt_packages
+     ├─── logs
+     ├─── macros
+     ├─── models
+     │    ├─── base
+     │    ├─── intermediate
+     │    ├─── legacy
+     │    ├─── marts
+     │    ├─── reports
+     │    └─── staging
+     ├─── seeds
+     ├─── snapshots
+     ├─── target
+     ├─── ...
+     ├─── tests
+     ├─── ...
+     ├─── dbt_project.yml
+     ├─── ...
+```
+The remaining resources are project specific and are not managed by the template repo.
+
+### Different Project Properties and Configurations (YAMLs)
+```
+└─── dbt_project_name
+     ├─── ...
      ├─── models
      │    ├─── ...
-     │    └─── │    ├─── properties.yml
-               ├─── ...
+     │    ├─── │    ├─── properties.yml
+     │    ├─── ...
      ├─── ...
      ├─── dbt_project.yml
      ├─── packages.yml
      ├─── ...
 ```
-A dbt project uses YAML, `.yml`, files to store and specify properties and configurations for different project resources. dbt Labs has documentation regarding properties and configurations [here](https://docs.getdbt.com/reference/configs-and-properties). 
+A dbt project uses YAML, `.yml`, files to store and specify properties and configurations for project resources and the project itself. dbt Labs has documentation regarding properties and configurations [here](https://docs.getdbt.com/reference/configs-and-properties).
 >Note that dbt Lab's documentation is versioned and to select the correct version when reviewing their documentation.
 
-The YAMLs that can be found in a dbt project are `dbt_project.yml`, `packages.yml`, and `properties.yml`.
+The different type of YAMLs that can be found in a dbt project are `dbt_project.yml`, `packages.yml`, and `properties.yml`.
 
-#### DBT_PROJECT.YML
-dbt Labs' project configuration documentation for the `dbt_project.yml` can be found [here](https://docs.getdbt.com/reference/dbt_project.yml). CDP projects usually use the [`dbt_project.yml`](https://github.com/dbt-labs/dbt-core/blob/main/core/dbt/include/starter_project/dbt_project.yml) that is generated during the `dbt init` process with minimal initial modifications. A common area that may receive modifications later on is the models section. For example,
+#### dbt_project.yml
+dbt Labs' project configuration documentation for the `dbt_project.yml` can be found [here](https://docs.getdbt.com/reference/dbt_project.yml). CDP projects use the [`dbt_project.yml`](https://github.com/dbt-labs/dbt-core/blob/main/core/dbt/include/starter_project/dbt_project.yml) that is generated during the `dbt init` process and make modifications as necessary. A common area that may receive modifications is the models section. For example,
 ```yml
 # In this example config, we tell dbt to build all models in the example/
 # directory as views. These settings can be overridden in the individual model
@@ -81,45 +124,36 @@ models:
       +materialized: view
     marts:
       +materialized: table
-    validation:
-      +materialized: table
-      +schema: validation
     reverse_etl:
       +materialized: table
       +schema: shared_data
 ```
+There is only one `dbt_project.yml` in a dbt project.
 
-#### PACKAGES.YML
+#### packages.yml
+The `packages.yml` is where packages that should be made available for use in the dbt project are specified. There is only one `packages.yml` in a dbt project. Note that the `packages.yml` is managed by the template repo. 
 
-#### PROPERTIES.YML
-Property YAML files can be named anything. What identifies a YAML file as a property YAML is the resource key and the property keys and values that follow. The following project resources can have property YAML files: models, seeds, snapshots, sources, analyses, exposures, and macros. The [dbt Labs documentation](https://docs.getdbt.com/reference/configs-and-properties) on properties and configurations is very thorough and highly recommended for developers to review. 
+#### properties.yml
+Property YAML files can be named anything. What identifies a YAML file as a property YAML is the resource key and the property keys and values that follow. The following project resources can have property YAML files: models, seeds, snapshots, sources, analyses, exposures, and macros. There can be multiple `properties.yml` files in a dbt project. The [dbt Labs documentation](https://docs.getdbt.com/reference/configs-and-properties) on properties and configurations is very thorough and highly recommended for developers to review.
 
 This document will build upon dbt Labs documentation and further discuss specific CDP standards for each project resource in its corresponding section.
 
 ## dbt_project_name/analyses/
+> Documentation needed.
 
 ## dbt_project_name/data/
+> Documentation needed.
 
 ## dbt_project_name/dbt_packages/
+> Documentation needed.
 
 ## dbt_project_name/logs/
+> Documentation needed.
 
 ## dbt_project_name/macros/
-- Description of the `macros` folder
+> Documentation needed.
 
 ## dbt_project_name/models/
-### Model Properties and Configurations (YAMLs)
-The use of the [`sources:`](https://docs.getdbt.com/reference/source-properties) and [`models:`](https://docs.getdbt.com/reference/model-properties) keys in a YAML file specify the file as a model property file (rather than a seeds or macro property file).
-
-The naming convention for model property YAMLs:
-```bash
-_[model_type]_[source_name]__[resource_type].yml
-```
-where
-- model_type is base, int (intermediate), lgc (legacy), mart (marts), rpt (reports), or stg (staging)
-- source_name is the source name
-- resource_type is source or model.
-
 ### Modeling Best Practices
 - The general naming convention for all models and fields should be singular.
 > - If you had a dimension that held attributes for a student in a given term, would you call it “dim_student_term”, “dim_student_terms”, or “dim_students_terms”?
@@ -131,7 +165,7 @@ where
 > - [Analytics Engineering Glossary: CTE in SQL](https://docs.getdbt.com/terms/cte)
 > - ['Import' CTEs](https://docs.getdbt.com/best-practices/how-we-style/2-how-we-style-our-sql#import-ctes) vs ['Functional' CTEs](https://docs.getdbt.com/best-practices/how-we-style/2-how-we-style-our-sql#functional-ctes)
 > - [Why dbt Labs (Fishtown) SQL style guide uses so many CTEs](https://discourse.getdbt.com/t/why-the-fishtown-sql-style-guide-uses-so-many-ctes/1091)
-> - [Different examples of CDP models]
+> - [Add CDP example models]
 - Developers should prioritize modular, reusable, concise, and universal modeling.
 > - Again, CTEs can be used to create modular and concise modeling.
 > - Intermediate models can be used to create modular, reusable, and concise models.
@@ -142,7 +176,6 @@ where
 └─── dbt_project_name
      ├─── ...
      ├─── models
-     │    ├─── ...
      │    └─── base
                ├─── source1
                │    ├─── _base_source1__sources.yml
@@ -150,14 +183,15 @@ where
                │    ├─── base_source1__model1.sql
                │    ├─── ...
                │    └─── base_source1__modeln.yml
-               ├─── ...
+               ├─── ....
                └─── sourcen
+     │    ├─── ...
      ├─── ...
 
 ```
 The base layer should be organized by source. Each base folder should contain a source yaml, model yaml, and base models.
 
-#### Best Practices
+#### BEST PRACTICES
 - The base layer should only be used on a case by case basis.
 - The base layer should be the landing zone for semi-structure source data that needs to be parsed. (e.g. JSON data)
 - The base layer should be `ref()` in the staging layer.
@@ -186,7 +220,7 @@ The base layer should be organized by source. Each base folder should contain a 
      ├─── ...
      ├─── models
      │    ├─── ...
-     │    └─── staging
+     │    ├─── staging
                ├─── source1
                │    ├─── _stg_source1__source.yml
                │    ├─── _stg_source1__model.yml
@@ -194,26 +228,33 @@ The base layer should be organized by source. Each base folder should contain a 
                │    ├─── ...
                │    └─── stg_source1__modeln.yml
                ├─── source2
-               │    ├─── _stg_source2__source.yml
+               │    ├─── _stg_source2__schemaX_source.yml
+               │    ├─── _stg_source2__schemaY_source.yml
+               │    ├─── _stg_source2__schemaZ_source.yml
                │    ├─── _stg_source2__model.yml
                │    ├─── stg_source2__model1.sql
                │    ├─── ...
                │    └─── stg_source2__modeln.yml
                ├─── ...
-               └─── sourcen
+     │    ├─── ...
      ├─── ...
-
 ```
-The staging layer is organized by source. Each source folder should contain one property YAML for source, one property YAML for model, and the staging models itself.
+The staging layer is organized by source. A source can be further organized into separate source YAMLs for each schema if the source is comprised of multiple schemas. A single source will have a single model YAML regardless of the organization of source YAMLs.
 
-#### NAMING CONVENTIONS
-Property YAMLs:
+See the `financial-analytics` [staging layer](https://github.com/cdp-ucsc/financial-analytics/tree/main/models/staging/) for an example.
+
+#### RESOURCE NAMING CONVENTION
+Source Property YAML:
 ```
-_stg_[source]__source.yml
+_stg_[source]__source.yml or `_stg_[source]__[schema]_source.yml
+```
+
+Model Property YAML:
+```
 _stg_[source]__model.yml
 ```
 
-Staging models:
+Staging Model:
 ```
  stg_[source]__[source_table_name].sql
 ```
@@ -222,24 +263,24 @@ Staging models:
 ```yml
 version: 2
 sources:
-  - name:
-    description:
-    loader:
-    database:
-    schema:
-    tables:
-      - name:
-        description:
-        meta:
-          contains_pii: <TRUE/FALSE>
-          effective_dated: <TRUE/FALSE>
-          partition_columns: ["column1", "column2", ...]
-        columns:
-          - name:
-            meta:
-              alias:
+    - name: source_name
+      meta:
+        soft_delete_columns:
+      tables:
+        - name: table_name
+          meta:
+            effective_type:
+            effective_date_col:
+            effective_sequence_col:
+            effective_sequence_order:
+            partition_columns:
+            columns:
+              - name: column_a
+                meta:
+                  casted_as: data_type
+                  renamed_as: new_name
 ```
-All sources at the staging layer must declare the above meta keys.
+CDP utilizes the source YAML as per dbt lab's documentation. CDP also utilizes dbt's meta tag to declare additional information specific to CDP's staging process. Further information can be found [here](https://github.com/cdp-ucsc/cdp-ucsc-dbt-codegen/tree/staging-layer-macros/macros/cdp-ucsc-staging-layer).
 
 #### MODEL.YML
 ```yml
@@ -260,20 +301,10 @@ All models at the staging layer must be tested for uniqueness and emptyness usin
 
 #### STAGING MODEL BEST PRACTICES
 - All models in the stager layer should be materialized as a view.
-- The staging layer should be generated using the domain and source specific staging macro.
-  - [More info on staging macros]
-  - If the model is SCD2, then the final data set should include `valid_from`, `valid_to`, `current_rcd_desc`, and `is_current_record` fields
-  - The staging layer should almost always exclude deleted records.
-    - [More info regarding different conditions based on source systems]
-- If a base model exists, the staging model should `ref()` the base model.
-
-#### STAGING MODEL MACROS
-Inspired by [codegen](https://hub.getdbt.com/dbt-labs/codegen/latest/), CDP uses macros and bash scripts to automate the creation of the staging layer. CDP uses source specific macros and so not all staging macros are identical. The advantages of the staging macros are:
-- reducing repetitive manual work with an automated process
-- achieving consist style and structure across multiple sources and projects at the staging layer
-- sharing foundational SCD2 logic at the staging layer
-
-[How to generate a staging layer with the use of macros]
+- [CDP's staging macros](https://github.com/cdp-ucsc/cdp-ucsc-dbt-codegen/tree/staging-layer-macros/macros/cdp-ucsc-staging-layer) should be used to generate models.
+  - By utilizing CDP's staging macros, staging logic will be consistently managed across all of the dbt projects. 
+  - If a base model exists, the staging model should `ref()` the base model and should not be generated from CDP's staging macros.
+- Renames at the staging layer should be independent from business names/logic. Business friendly names can be declared in downstream layers.
 
 ## dbt_project_name/seeds/
 - Description of the `seeds` folder
