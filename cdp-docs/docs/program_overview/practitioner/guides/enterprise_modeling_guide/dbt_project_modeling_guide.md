@@ -207,14 +207,40 @@ Base Model:
 base_[source]__model.sql
 ```
 
-#### BEST PRACTICES
+#### SOURCE.YML
+```yml
+version: 2
+sources:
+    - name: source_name
+      tables:
+        - name: table_name
+```
+CDP utilizes the source YAML as per dbt lab's documentation. Models declared at the base layer source should not be declared in the staging layer source.
+
+See more source properties [here](https://docs.getdbt.com/reference/source-properties).
+
+#### MODEL.YML
+```yml
+version: 2
+models:
+  - name:
+    description:
+```
+Base layer models will be tested at the staging layer per the staging layer's practices.
+
+See more model properties [here](https://docs.getdbt.com/reference/model-properties).
+
+
+#### BASE LAYER BEST PRACTICES
 - The base layer should only be used on a case by case basis.
-- The base layer should be used as the landing zone for semi-structure source data that needs to be parsed. (e.g. JSON data)
-- The base layer can be used if there is a need for a model to retain the deleted records that are excluded in the staging layer. (e.g. `_fivetran_deleted = false`)
-  > This is a rare case. Double-check if this is the correct approach or `dbt snapshot` should be used.
-- The base layer should be `ref()` in the staging layer. 
-  > The staging layer model name should end in `_flattened` if the base model was semi-structured data.
-- The base models should be materialized as a view.
+- Base models should be materialized as a view.
+- Base models should not exclude any columns or rows from the source data. Except soft deletes should be excluded.
+- Base models should be used as the landing zone for semi-structure source data that needs to be parsed. (e.g. JSON data)
+- Base models can be used if there is a need to retain the soft deleted records that are excluded in the staging layer. (e.g. `_fivetran_deleted = false`)
+  - This is a rare case. Double-check if this is the correct approach or `dbt snapshot` should be used.
+- Base models should be `ref()` in the staging layer. 
+  - The staging model name should end in `_flattened` if the base model was semi-structured data.
+
 
 ### models/intermediate/
 > Documentation needed.er
@@ -245,7 +271,7 @@ base_[source]__model.sql
      │    ├─── ...
      ├─── ...
 ```
-The reverse etl layer is organized by destination systems. Each destination system will have a model YAML and exposure YAML.
+The reverse ETL layer is organized by destination systems. Each destination system will have a model YAML and exposure YAML.
 
 #### RESOURCE NAMING CONVENTION
 Model Property YAML:
@@ -270,7 +296,7 @@ models:
   - name:
     description: 
 ```
-There is no set of standard tests recommended for reverse etl models. Suggested tests are tests related to data integrity/formatting required by the reverse etl tool Census and the destination system.
+There is no set of standard tests recommended for reverse ETL models. Suggested tests are tests related to data integrity/formatting required by the reverse ETL tool Census and the destination system.
 
 The model descriptions should detail the business requirements that the model is meeting for the specific destination system.
 
@@ -291,14 +317,14 @@ exposures:
       name:
       email: 
 ```
-All reverse etl models should be referenced under an exposure's `depends_on` key. Exposures are important to surface the destination system in the project DAG. 
+All reverse ETL models should be referenced under an exposure's `depends_on` key. Exposures are important to surface the destination system in the project DAG. 
 
 See more exposure properties [here](https://docs.getdbt.com/reference/exposure-properties).
 
-#### REVERSE ETL MODEL BEST PRACTICES
-- Ideally models are not directly referencing staging models and are referencing mart models.
-  - Beware of models referencing resources of different materializations (i.e. view vs table).
-- Keep in mind the reverse etl layer is intended to extract business requirements/logic out of the reverse etl tool and manage it in the dbt project.
+#### REVERSE ETL LAYER BEST PRACTICES
+- Reverse ETL models should not `ref()` staging models. Ideally they `ref()` mart models.
+  - Beware of models referencing resources of different materializations (i.e. staging view vs mart table).
+- Reverse ETL models should extract business requirements/logic out of the reverse ETL tool so it can be managed in the dbt project.
   - Reverse etl tools can change. Managing the business requirements in the dbt project makes it easily transferrable. The dbt project also provides version management that is already integrated with CDP's workflow.
 
 ### models/staging/
@@ -390,12 +416,15 @@ All models at the staging layer must be tested for uniqueness and emptyness usin
 
 See more model properties [here](https://docs.getdbt.com/reference/model-properties).
 
-#### STAGING MODEL BEST PRACTICES
-- All models in the stager layer should be materialized as a view.
-- [CDP's staging macros](https://github.com/cdp-ucsc/cdp-ucsc-dbt-codegen/tree/staging-layer-macros/macros/cdp-ucsc-staging-layer) should be used to generate models.
-  - By utilizing CDP's staging macros, staging logic will be consistently managed across all of the dbt projects. 
-  - If a base model exists, the staging model should `ref()` the base model and should not be generated from CDP's staging macros.
-- Renames at the staging layer should be independent from business names/logic. Business friendly names can be declared in downstream layers.
+#### STAGING LAYER BEST PRACTICES
+- Staging models should be materialized as views.
+- Staging models should not exclude any columns or rows from the source data. Except soft deletes should be excluded.
+- Staging models can include renamed fields.
+  - The new field name should be independent of business name/logic. More business friendly names can be declared in downstream layers. 
+- Staging models can include data type conversions.
+- [CDP's staging macros](https://github.com/cdp-ucsc/cdp-ucsc-dbt-codegen/tree/staging-layer-macros/macros/cdp-ucsc-staging-layer) should be used to generate models. The staging macros reflect the staging model's best practices.
+  - By utilizing CDP's staging macros, staging logic will be consistently managed across all of the dbt projects.
+  - If a base model exists, the staging model should `ref()` the base model and not be generated from CDP's staging macros.
 
 ## dbt_project_name/seeds/
 > Documentation needed.
