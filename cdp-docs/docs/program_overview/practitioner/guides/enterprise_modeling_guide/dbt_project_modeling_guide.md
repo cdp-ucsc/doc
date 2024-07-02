@@ -178,8 +178,8 @@ This document will build upon dbt Labs documentation and further discuss specifi
      ├─── models
      │    └─── base
                ├─── source1
-               │    ├─── _base_source1__sources.yml
-               │    ├─── _base_source1__models.yml
+               │    ├─── _base_source1__source.yml
+               │    ├─── _base_source1__model.yml
                │    ├─── base_source1__model1.sql
                │    ├─── ...
                │    └─── base_source1__modeln.yml
@@ -191,11 +191,29 @@ This document will build upon dbt Labs documentation and further discuss specifi
 ```
 The base layer should be organized by source. Each base folder should contain a source yaml, model yaml, and base models.
 
+#### RESOURCE NAMING CONVENTION
+Source Property YAML:
+```
+_base_[source]__source.yml
+```
+
+Model Property YAML:
+```
+_base_[source]__model.yml
+```
+
+Base Model:
+```
+base_[source]__model.sql
+```
+
 #### BEST PRACTICES
 - The base layer should only be used on a case by case basis.
-- The base layer should be the landing zone for semi-structure source data that needs to be parsed. (e.g. JSON data)
-- The base layer should be `ref()` in the staging layer.
-- The base layer should be used if there is a need for a model to retain the deleted records that are usually excluded in the staging layer. (e.g. `_fivetran_deleted = false`)
+- The base layer should be used as the landing zone for semi-structure source data that needs to be parsed. (e.g. JSON data)
+- The base layer can be used if there is a need for a model to retain the deleted records that are excluded in the staging layer. (e.g. `_fivetran_deleted = false`)
+  > This is a rare case. Double-check if this is the correct approach or `dbt snapshot` should be used.
+- The base layer should be `ref()` in the staging layer. 
+  > The staging layer model name should end in `_flattened` if the base model was semi-structured data.
 - The base models should be materialized as a view.
 
 ### models/intermediate/
