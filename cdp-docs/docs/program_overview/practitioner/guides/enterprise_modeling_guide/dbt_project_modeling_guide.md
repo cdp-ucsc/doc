@@ -25,7 +25,7 @@ This page is a work in progress
      │    ├─── intermediate
      │    ├─── legacy
      │    ├─── marts
-     │    ├─── reports
+     │    ├─── reverse_etl
      │    └─── staging
      ├─── seeds
      ├─── snapshots
@@ -79,7 +79,7 @@ The selected resources above are managed by the template repo, [dbt-project-temp
      │    ├─── intermediate
      │    ├─── legacy
      │    ├─── marts
-     │    ├─── reports
+     │    ├─── reverse_etl
      │    └─── staging
      ├─── seeds
      ├─── snapshots
@@ -236,10 +236,8 @@ See more model properties [here](https://docs.getdbt.com/reference/model-propert
 - Base models should be materialized as a view.
 - Base models should not exclude any columns or rows from the source data. Except soft deletes should be excluded.
 - Base models should be used as the landing zone for semi-structure source data that needs to be parsed. (e.g. JSON data)
-- Base models can be used if there is a need to retain the soft deleted records that are excluded in the staging layer. (e.g. `_fivetran_deleted = false`)
-  - This is a rare case. Double-check if this is the correct approach or `dbt snapshot` should be used.
 - Base models should be `ref()` in the staging layer. 
-  - The staging model name should end in `_flattened` if the base model was semi-structured data.
+>  - The staging model name should end in `_flattened` if the base model was semi-structured data.
 
 
 ### models/intermediate/
@@ -261,10 +259,10 @@ See more model properties [here](https://docs.getdbt.com/reference/model-propert
                ├─── destination_system1
                │    ├─── _retl_destination_system1_exposure.yml
                │    ├─── _retl_destination_system1_model.yml
-               │    ├─── retl_destination_system1__model1.sql
-               │    ├─── retl_destination_system1__model2.sql
+               │    ├─── destination_system1__model1.sql
+               │    ├─── destination_system1__model2.sql
                │    ├─── ...
-               │    └─── retl_destination_system1__modeln.sql
+               │    └─── destination_system1__modeln.sql
                ├─── destination_system2
                │    ├─── ...
                ├─── ...
@@ -286,7 +284,7 @@ _retl_[destination_system]_exposure.yml
 
 Reverse ETL Model:
 ```
-retl_[destination_system]__[model_name].sql
+[destination_system]__[model_name].sql
 ```
 
 #### MODEL.YML
@@ -323,9 +321,9 @@ See more exposure properties [here](https://docs.getdbt.com/reference/exposure-p
 
 #### REVERSE ETL LAYER BEST PRACTICES
 - Reverse ETL models should not `ref()` staging models. Ideally they `ref()` mart models.
-  - Beware of models referencing resources of different materializations (i.e. staging view vs mart table).
+>  - Beware of models referencing resources of different materializations (i.e. staging view vs mart table).
 - Reverse ETL models should extract business requirements/logic out of the reverse ETL tool so it can be managed in the dbt project.
-  - Reverse etl tools can change. Managing the business requirements in the dbt project makes it easily transferrable. The dbt project also provides version management that is already integrated with CDP's workflow.
+>  - Reverse etl tools can change. Managing the business requirements in the dbt project makes it easily transferrable. The dbt project also provides version management that is already integrated with CDP's workflow.
 
 ### models/staging/
 ```
@@ -420,17 +418,19 @@ See more model properties [here](https://docs.getdbt.com/reference/model-propert
 - Staging models should be materialized as views.
 - Staging models should not exclude any columns or rows from the source data. Except soft deletes should be excluded.
 - Staging models can include renamed fields.
-  - The new field name should be independent of business name/logic. More business friendly names can be declared in downstream layers. 
+>  - The new field name should be independent of business name/logic. More business friendly names can be declared in downstream layers. 
 - Staging models can include data type conversions.
 - [CDP's staging macros](https://github.com/cdp-ucsc/cdp-ucsc-dbt-codegen/tree/staging-layer-macros/macros/cdp-ucsc-staging-layer) should be used to generate models. The staging macros reflect the staging model's best practices.
-  - By utilizing CDP's staging macros, staging logic will be consistently managed across all of the dbt projects.
-  - If a base model exists, the staging model should `ref()` the base model and not be generated from CDP's staging macros.
+>  - By utilizing CDP's staging macros, staging logic will be consistently managed across all of the dbt projects.
+>  - If a base model exists, the staging model should `ref()` the base model and not be generated from CDP's staging macros.
 
 ## dbt_project_name/seeds/
 > Documentation needed.
 
 ## dbt_project_name/snapshots/
-> Documentation needed.
+### Snapshot Best Practices
+- Snapshots should be used instead of relying on soft delete tracking columns like `_fivetran_delete`. 
+>  - Do not use `_fivetran_deleted`. If the Fivetran connector ever needed a full refresh then all history tracked by `_fivetran_deleted` would be lost.
 
 ## dbt_project_name/target/
 > Documentation needed.
